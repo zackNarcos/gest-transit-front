@@ -1,0 +1,152 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="offset-2 col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Ajout d'un nouvel utilisateur</h5>
+        </div>
+        <div class="card-body px-5">
+          <div *ngIf="wrongCredential" class="alert alert-danger text-center" role="alert">
+            Données invalide!
+          </div>
+          <form #form="ngForm" (submit)="newColi(form)">
+            <div>
+              <fieldset>
+                <legend>EXPEDITEUR</legend>
+                <div class="row">
+                  <div class="col-md-6 pr-1">
+                    <div class="form-group">
+                      <label>Noms</label>
+                      <input name="nomExpediteur" type="text" class="form-control" placeholder="Nom" [(ngModel)]="colis.nomExpediteur" >
+                    </div>
+                  </div>
+                  <div class="col-md-6 pl-1">
+                    <div class="form-group">
+                      <label>Prénoms</label>
+                      <input name="prenomExpediteur" type="text" class="form-control" placeholder="Prénom"  [(ngModel)]="colis.prenomExpediteur">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Téléphone</label>
+                      <input name="telephoneExpediteur" type="tel" class="form-control" [(ngModel)]="colis.telephoneExpediteur">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Numéro de la pièce d’identité</label>
+                      <input name="npiExpediteur" type="text" class="form-control"  [(ngModel)]="colis.npiExpediteur">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>E-mail</label>
+                      <input name="emailExpediteur" type="email" class="form-control" placeholder="exemple@exemple.com"  [(ngModel)]="colis.emailExpediteur">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend>BENEFICIAIRE</legend>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Nom</label>
+                      <input name="nomBeneficiaire" type="text" class="form-control" placeholder="Nom" [(ngModel)]="colis.nomBeneficiaire" >
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Prénom</label>
+                      <input name="prenomBeneficiaire" type="text" class="form-control" placeholder="Prénom"  [(ngModel)]="colis.prenomBeneficiaire">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Téléphone</label>
+                      <input name="tel" type="text" class="form-control" [(ngModel)]="colis.telephoneBeneficiaire">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend>Nature et contenu du colis</legend>
+                <div class="row">
+                  <div class="col-md-7 ">
+                    <div class="form-group">
+                      <label>Destination</label>
+                      <select name="destination" class="form-control" [(ngModel)]="colis.destination" (change)="changeDestination()">
+                        <option value="value"> –– Choisissez une destination ––</option>
+                        <option *ngFor="let destinationItem of destinations" value="/api/destinations/{{destinationItem.id}}">{{destinationItem.libelle}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-5 ">
+                    <div class="form-group">
+                      <label for="valeur">Valeur de la marchandise</label>
+                      <input name="valeur" id="valeur" type="number" class="form-control" [(ngModel)]="colis.valeur">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 ">
+                    <div class="form-group">
+                      <label>Poids (Kg)</label>
+                      <input name="poids" type="number" class="form-control" [(ngModel)]="colis.poids">
+                    </div>
+                  </div>
+                  <div class="col-md-3 ">
+                    <div class="form-group">
+                      <label>Prix du Kg</label>
+                      <input name="prixKilo" type="number" class="form-control" [(ngModel)]="colis.prixKilo">
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="emballage">Emballage</label>
+                      <input name="emballage" id="emballage" type="number" class="form-control" [(ngModel)]="colis.emballage">
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Douane</label>
+                      <input name="douane" type="number" class="form-control" [(ngModel)]="colis.douane">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Contenue</label>
+                      <textarea name="contenue" rows="4" cols="80" class="form-control"  [(ngModel)]="colis.contenue"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <fieldset>
+                      <legend>Total : <i class="text-info h6 ml-5">{{(colis.prixKilo*colis.poids)+colis.douane+colis.emballage}}cfa</i></legend>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="offset-4 col-4">
+                <button type="submit" class="btn btn-round btn-primary col-12">Enregistrer</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

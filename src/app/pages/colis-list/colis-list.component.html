@@ -1,0 +1,115 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Liste d'utilisateurs</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+              <th>
+                Numero
+              </th>
+              <th>
+                Noms expediteurs
+              </th>
+              <th>
+                Téléphones expediteurs
+              </th>
+              <th>
+                Noms bénéficiaires
+              </th>
+              <th>
+                Téléphones bénéficiaires
+              </th>
+              <th>
+                Poids
+              </th>
+              <th class="text-center pb-0">
+                Montants<p class="category mb-0">(douane+amballage+kilos)</p>
+              </th>
+              <th>
+                Status
+              </th>
+
+              </thead>
+              <tbody>
+              <ng-container *ngIf="colis">
+                <ng-container *ngFor="let coli of colis">
+                    <tr class="">
+                      <td class="text-center">
+                        {{ coli.numero }}
+                      </td>
+                      <td class="text-center">
+                        {{ coli.nomExpediteur }}
+                      </td>
+                      <td class="text-center">
+                        {{ coli.telephoneExpediteur }}
+                      </td>
+                      <td class="text-center">
+                        {{ coli.nomBeneficiaire }}
+                      </td>
+                      <td class="text-center">
+                        {{ coli.telephoneBeneficiaire }}
+                      </td>
+                      <td class="text-center">
+                        {{ coli.poids }}
+                      </td>
+
+                      <td class="text-center">
+                        {{ coli.douane+coli.emballage+(coli.prixKilo*coli.poids) }}
+                        <p class="category mb-0">
+                          ({{ coli.douane}}+{{coli.emballage}}+{{(coli.prixKilo*coli.poids) }})
+                        </p>
+                      </td>
+                      <ng-container *ngIf="coli.status=='ATTENTE_EXPEDITION'">
+                        <td class="text-center bg-danger text-light">
+                          {{ coli.status }}
+                        </td>
+                        <td class="text-right">
+                          <a routerLink="/colis/{{ coli.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
+                          <button (click)="upColis(coli.id,'TRANSIT')" class="btn btn-round btn-warning mr-1"><i class="fa fa-unlock"></i></button>
+                        </td>
+                      </ng-container>
+                      <ng-container *ngIf="coli.status=='TRANSIT'">
+                        <td class="text-center bg-warning text-light">
+                          {{ coli.status }}
+                        </td>
+                        <td class="text-right">
+                          <a routerLink="/colis/{{ coli.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
+                          <button (click)="upColis(coli.id,'EXPEDIÉ')" class="btn btn-round btn-secondary mr-1"><i class="fa fa-unlock"></i></button>
+                        </td>
+                      </ng-container>
+                      <ng-container *ngIf="coli.status=='EXPEDIÉ'">
+                        <td class="text-center bg-secondary text-light">
+                          {{ coli.status }}
+                        </td>
+                        <td class="text-right">
+                          <a routerLink="/colis/{{ coli.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
+                          <button (click)="upColis(coli.id,'RECUPERÉ')" class="btn btn-round btn-success mr-1"><i class="fa fa-unlock"></i></button>
+                        </td>
+                      </ng-container>
+                      <ng-container *ngIf="coli.status=='RECUPERÉ'">
+                        <td class="text-center bg-success text-light">
+                          {{ coli.status }}
+                        </td>
+
+                        <td class="text-right">
+                          <a routerLink="/colis/{{ coli.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
+                        </td>
+                      </ng-container>
+                    </tr>
+                </ng-container>
+              </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

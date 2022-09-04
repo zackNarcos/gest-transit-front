@@ -1,0 +1,153 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="offset-3">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between">
+          <h5 class="card-title"> Detail du recu</h5>
+          <button class="btn btn-round btn-primary mt-4 mr-5" (click)="downloadAsPDF(colis.numero,toastr);">Imprimer le recu</button>
+        </div>
+        <div class="card-body" #recuColi style="height: 902px; width: 596px">
+          <form #form="ngForm">
+            <div class="px-2">
+              <div class="d-flex justify-content-between mb-5">
+                <h5 class="">KEAS EXPRESS</h5>
+                <div>
+                  <p class="mb-0">Date:</p>
+                  <p class="mb-0">N° coli : {{colis.numero}}</p>
+                </div>
+              </div>
+              <fieldset>
+                <h6>EXPEDITEUR</h6>
+                <div class="row px-2">
+                  <div class="col-md-6 pr-1">
+                    <div class="form-group">
+                      <label>Noms</label>
+                      <input name="nomExpediteur" type="text" class="form-control" placeholder="Nom" [(ngModel)]="colis.nomExpediteur" disabled="" >
+                    </div>
+                  </div>
+                  <div class="col-md-6 pl-1">
+                    <div class="form-group">
+                      <label>Prénoms</label>
+                      <input name="prenomExpediteur" type="text" class="form-control" placeholder="Prénom"  [(ngModel)]="colis.prenomExpediteur" disabled="">
+                    </div>
+                  </div>
+                </div>
+                <div class="row px-2">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Téléphone</label>
+                      <input name="telephoneExpediteur" type="tel" class="form-control" [(ngModel)]="colis.telephoneExpediteur" disabled="">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Numéro de la pièce d’...</label>
+                      <input name="npiExpediteur" type="text" class="form-control"  [(ngModel)]="colis.npiExpediteur" disabled="">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>E-mail</label>
+                      <input name="emailExpediteur" type="email" class="form-control" placeholder="exemple@exemple.com"  [(ngModel)]="colis.emailExpediteur" disabled="">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <h6 class="pt-2">BENEFICIAIRE</h6>
+                <div class="row px-2">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Nom</label>
+                      <input name="nomBeneficiaire" type="text" class="form-control" placeholder="Nom" [(ngModel)]="colis.nomBeneficiaire" disabled="" >
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Prénom</label>
+                      <input name="prenomBeneficiaire" type="text" class="form-control" placeholder="Prénom"  [(ngModel)]="colis.prenomBeneficiaire" disabled="">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Téléphone</label>
+                      <input name="tel" type="text" class="form-control" [(ngModel)]="colis.telephoneBeneficiaire" disabled="">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <h6 class="pt-2">Nature et contenu du colis</h6>
+                <div class="row px-2">
+                  <div class="col-md-7 ">
+                    <div class="form-group">
+                      <label>Destination</label>
+                      <select name="destination" class="form-control" [(ngModel)]="colis.destination"  disabled="">
+                        <option value="value"> –– Choisissez une destination ––</option>
+                        <option *ngFor="let destinationItem of destinations" value="/api/destinations/{{destinationItem.id}}">{{destinationItem.libelle}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-5 ">
+                    <div class="form-group">
+                      <label for="valeur">Valeur de la marchandise</label>
+                      <input name="valeur" id="valeur" type="number" class="form-control" [(ngModel)]="colis.valeur" disabled="">
+                    </div>
+                  </div>
+                </div>
+                <div class="row px-2">
+                  <div class="col-md-3 ">
+                    <div class="form-group">
+                      <label>Poids (Kg)</label>
+                      <input name="poids" type="number" class="form-control" [(ngModel)]="colis.poids" disabled="">
+                    </div>
+                  </div>
+                  <div class="col-md-3 ">
+                    <div class="form-group">
+                      <label>Prix du Kg</label>
+                      <input name="prixKilo" type="number" class="form-control" [(ngModel)]="colis.prixKilo" disabled="">
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="emballage">Emballage</label>
+                      <input name="emballage" id="emballage" type="number" class="form-control" [(ngModel)]="colis.emballage" disabled="">
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Douane</label>
+                      <input name="douane" type="number" class="form-control" [(ngModel)]="colis.douane" disabled="">
+                    </div>
+                  </div>
+                </div>
+                <div class="row px-2">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Contenue</label>
+                      <textarea name="contenue" rows="4" cols="80" class="form-control"  [(ngModel)]="colis.contenue" disabled=""></textarea>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="col-md-12">
+                  <p class="category">Nous reconnaissons avoir reçu votre colis pour le transport de {{destination.libelle}} d’un bagage de {{colis.poids}} Kg</p>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <fieldset>
+                      <legend>Total : <i class="text-info h6 ml-5">{{colis.prixTotal}}cfa</i></legend>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

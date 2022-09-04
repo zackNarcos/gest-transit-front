@@ -1,0 +1,62 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="offset-3 col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Nouvelle destination</h5>
+        </div>
+        <div class="card-body">
+          <div *ngIf="wrongCredential" class="alert alert-danger text-center" role="alert">
+            Données invalide!
+          </div>
+          <form #form="ngForm" (submit)="upDest(form)">
+            <div>
+              <div class="row">
+                <div class="col-md-12 pr-1">
+                  <div class="form-group">
+                    <label>Libelle</label>
+                    <input name="libelle" id="libelle" type="text" class="form-control" placeholder="Dakar/Libreville" [(ngModel)]="destination.libelle" disabled="">
+                    <div *ngIf="uniqDest" class=" text-danger">
+                      Destination existante!
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Prix du kilo</label>
+                    <input name="prixKilos" type="number" class="form-control"  [(ngModel)]="destination.prixKilos">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Prix de la douane</label>
+                    <input name="prixDouane" type="number" class="form-control"  [(ngModel)]="destination.prixDouane">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 pr-1">
+                  <div class="form-group">
+                    <label>Jours de depart</label>
+                    <input name="jourDeDepart" type="text" class="form-control" placeholder="lundi, mardi, samedi"  [(ngModel)]="destination.jourDeDepart">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="offset-4 col-4">
+                <button type="submit" class="btn btn-round btn-primary col-12">Enregistrer</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+
+  <div class="">
+    <div class="panel-header panel-header-sm">
+    </div>
+    <div class="main-content">
+      <div class="mt-5 pt-5">
+        <div class="offset-md-3 col-md-6">
+          <div class="card shadow">
+            <div class="card-header">
+              <h5 class="title text-center">Connexion</h5>
+            </div>
+            <div class="card-body">
+              <div *ngIf="wrongCredential" class="alert alert-danger text-center" role="alert">
+                Données invalide!
+              </div>
+              <form #form="ngForm" (submit)="login(form)">
+                <div class="row">
+                  <div class="col-md-12 px-5">
+                    <div class="form-group">
+                      <label>Login</label>
+                      <input type="email" class="form-control" name="email" placeholder="Email" [(ngModel)]="email">
+                    </div>
+                  </div>
+                  <div class="col-md-12 px-5">
+                    <div class="form-group">
+                      <label>Mot de passe</label>
+                      <input type="password" class="form-control" name="password" placeholder="Mot de passe" [(ngModel)]="password">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="offset-3 col-6">
+                    <button type="submit" class="btn btn-round btn-primary col-12">Connexion</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

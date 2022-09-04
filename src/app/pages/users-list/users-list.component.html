@@ -1,0 +1,89 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Liste d'utilisateurs</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+              <th>
+                Nom
+              </th><th>
+                Prenom
+              </th>
+              <th>
+                Téléphone
+              </th>
+              <th>
+                Ville
+              </th>
+              <th class="text-right">
+                Email
+              </th>
+
+              </thead>
+              <tbody>
+              <ng-container *ngIf="users">
+                <ng-container *ngFor="let user of users">
+                  <ng-container *ngIf="user.isLocked;then isLocked else notLocked"></ng-container>
+                  <ng-template #isLocked>
+                    <tr class="bg-danger text-light">
+                      <td>
+                        {{ user.nom }}
+                      </td>
+                      <td>
+                        {{ user.prenom }}
+                      </td>
+                      <td>
+                        {{ user.telephone }}
+                      </td>
+                      <td>
+                        {{ user.ville }}
+                      </td>
+                      <td class="text-right">
+                        {{ user.email }}
+                      </td>
+                      <td class="text-right">
+                        <a routerLink="/utilisateurs/{{ user.id }}" class="btn btn-round bg-light text-primary mr-1"><i class="fa fa-eye"></i></a>
+                        <button (click)="lockUser(user.id,false,$event)" class="btn btn-round bg-light text-danger mr-1"><i class="fa fa-unlock"></i></button>
+                      </td>
+                    </tr>
+                  </ng-template>
+                  <ng-template #notLocked>
+                    <tr class="">
+                      <td>
+                        {{ user.nom }}
+                      </td>
+                      <td>
+                        {{ user.prenom }}
+                      </td>
+                      <td>
+                        {{ user.telephone }}
+                      </td>
+                      <td>
+                        {{ user.ville }}
+                      </td>
+                      <td class="text-right">
+                        {{ user.email }}
+                      </td>
+                      <td class="text-right">
+                        <a routerLink="/utilisateurs/{{ user.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
+                        <button (click)="lockUser(user.id,true,$event)" class="btn btn-round btn-danger mr-1"><i class="fa fa-lock"></i></button>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </ng-container>
+              </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
