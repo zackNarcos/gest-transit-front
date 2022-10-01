@@ -11,8 +11,19 @@
           <div *ngIf="wrongCredential" class="alert alert-danger text-center" role="alert">
             Données invalide!
           </div>
+
           <form #form="ngForm" (submit)="newDest(form)">
             <div class="px-5">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Pays de destination</label>
+                    <select name="destination" class="form-control" [(ngModel)]="destination.pays">
+                      <option *ngFor="let destinationItem of pays" value="/api/pays/{{destinationItem.id}}">{{destinationItem.nom}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">

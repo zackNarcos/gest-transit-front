@@ -16,19 +16,22 @@ export class DestinationsComponent implements OnInit {
   ) { }
 
   destinations:Destinations[]=[]
-
-  ngOnInit(): void {
+  getDestinations(){
     this.destinationsService.getDestinations().subscribe(res => {
       this.destinations = res
     })
+  }
+
+  ngOnInit(): void {
+    this.getDestinations()
   }
 
   lockUser(id: number, b: boolean, $event: MouseEvent) {
     let destination: Destinations = new Destinations()
     destination.id = id
     destination.isArchivate = b
-    this.destinationsService.putDestinationr(destination).subscribe( resuslt => {
-      this.router.navigate(['/destinations/'+id])
+    this.destinationsService.deleteDestinationr(destination).subscribe( resuslt => {
+      this.getDestinations()
     },error => {
 
     })

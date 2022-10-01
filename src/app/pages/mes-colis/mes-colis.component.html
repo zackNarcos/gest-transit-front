@@ -1,0 +1,205 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Liste des Colis Sortant</h4>
+          <div class="col-md-12 mb-xl-0">
+            <div class="card">
+              <div class="card-header p-1 px-4">
+                <div class="row">
+                  <div class="col-12 d-flex justify-content-end">
+                    <form #form="ngForm">
+                      <div class="row">
+                        <select class="form-control col-3 text-primary" (change)="reloadData()" name="day" [(ngModel)]="day">
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                          <option value="11">11</option>
+                          <option value="12">12</option>
+                          <option value="13">13</option>
+                          <option value="14">14</option>
+                          <option value="15">15</option>
+                          <option value="16">16</option>
+                          <option value="17">17</option>
+                          <option value="18">18</option>
+                          <option value="19">19</option>
+                          <option value="20">20</option>
+                          <option value="21">21</option>
+                          <option value="22">22</option>
+                          <option value="23">23</option>
+                          <option value="24">24</option>
+                          <option value="25">25</option>
+                          <option value="26">26</option>
+                          <option value="27">27</option>
+                          <option value="28">28</option>
+                          <option value="29">29</option>
+                          <option value="30">30</option>
+                          <option value="31">31</option>
+                        </select>
+                        <select class="form-control col-5 text-primary" (change)="reloadData()" name="month" [(ngModel)]="month">
+                          <option value="1">Janvier</option>
+                          <option value="2">Fevrier</option>
+                          <option value="3">Mars</option>
+                          <option value="4">Avril</option>
+                          <option value="5">Mai</option>
+                          <option value="6">Juin</option>
+                          <option value="7">Juillet</option>
+                          <option value="8">Aout</option>
+                          <option value="9">Septembre</option>
+                          <option value="10">Octobre</option>
+                          <option value="11">Novembre</option>
+                          <option value="12">Decembre</option>
+                        </select>
+                        <select class="form-control col-4 text-primary" (change)="reloadData()" name="year" [(ngModel)]="year">
+                          <option value="2022">2022</option>
+                          <option value="2023">2023</option>
+                          <option value="2024">2024</option>
+                          <option value="2025">2025</option>
+                          <option value="2026">2026</option>
+                          <option value="2027">2027</option>
+                          <option value="2028">2028</option>
+                          <option value="2029">2029</option>
+                          <option value="2030">2030</option>
+                          <option value="2031">2031</option>
+                          <option value="2032">2032</option>
+                        </select>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+              <th>
+                Numero
+              </th>
+              <th>
+                Noms expediteurs
+              </th>
+              <th>
+                Téléphones expediteurs
+              </th>
+              <th>
+                Noms bénéficiaires
+              </th>
+              <th>
+                Téléphones bénéficiaires
+              </th>
+              <th>
+                Poids
+              </th>
+              <th class="text-center pb-0">
+                Montants<p class="category mb-0">(douane+amballage+kilos)</p>
+              </th>
+              <th>
+                Status
+              </th>
+
+              </thead>
+              <tbody>
+              <ng-container *ngIf="colis">
+                <ng-container *ngFor="let coli of colis">
+                  <tr class="">
+                    <td class="text-center">
+                      {{ coli.numero }}
+                    </td>
+                    <td class="text-center">
+                      {{ coli['nom_expediteur'] }}
+                    </td>
+                    <td class="text-center">
+                      {{ coli['telephone_expediteur'] }}
+                    </td>
+                    <td class="text-center">
+                      {{ coli['nom_beneficiaire'] }}
+                    </td>
+                    <td class="text-center">
+                      {{ coli['telephone_beneficiaire'] }}
+                    </td>
+                    <td class="text-center">
+                      {{ coli.poids }}
+                    </td>
+                    <td class="text-center">
+                      {{ coli['prix_total'] }}
+                      <p class="category text-danger text_bold mb-0">
+                        (-{{ coli.reste }})
+                      </p>
+                    </td>
+                    <ng-container *ngIf="coli.status=='ATTENTE_EXPEDITION'">
+                      <td class="text-center bg-danger text-light">
+                        {{ coli.status }}
+                      </td>
+                      <td class="row">
+                        <div class="col-6">
+                          <a routerLink="/colis/{{ coli.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
+                        </div>
+                        <div class="col-6">
+                          <button (click)="upColis(coli.id,'TRANSIT')" class="btn btn-round btn-warning mr-1"><i class="fa fa-unlock">TRANSIT</i></button>
+                        </div>
+                      </td>
+                    </ng-container>
+                    <ng-container *ngIf="coli.status=='TRANSIT'">
+                      <td class="text-center bg-warning text-light">
+                        {{ coli.status }}
+                      </td>
+                      <td class="row">
+                        <div class="col-6">
+                          <a routerLink="/colis/{{ coli.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
+                        </div>
+                        <div class="col-6">
+                          <button (click)="upColis(coli.id,'EXPEDIÉ')" class="btn btn-round btn-secondary mr-1"><i class="fa fa-unlock">EXPEDIÉ</i></button>
+                        </div>
+                      </td>
+                    </ng-container>
+                    <ng-container *ngIf="coli.status=='EXPEDIÉ'">
+                      <td class="text-center bg-secondary text-light">
+                        {{ coli.status }}
+                      </td>
+                      <td class="row">
+                        <div class="col-6">
+                          <a routerLink="/colis/{{ coli.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
+                        </div>
+                        <div class="col-6">
+                          <button (click)="upColis(coli.id,'RECUPERÉ')" class="btn btn-round btn-success mr-1"><i class="fa fa-unlock">RECUPERÉ</i></button>
+                        </div>
+                      </td>
+                    </ng-container>
+                    <ng-container *ngIf="coli.status=='RECUPERÉ'">
+                      <td class="text-center bg-success text-light">
+                        {{ coli.status }}
+                      </td>
+
+                      <td class="row">
+                        <div class="col-6">
+                          <a routerLink="/colis/{{ coli.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
+                        </div>
+                        <div class="col-6">
+                          <button (click)="upColis(coli.id,'ATTENTE_EXPEDITION')" class="btn btn-round btn-danger mr-1"><i class="fa fa-unlock">ATT_EXPED</i></button>
+                        </div>
+                      </td>
+                    </ng-container>
+                  </tr>
+                </ng-container>
+              </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

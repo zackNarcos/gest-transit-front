@@ -28,28 +28,6 @@
               <tbody>
               <ng-container *ngIf="destinations">
                 <ng-container *ngFor="let destination of destinations">
-                  <ng-container *ngIf="destination.isArchivate;then isLocked else notLocked"></ng-container>
-                  <ng-template #isLocked>
-                    <tr class="bg-danger text-light">
-                      <td>
-                        {{ destination.libelle }}
-                      </td>
-                      <td>
-                        {{ destination.prixKilos }}
-                      </td>
-                      <td>
-                        {{ destination.prixDouane }}
-                      </td>
-                      <td>
-                        {{ destination.jourDeDepart }}
-                      </td>
-                      <td class="text-right">
-                        <a routerLink="/destinations/{{ destination.id }}" class="btn btn-round bg-light text-primary mr-1"><i class="fa fa-eye"></i></a>
-                        <button (click)="lockUser(destination.id,false,$event)" class="btn btn-round bg-light text-danger mr-1"><i class="fa fa-archive"></i></button>
-                      </td>
-                    </tr>
-                  </ng-template>
-                  <ng-template #notLocked>
                     <tr class="">
                       <td>
                         {{ destination.libelle }}
@@ -68,7 +46,6 @@
                         <button (click)="lockUser(destination.id,true,$event)" class="btn btn-round btn-danger mr-1"><i class="fa fa-archive"></i></button>
                       </td>
                     </tr>
-                  </ng-template>
                 </ng-container>
               </ng-container>
               </tbody>

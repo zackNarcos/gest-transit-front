@@ -45,7 +45,9 @@
                 <div class="col-md-4 px-1">
                   <div class="form-group">
                     <label>Pays</label>
-                    <input name="pays" type="text" class="form-control" placeholder="Pays">
+                    <select name="destination" class="form-control" [(ngModel)]="user.pays">
+                      <option *ngFor="let destinationItem of pays" value="/api/pays/{{destinationItem.id}}">{{destinationItem.nom}}</option>
+                    </select>
                   </div>
                 </div>
                 <div class="col-md-4 pl-1">

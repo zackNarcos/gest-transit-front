@@ -1,0 +1,143 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Liste des colis entrant</h4>
+          <div class="col-md-12 mb-xl-0">
+            <div class="card">
+              <div class="card-header p-1 px-4">
+                <form #form="ngForm">
+                  <div class="row">
+                    <input class="form-control text-primary offset-5 col-3" type="search" placeholder="Renseigner le numero du coli" name="numberToFinnd" [ngModel]="numberToFinnd" (keyup)="reloadData(form)">
+                    <input class="form-control text-primary  col-4" type="search" placeholder="Renseigner le nom de l'expéditeur" name="nameToFinnd" [ngModel]="nameToFinnd" (keyup)="reloadData(form)">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+              <th>
+                Numero
+              </th>
+              <th>
+                Noms expediteurs
+              </th>
+              <th>
+                Téléphones expediteurs
+              </th>
+              <th>
+                Noms bénéficiaires
+              </th>
+              <th>
+                Téléphones bénéficiaires
+              </th>
+              <th>
+                Poids
+              </th>
+              <th class="text-center pb-0">
+                Montants<p class="category mb-0">(douane+amballage+kilos)</p>
+              </th>
+              <th>
+                Status
+              </th>
+
+              </thead>
+              <tbody>
+              <ng-container *ngIf="colis">
+                <ng-container *ngFor="let coli of colis">
+                  <tr class="">
+                    <td class="text-center">
+                      {{ coli.numero }}
+                    </td>
+                    <td class="text-center">
+                      {{ coli.nomExpediteur }}
+                    </td>
+                    <td class="text-center">
+                      {{ coli.telephoneExpediteur }}
+                    </td>
+                    <td class="text-center">
+                      {{ coli.nomBeneficiaire }}
+                    </td>
+                    <td class="text-center">
+                      {{ coli.telephoneBeneficiaire }}
+                    </td>
+                    <td class="text-center">
+                      {{ coli.poids }}
+                    </td>
+                    <td class="text-center">
+                      {{ coli.prixTotal }}
+                      <p class="category text-danger text_bold mb-0">
+                        (-{{ coli.reste }})
+                      </p>
+                    </td>
+                    <ng-container *ngIf="coli.status=='ATTENTE_EXPEDITION'">
+                      <td class="text-center bg-danger text-light">
+                        {{ coli.status }}
+                      </td>
+                      <td class="row">
+                        <div class="col-6">
+                          <a routerLink="/colis/{{ coli.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
+                        </div>
+                        <div class="col-6">
+                          <button (click)="upColis(coli.id,'TRANSIT', form)" class="btn btn-round btn-warning mr-1"><i class="fa fa-unlock">TRANSIT</i></button>
+                        </div>
+                      </td>
+                    </ng-container>
+                    <ng-container *ngIf="coli.status=='TRANSIT'">
+                      <td class="text-center bg-warning text-light">
+                        {{ coli.status }}
+                      </td>
+                      <td class="row">
+                        <div class="col-6">
+                          <a routerLink="/colis/{{ coli.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
+                        </div>
+                        <div class="col-6">
+                          <button (click)="upColis(coli.id,'EXPEDIÉ', form)" class="btn btn-round btn-secondary mr-1"><i class="fa fa-unlock">EXPEDIÉ</i></button>
+                        </div>
+                      </td>
+                    </ng-container>
+                    <ng-container *ngIf="coli.status=='EXPEDIÉ'">
+                      <td class="text-center bg-secondary text-light">
+                        {{ coli.status }}
+                      </td>
+                      <td class="row">
+                        <div class="col-6">
+                          <a routerLink="/colis/{{ coli.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
+                        </div>
+                        <div class="col-6">
+                          <button (click)="upColis(coli.id,'RECUPERÉ', form)" class="btn btn-round btn-success mr-1"><i class="fa fa-unlock">RECUPERÉ</i></button>
+                        </div>
+                      </td>
+                    </ng-container>
+                    <ng-container *ngIf="coli.status=='RECUPERÉ'">
+                      <td class="text-center bg-success text-light">
+                        {{ coli.status }}
+                      </td>
+
+                      <td class="row">
+                        <div class="col-6">
+                          <a routerLink="/colis/{{ coli.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
+                        </div>
+                        <div class="col-6">
+                          <button (click)="upColis(coli.id,'ATTENTE_EXPEDITION', form)" class="btn btn-round btn-danger mr-1"><i class="fa fa-unlock">ATT_EXPED</i></button>
+                        </div>
+                      </td>
+                    </ng-container>
+                  </tr>
+                </ng-container>
+              </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

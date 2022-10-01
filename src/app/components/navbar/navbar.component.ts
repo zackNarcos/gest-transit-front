@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
 
     public isCollapsed = true;
 
-    prenom: String
+    prenom = "Connexion"
 
     constructor(
       location: Location,

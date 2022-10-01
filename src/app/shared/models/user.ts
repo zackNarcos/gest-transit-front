@@ -4,6 +4,7 @@ export class User{
   email:string
   roles:[string]
   password:string
+  pays: string
   nom:string
   prenom:string
   adresse: string

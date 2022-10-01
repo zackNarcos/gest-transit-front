@@ -50,9 +50,13 @@ export class DestinationsService {
     return this.http.get<Destinations>(`${this.URL_API2+uri}`, this.setoption());
   }
 
-
   putDestinationr(destination: Destinations) {
     return this.http.put(`${this.URL_API}api/destinations/${destination.id}`,destination, this.setoption())
   }
+
+  deleteDestinationr(destination: Destinations) {
+    return this.http.delete(`${this.URL_API}api/destinations/${destination.id}`, this.setoption())
+  }
+
 
 }

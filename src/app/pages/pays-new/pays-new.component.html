@@ -1,0 +1,38 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="offset-3 col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Nouveau pays</h5>
+        </div>
+        <div class="card-body">
+          <div *ngIf="wrongCredential" class="alert alert-danger text-center" role="alert">
+            Données invalide!
+          </div>
+          <form #form="ngForm" (submit)="newDest(form)">
+            <div class="px-5">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Libelle</label>
+                    <input name="nom" id="nom" type="text" class="form-control" placeholder="Gabon" [(ngModel)]="pays.nom" >
+                    <div *ngIf="uniqDest" class=" text-danger">
+                      Pays deja existant!
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="offset-4 col-4">
+                <button type="submit" class="btn btn-round btn-primary col-12">Enregistrer</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

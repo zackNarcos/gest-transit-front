@@ -5,20 +5,22 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import {LoginComponent} from "./pages/login/login.component";
+import {ProfileService} from "./shared/services/profile/profile.service";
 
 const routes: Routes =[
   {
     path: '',
-    redirectTo: 'tableau-de-bord',
+    redirectTo: 'nouveau-coli',
     pathMatch: 'full',
   },
   {
     path: '',
     component: AdminLayoutComponent,
+    canActivate: [ProfileService ],
     children: [
         {
       path: '',
-      loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(x=>x.AdminLayoutModule)
+      loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(x=>x.AdminLayoutModule),
   }]},
   {
     path: 'login',
@@ -26,7 +28,7 @@ const routes: Routes =[
   },
   {
     path: '**',
-    redirectTo: 'tableau-de-bord'
+    redirectTo: 'nouveau-coli'
   }
 ];
 

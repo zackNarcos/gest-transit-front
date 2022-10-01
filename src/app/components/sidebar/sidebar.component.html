@@ -11,11 +11,23 @@
 </div>
 <div class="sidebar-wrapper">
     <ul class="nav">
-        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+      <ng-container *ngFor="let menuItem of menuItems">
+        <ng-container *ngIf="isAdmin">
+          <li routerLinkActive="active" class="{{menuItem.class}} nav-item">
             <a [routerLink]="[menuItem.path]">
-                <i class="now-ui-icons {{menuItem.icon}}"></i>
-                <p>{{menuItem.title}}</p>
+              <i class="now-ui-icons {{menuItem.icon}}"></i>
+              <p>{{menuItem.title}}</p>
             </a>
-        </li>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="!isAdmin">
+          <li routerLinkActive="active" *ngIf="menuItem.isAdmin == false" class="{{menuItem.class}} nav-item">
+            <a [routerLink]="[menuItem.path]">
+              <i class="now-ui-icons {{menuItem.icon}}"></i>
+              <p>{{menuItem.title}}</p>
+            </a>
+          </li>
+        </ng-container>
+      </ng-container>
     </ul>
 </div>

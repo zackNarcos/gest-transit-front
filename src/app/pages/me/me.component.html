@@ -1,0 +1,222 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-12 mb-xl-0">
+          <div class="card">
+            <div class="card-header p-1 px-4">
+              <div class="row">
+                <div class="col-4">
+                </div>
+                <div class="col-8 d-flex justify-content-end">
+                  <form #form="ngForm">
+                    <div class="row">
+                      <select class="form-control col-7 text-primary" (change)="reloadData()" name="month" [(ngModel)]="monthStatistique.month">
+                        <option value="1">Janvier</option>
+                        <option value="2">Fevrier</option>
+                        <option value="3">Mars</option>
+                        <option value="4">Avril</option>
+                        <option value="5">Mai</option>
+                        <option value="6">Juin</option>
+                        <option value="7">Juillet</option>
+                        <option value="8">Aout</option>
+                        <option value="9">Septembre</option>
+                        <option value="10">Octobre</option>
+                        <option value="11">Novembre</option>
+                        <option value="12">Decembre</option>
+                      </select>
+                      <select class="form-control col-5 text-primary" (change)="reloadData()" name="year" [(ngModel)]="monthStatistique.year">
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                        <option value="2029">2029</option>
+                        <option value="2030">2030</option>
+                        <option value="2031">2031</option>
+                        <option value="2032">2032</option>
+                      </select>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 mb-xl-0 mb-1">
+          <div class="card">
+            <div class="card-header p-3 pt-2">
+              <div class="text-end pt-1">
+                <p class="text-sm mb-0 text-capitalize">Gains</p>
+                <h4 class="mb-0 text-info">{{ monthStatistique.gains }}Fcfa</h4>
+              </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3 bg-info">
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 mb-xl-0 mb-1">
+          <div class="card">
+            <div class="card-header p-3 pt-2">
+              <div class="text-end pt-1">
+                <p class="text-sm mb-0 text-capitalize">Avances</p>
+                <h4 class="mb-0 text-success">{{ monthStatistique.avances }}Fcfa</h4>
+              </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3 bg-success">
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 mb-xl-0 mb-1">
+          <div class="card">
+            <div class="card-header p-3 pt-2">
+              <div class="text-end pt-1">
+                <p class="text-sm mb-0 text-capitalize">Reliquat</p>
+                <h4 class="mb-0 text-warning">{{ monthStatistique.reliquats }}Fcfa</h4>
+              </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3 bg-warning">
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 mb-xl-0 mb-1">
+          <div class="card">
+            <div class="card-header p-3 pt-2">
+              <div class="text-end pt-1">
+                <p class="text-sm mb-0 text-capitalize">Quantité de depôts</p>
+                <h4 class="mb-0">{{ monthStatistique.qte }}</h4>
+              </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3 bg-dark">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-user">
+        <div class="image">
+          <img src="../assets/img/bg5.jpg" alt="...">
+        </div>
+        <div class="card-body">
+          <div class="author">
+            <a href="#">
+              <img class="avatar border-gray" src="../assets/img/mike.jpg" alt="...">
+              <h5 class="title">{{ user.nom }}</h5>
+            </a>
+            <p class="description">
+              {{ user.email }}
+            </p>
+          </div>
+          <p class="description text-center">
+            {{ user.description }}
+          </p>
+        </div>
+        <hr>
+        <div class="button-container">
+          <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+            <i class="fab fa-facebook-f"></i>
+          </button>
+          <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+            <i class="fab fa-twitter"></i>
+          </button>
+          <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+            <i class="fab fa-google-plus-g"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Profil</h5>
+        </div>
+        <div class="card-body">
+          <form #form="ngForm" (submit)="upgrade(form)">
+            <div>
+              <div class="row">
+                <div class="col-md-6 pr-1">
+                  <div class="form-group">
+                    <label>Nom</label>
+                    <input name="nom" type="text" class="form-control" placeholder="Nom" [(ngModel)]="user.nom"disabled="">
+                  </div>
+                </div>
+                <div class="col-md-6 pl-1">
+                  <div class="form-group">
+                    <label>Prenom</label>
+                    <input name="prenom" type="text" class="form-control" placeholder="Prenom"  [(ngModel)]="user.prenom"disabled="">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Adresse</label>
+                    <input name="adresse" type="text" class="form-control" placeholder="Adresse"  [(ngModel)]="user.adresse">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 pr-1">
+                  <div class="form-group">
+                    <label>Ville</label>
+                    <input name="ville" type="text" class="form-control" placeholder="Ville"  [(ngModel)]="user.ville"disabled="">
+                  </div>
+                </div>
+                <div class="col-md-4 px-1">
+                  <div class="form-group">
+                    <label>Pays</label>
+                    <div *ngFor="let destinationItem of destinations">
+                      <div *ngIf="'/api/pays/'+destinationItem.id == user.pays" class="text-warning pl-4">
+                        {{destinationItem.nom}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 pl-1">
+                  <div class="form-group">
+                    <label>Téléphone</label>
+                    <input name="telephone" type="tel" class="form-control"  [(ngModel)]="user.telephone">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 pr-1">
+                  <div class="form-group">
+                    <label>Salaire</label>
+                    <input name="salaire" type="number" class="form-control" [(ngModel)]="user.salaire"disabled="">
+                  </div>
+                </div>
+                <div class="col-md-6 pl-1">
+                  <div class="form-group">
+                    <label for="email">Adresse mail</label>
+                    <input name="email" id="email" type="email" class="form-control" placeholder="Email" [(ngModel)]="user.email" disabled="">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="offset-4 col-4">
+                <button type="submit" class="btn btn-round btn-primary col-12">Enregistrer</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

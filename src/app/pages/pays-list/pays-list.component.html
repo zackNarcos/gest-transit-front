@@ -1,0 +1,45 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between">
+          <h4 class="card-title"> Liste des Pays</h4>
+          <a routerLink="/nouveau-pays" class="btn btn-round btn-primary mt-4 mr-5">Nouveau Pays</a>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+              <th>
+                Id
+              </th><th>
+                Nom
+              </th>
+
+              </thead>
+              <tbody>
+              <ng-container *ngIf="pays">
+                <ng-container *ngFor="let destination of pays">
+                  <tr class="">
+                    <td>
+                      {{ destination.id }}
+                    </td>
+                    <td>
+                      {{ destination.nom }}
+                    </td>
+                    <td class="text-right">
+                      <a routerLink="/pays/{{ destination.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
+                    </td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

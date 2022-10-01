@@ -18,40 +18,19 @@
           <span class="navbar-toggler-bar navbar-kebab"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="collapseExample" [ngbCollapse]="isCollapsed">
-          <form>
-            <div class="input-group no-border">
-              <input type="text" value="" class="form-control" placeholder="Search...">
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <i class="now-ui-icons ui-1_zoom-bold"></i>
-                </div>
-              </div>
-            </div>
-          </form>
+          <a [routerLink]="['/rechercher/coli']" class="rounded-sm btn btn-primary p-3 py-1">
+            Rechercher un coli<i class="now-ui-icons ui-1_zoom-bold ml-1"></i>
+          </a>
           <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="#pablo">
-                <i class="now-ui-icons media-2_sound-wave"></i>
-                <p>
-                  <span class="d-lg-none d-md-block">Stats</span>
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#pablo">
-                <i class="now-ui-icons location_world"></i>
-                <p>
-                  <span class="d-lg-none d-md-block">Account</span>
-                </p>
-              </a>
-            </li>
             <li class="nav-item" ngbDropdown>
               <a class="nav-link" id="dropdownBasic1" ngbDropdownToggle>
                 {{ prenom }}
                 <i class="now-ui-icons users_single-02"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <a class="dropdown-item" href="/profil">Profile</a>
+                <a routerLink="/me" class="dropdown-item nav-link text-dark">
+                  Profil
+                </a>
                 <button class="dropdown-item" (click)="logout()">Deconnection</button>
               </div>
             </li>

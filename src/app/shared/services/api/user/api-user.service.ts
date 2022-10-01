@@ -44,8 +44,11 @@ export class ApiUserService  {
     return this.http.get<User>(`${this.URL_API}api/users?email=${email}`, this.setoption());
   }
 
-
   putUser(user: User) {
     return this.http.put(`${this.URL_API}api/users/${user.id}`,user, this.setoption())
+  }
+
+  deleteUser(user: User) {
+    return this.http.delete(`${this.URL_API}api/users/${user.id}`, this.setoption())
   }
 }

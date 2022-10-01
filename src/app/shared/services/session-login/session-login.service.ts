@@ -34,21 +34,6 @@ export class SessionLoginService {
       this.http.post(this.URL_API+this.LOGIN_URL,loginDada).subscribe( result => {
         observer.next(true)
         observer.complete()
-        this.userService.findByEmail(loginDada.email).subscribe(user => {
-          user = user[0]
-          this.localStore.saveData('userId', user.id.toString());
-          this.localStore.saveData('userName', user.nom);
-          this.localStore.saveData('userFisrtName', user.prenom);
-          this.localStore.saveData('userEmail', user.email);
-          for (let userRole in user.roles) {
-            if (userRole == 'ROLE_ADMIN'){
-              this.localStore.saveData('userRoles', userRole);
-            }
-            if (userRole == 'ROLE_EMPLOYE'){
-              this.localStore.saveData('userRoles', userRole);
-            }
-          }
-        })
         this.localStore.saveData('token', result['token']);
       },error => {
         observer.error(false)
@@ -58,8 +43,8 @@ export class SessionLoginService {
   }
 
   logout(){
+    this.localStore.clearData();
     return new Observable<boolean>((observer) => {
-      this.localStore.clearData();
       this.http.get(this.URL_API+this.LOGOUT_URL).subscribe( result => {
         observer.next(true)
         observer.complete()

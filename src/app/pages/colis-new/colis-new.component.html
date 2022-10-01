@@ -5,7 +5,7 @@
     <div class="offset-2 col-md-8">
       <div class="card">
         <div class="card-header">
-          <h5 class="title">Ajout d'un nouvel utilisateur</h5>
+          <h5 class="title">Nouveau dépot</h5>
         </div>
         <div class="card-body px-5">
           <div *ngIf="wrongCredential" class="alert alert-danger text-center" role="alert">
@@ -128,12 +128,27 @@
                     </div>
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Avance</label>
+                      <input name="avance" type="number" class="form-control" [(ngModel)]="colis.avance">
+                    </div>
+                  </div>
+                </div>
               </fieldset>
               <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                   <div class="form-group">
                     <fieldset>
-                      <legend>Total : <i class="text-info h6 ml-5">{{(colis.prixKilo*colis.poids)+colis.douane+colis.emballage}}cfa</i></legend>
+                      <legend>Total : <i class="text-info h6 ml-3">{{(colis.prixKilo*colis.poids)+colis.douane+colis.emballage}}cfa</i></legend>
+                    </fieldset>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <fieldset>
+                      <legend>Impayé : <i class="text-warning h6 ml-3">-{{((colis.prixKilo*colis.poids)+colis.douane+colis.emballage)-colis.avance}}cfa</i></legend>
                     </fieldset>
                   </div>
                 </div>

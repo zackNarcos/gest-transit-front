@@ -1,4 +1,4 @@
-# [Now UI Dashboard Angular](https://creativetimofficial.github.io/now-ui-dashboard-angular) [![version][version-badge]][CHANGELOG] [![license][license-badge]][LICENSE]
+# [Keas-Expres](https://creativetimofficial.github.io/now-ui-dashboard-angular) [![version][version-badge]][CHANGELOG] [![license][license-badge]][LICENSE]
 
 ![alt text](https://s3.amazonaws.com/creativetim_bucket/products/85/original/opt_nud_angular_thumbnail.jpg)
 

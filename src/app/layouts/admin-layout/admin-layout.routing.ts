@@ -1,8 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
-import { IconsComponent } from '../../pages/icons/icons.component';
 import { NotificationsComponent } from '../../pages/notifications/notifications.component';
 import {SignUpComponent} from "../../pages/sign-up/sign-up.component";
 import {UsersListComponent} from "../../pages/users-list/users-list.component";
@@ -12,11 +10,16 @@ import {DestinationsDetailComponent} from "../../pages/destinations-detail/desti
 import {ColisListComponent} from "../../pages/colis-list/colis-list.component";
 import {ColisNewComponent} from "../../pages/colis-new/colis-new.component";
 import {ColisDetailComponent} from "../../pages/colis-detail/colis-detail.component";
+import {MeComponent} from "../../pages/me/me.component";
+import {MesColisComponent} from "../../pages/mes-colis/mes-colis.component";
+import {FindColiComponent} from "../../pages/find-coli/find-coli.component";
+import {PaysListComponent} from "../../pages/pays-list/pays-list.component";
+import {PaysDetailsComponent} from "../../pages/pays-details/pays-details.component";
+import {PaysNewComponent} from "../../pages/pays-new/pays-new.component";
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'tableau-de-bord',      component: DashboardComponent },
     { path: 'inscription',      component: SignUpComponent },
-    { path: 'utilisateurs',      component: UsersListComponent },
+    { path: 'utilisateurs',      component: UsersListComponent},
     { path: 'colis',      component: ColisListComponent },
     { path: 'colis/:id',      component: ColisDetailComponent },
     { path: 'nouveau-coli',      component: ColisNewComponent },
@@ -24,7 +27,11 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'destinations',      component: DestinationsComponent },
     { path: 'destinations/:id',   component: DestinationsDetailComponent },
     { path: 'nouvelle-destination',      component: DestinationsNewComponent },
-
-    { path: 'icons',          component: IconsComponent },
+    { path: 'pays',      component: PaysListComponent },
+    { path: 'pays/:id',   component: PaysDetailsComponent },
+    { path: 'nouveau-pays',      component: PaysNewComponent },
+    { path: 'me',      component: MeComponent },
+    { path: 'me/colis',      component: MesColisComponent },
     { path: 'notifications',  component: NotificationsComponent },
+    { path: 'rechercher/coli',  component: FindColiComponent },
 ];

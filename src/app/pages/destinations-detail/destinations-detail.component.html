@@ -5,7 +5,7 @@
     <div class="offset-3 col-md-6">
       <div class="card">
         <div class="card-header">
-          <h5 class="title">Nouvelle destination</h5>
+          <h5 class="title">Details destination</h5>
         </div>
         <div class="card-body">
           <div *ngIf="wrongCredential" class="alert alert-danger text-center" role="alert">
@@ -13,6 +13,16 @@
           </div>
           <form #form="ngForm" (submit)="upDest(form)">
             <div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Pays de destination</label>
+                    <select name="destination" class="form-control" [(ngModel)]="destination.pays">
+                      <option *ngFor="let destinationItem of pays" value="/api/pays/{{destinationItem.id}}">{{destinationItem.nom}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
               <div class="row">
                 <div class="col-md-12 pr-1">
                   <div class="form-group">

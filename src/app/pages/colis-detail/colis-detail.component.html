@@ -2,19 +2,19 @@
 </div>
 <div class="main-content">
   <div class="row">
-    <div class="offset-3">
+    <div class=" ml-5">
       <div class="card">
         <div class="card-header d-flex justify-content-between">
           <h5 class="card-title"> Detail du recu</h5>
-          <button class="btn btn-round btn-primary mt-4 mr-5" (click)="downloadAsPDF(colis.numero,toastr);">Imprimer le recu</button>
+          <button class="btn btn-round btn-primary mt-4 mr-5" (click)="downloadAsPDF(colis.numero,toastr );">Imprimer le recu</button>
         </div>
         <div class="card-body" #recuColi style="height: 902px; width: 596px">
           <form #form="ngForm">
             <div class="px-2">
-              <div class="d-flex justify-content-between mb-5">
+              <div class="d-flex justify-content-between mb-2">
                 <h5 class="">KEAS EXPRESS</h5>
                 <div>
-                  <p class="mb-0">Date:</p>
+                  <p class="mb-0">Date: {{colis.dateDepot | date }}</p>
                   <p class="mb-0">N° coli : {{colis.numero}}</p>
                 </div>
               </div>
@@ -84,10 +84,11 @@
                   <div class="col-md-7 ">
                     <div class="form-group">
                       <label>Destination</label>
-                      <select name="destination" class="form-control" [(ngModel)]="colis.destination"  disabled="">
-                        <option value="value"> –– Choisissez une destination ––</option>
-                        <option *ngFor="let destinationItem of destinations" value="/api/destinations/{{destinationItem.id}}">{{destinationItem.libelle}}</option>
-                      </select>
+                      <div *ngFor="let destinationItem of destinations">
+                        <div *ngIf="'/api/destinations/'+destinationItem.id == colis.destination" class="text-warning">
+                          {{destinationItem.libelle}}
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="col-md-5 ">
@@ -131,19 +132,66 @@
                     </div>
                   </div>
                 </div>
-              </fieldset>
-              <div class="col-md-12">
-                  <p class="category">Nous reconnaissons avoir reçu votre colis pour le transport de {{destination.libelle}} d’un bagage de {{colis.poids}} Kg</p>
-              </div>
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
+                    <label>Avance</label>
+                    <input name="avance" type="number" class="form-control" [(ngModel)]="colis.avance" disabled="">
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <p class="category">Nous reconnaissons avoir reçu votre colis pour le transport de {{destination.libelle}} d’un bagage de {{colis.poids}} Kg</p>
+                </div>
+              </div>
+              </fieldset>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
                     <fieldset>
-                      <legend>Total : <i class="text-info h6 ml-5">{{colis.prixTotal}}cfa</i></legend>
+                      <legend>Total : <i class="text-info h6 ml-1">{{(colis.prixTotal)}}cfa</i></legend>
+                    </fieldset>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <fieldset>
+                      <legend>Impayé : <i class="text-warning">-{{colis.reste}}cfa</i></legend>
                     </fieldset>
                   </div>
                 </div>
               </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body ">
+          <form #form="ngForm" (submit)="getReliquat(form)">
+            <div class="px-2">
+              <fieldset>
+                <h6>SECTION RELIQUAT</h6>
+              </fieldset>
+              <div class="row">
+                <div class="col-md-12 mt-5">
+                  <div class="form-group">
+                    <fieldset>
+                      <legend>Reste : <i class="text-danger h6 ml-1">{{(colis.reste)}}cfa</i></legend>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+              <div class="row" *ngIf="colis.isSolde == false">
+                <div class="offset-1 col-10">
+                  <button type="submit" class="btn btn-round btn-success col-12">Percevoir le reste</button>
+                </div>
+              </div>
+              <!--<div class="row" *ngIf="colis.isSolde">
+                <div class="offset-1 col-10" *ngIf="colis.prixTotal - colis.avance > 0">
+                  <button type="button" class="btn btn-round btn-danger col-12" (click)="undoReliquat()">Annuler la reception</button>
+                </div>
+              </div>-->
             </div>
           </form>
         </div>

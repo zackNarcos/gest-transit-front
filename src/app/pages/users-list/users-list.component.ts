@@ -16,11 +16,13 @@ export class UsersListComponent implements OnInit {
   ) { }
 
   users:User[]=[]
-
-  ngOnInit(): void {
+  getUsers(){
     this.userService.getUsers().subscribe(res => {
       this.users = res
     })
+  }
+  ngOnInit(): void {
+    this.getUsers()
   }
 
   lockUser(id: number, b: boolean, $event: MouseEvent) {
@@ -28,7 +30,7 @@ export class UsersListComponent implements OnInit {
     user.isLocked = b
     user.id = id
     this.userService.putUser(user).subscribe( resuslt => {
-      this.router.navigate(['/utilisateurs/'+id])
+      this.getUsers()
     },error => {
 
     })

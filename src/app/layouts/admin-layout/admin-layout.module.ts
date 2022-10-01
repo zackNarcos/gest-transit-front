@@ -3,9 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminLayoutRoutes } from './admin-layout.routing';
-import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
-import { IconsComponent } from '../../pages/icons/icons.component';
 import { NotificationsComponent } from '../../pages/notifications/notifications.component';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -18,6 +16,12 @@ import { DestinationsDetailComponent } from '../../pages/destinations-detail/des
 import { ColisListComponent } from '../../pages/colis-list/colis-list.component';
 import { ColisNewComponent } from '../../pages/colis-new/colis-new.component';
 import { ColisDetailComponent } from '../../pages/colis-detail/colis-detail.component';
+import { MeComponent } from '../../pages/me/me.component';
+import { MesColisComponent } from '../../pages/mes-colis/mes-colis.component';
+import { FindColiComponent } from '../../pages/find-coli/find-coli.component';
+import { PaysNewComponent } from '../../pages/pays-new/pays-new.component';
+import { PaysListComponent } from '../../pages/pays-list/pays-list.component';
+import { PaysDetailsComponent } from '../../pages/pays-details/pays-details.component';
 
 @NgModule({
   imports: [
@@ -29,9 +33,7 @@ import { ColisDetailComponent } from '../../pages/colis-detail/colis-detail.comp
     ToastrModule.forRoot()
   ],
   declarations: [
-    DashboardComponent,
     UserProfileComponent,
-    IconsComponent,
     NotificationsComponent,
     SignUpComponent,
     UsersListComponent,
@@ -41,6 +43,12 @@ import { ColisDetailComponent } from '../../pages/colis-detail/colis-detail.comp
     ColisListComponent,
     ColisNewComponent,
     ColisDetailComponent,
+    MeComponent,
+    MesColisComponent,
+    FindColiComponent,
+    PaysNewComponent,
+    PaysListComponent,
+    PaysDetailsComponent,
 
   ]
 })
