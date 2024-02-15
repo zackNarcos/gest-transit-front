@@ -13,7 +13,7 @@ import {PaysService} from "../../shared/services/api/pays/pays.service";
 })
 export class PaysDetailsComponent implements OnInit {
 
-  pays : Pays = new Pays()
+  pays : Pays
 
 
   wrongCredential: boolean;

@@ -11,19 +11,19 @@
           <div *ngIf="wrongCredential" class="alert alert-danger text-center" role="alert">
             Données invalide!
           </div>
-          <form #form="ngForm" (submit)="signUp(form)">
+          <form [formGroup]="userForm">
             <div class="px-5">
               <div class="row">
                 <div class="col-md-6 pr-1">
                   <div class="form-group">
                     <label>Nom</label>
-                    <input name="nom" type="text" class="form-control" placeholder="Nom" [(ngModel)]="user.nom" >
+                    <input name="nom" type="text" class="form-control" placeholder="Nom" formControlName="nom">
                   </div>
                 </div>
                 <div class="col-md-6 pl-1">
                   <div class="form-group">
                     <label>Prenom</label>
-                    <input name="prenom" type="text" class="form-control" placeholder="Prenom"  [(ngModel)]="user.prenom">
+                    <input name="prenom" type="text" class="form-control" placeholder="Prenom"  formControlName="prenom">
                   </div>
                 </div>
               </div>
@@ -31,7 +31,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label>Adresse</label>
-                    <input name="adresse" type="text" class="form-control" placeholder="Adresse"  [(ngModel)]="user.adresse">
+                    <input name="adresse" type="text" class="form-control" placeholder="Adresse"  formControlName="adresse">
                   </div>
                 </div>
               </div>
@@ -39,21 +39,22 @@
                 <div class="col-md-4 pr-1">
                   <div class="form-group">
                     <label>Ville</label>
-                    <input name="ville" type="text" class="form-control" placeholder="Ville"  [(ngModel)]="user.ville">
+                    <input name="ville" type="text" class="form-control" placeholder="Ville"  formControlName="ville">
                   </div>
                 </div>
                 <div class="col-md-4 px-1">
                   <div class="form-group">
                     <label>Pays</label>
-                    <select name="destination" class="form-control" [(ngModel)]="user.pays">
-                      <option *ngFor="let destinationItem of pays" value="/api/pays/{{destinationItem.id}}">{{destinationItem.nom}}</option>
+                    <select name="destination" class="form-control" formControlName="pays">
+                      <option value="" selected>Selectionner un pays</option>
+<!--                      <option *ngFor="let destinationItem of pays" [value]="destinationItem">{{destinationItem.nom}}</option>-->
                     </select>
                   </div>
                 </div>
                 <div class="col-md-4 pl-1">
                   <div class="form-group">
                     <label>Téléphone</label>
-                    <input name="telephone" type="tel" class="form-control"  [(ngModel)]="user.telephone">
+                    <input name="telephone" type="tel" class="form-control"  placeholder="Téléphone"  formControlName="telephone">
                   </div>
                 </div>
               </div>
@@ -61,7 +62,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label>Description</label>
-                    <textarea name="description" rows="4" cols="80" class="form-control"  [(ngModel)]="user.description"></textarea>
+                    <textarea name="description" rows="4" cols="80" class="form-control" placeholder="Description"  formControlName="description"></textarea>
                   </div>
                 </div>
               </div>
@@ -69,14 +70,14 @@
                 <div class="col-md-4 pr-1">
                   <div class="form-group">
                     <label>Salaire</label>
-                    <input name="salaire" type="number" class="form-control" [(ngModel)]="user.salaire">
+                    <input name="salaire" type="number" class="form-control" placeholder="Salaire"  formControlName="salaire">
                   </div>
                 </div>
                 <div class="col-md-4 pl-1">
                   <div class="form-group">
                     <label for="email">Adresse mail</label>
-                    <input name="email" id="email" type="email" class="form-control" placeholder="Email" [(ngModel)]="user.email">
-                    <div *ngIf="uniqMail" id="" class="text-danger text-center">
+                    <input name="email" id="email" type="email" class="form-control" placeholder="Email" formControlName="email" (change)="checkEmail()">
+                    <div *ngIf="notUniqMail" id="" class="text-danger text-center">
                       Adresse mail deja utilisé
                     </div>
                   </div>
@@ -84,14 +85,20 @@
                 <div class="col-md-4 px-1">
                   <div class="form-group">
                     <label>Mot de passe</label>
-                    <input name="password" type="text" class="form-control" placeholder=""  [(ngModel)]="user.password">
+                    <input name="password" type="text" class="form-control" placeholder=""  formControlName="password">
                   </div>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="offset-4 col-4">
-                <button type="submit" class="btn btn-round btn-primary col-12">Enregistrer</button>
+                <button type="submit"
+                        class="btn btn-round btn-primary col-12"
+                        [disabled]="!userForm.valid || !notUniqMail"
+                        (click)="signUp()"
+                >
+                  Enregistrer
+                </button>
               </div>
             </div>
           </form>

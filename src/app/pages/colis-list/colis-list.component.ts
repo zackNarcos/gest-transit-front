@@ -4,7 +4,6 @@ import {Router} from "@angular/router";
 import {User} from "../../shared/models/user";
 import {ColisService} from "../../shared/services/api/colis/colis.service";
 import {Colis} from "../../shared/models/colis";
-import {MonthStatistique} from "../../shared/models/monthStatistique";
 import {ProfileService} from "../../shared/services/profile/profile.service";
 
 @Component({
@@ -26,14 +25,14 @@ export class ColisListComponent implements OnInit {
 
 
   colis:Colis[]=[]
-  user:User = new User()
+  user:User
 
   ngOnInit(): void {
     this.profilService.getMe().subscribe(user => {
       this.user = user
       this.month = new Date().getMonth()+1;
       this.year = new Date().getFullYear();
-      this.colisService.getColisIn(this.user.id, this.year, this.month).subscribe(res => {
+      this.colisService.getColisIn(this.user._id, this.year, this.month).subscribe(res => {
         this.colis = res
       })
     })
@@ -47,7 +46,7 @@ export class ColisListComponent implements OnInit {
     this.colisService.putColis(coli).subscribe( resuslt => {
       this.profilService.getMe().subscribe(user => {
         this.user = user
-        this.colisService.getColisIn(this.user.id, this.year, this.month).subscribe(res => {
+        this.colisService.getColisIn(this.user._id, this.year, this.month).subscribe(res => {
           this.colis = res
         })
       })
@@ -60,7 +59,7 @@ export class ColisListComponent implements OnInit {
     this.colis = []
     this.profilService.getMe().subscribe(user => {
       this.user = user
-      this.colisService.getColisIn(this.user.id, this.year, this.month).subscribe(res => {
+      this.colisService.getColisIn(this.user._id, this.year, this.month).subscribe(res => {
         this.colis = res
       })
     })

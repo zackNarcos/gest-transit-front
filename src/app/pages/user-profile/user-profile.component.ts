@@ -28,7 +28,7 @@ export class UserProfileComponent implements OnInit {
     private router:Router
   ) { }
 
-  user:User = new User()
+  user:User
   private id = this.route.snapshot.params['id']
 
   ngOnInit(): void {

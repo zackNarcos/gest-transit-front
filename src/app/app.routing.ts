@@ -4,8 +4,7 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import {LoginComponent} from "./pages/login/login.component";
-import {ProfileService} from "./shared/services/profile/profile.service";
+import {LoginGuard} from "./core/guards/login.guard";
 
 const routes: Routes =[
   {
@@ -16,15 +15,17 @@ const routes: Routes =[
   {
     path: '',
     component: AdminLayoutComponent,
-    canActivate: [ProfileService ],
+    canActivate: [LoginGuard],
     children: [
-        {
-      path: '',
-      loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(x=>x.AdminLayoutModule),
-  }]},
+      {
+        path: '',
+        loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(x=>x.AdminLayoutModule),
+      }
+    ]
+  },
   {
-    path: 'login',
-    component: LoginComponent
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
   },
   {
     path: '**',

@@ -26,14 +26,14 @@ export class MesColisComponent implements OnInit {
 
 
   colis:Colis[]=[]
-  user:User = new User()
+  user:User
 
   ngOnInit(): void {
     this.profilService.getMe().subscribe(user => {
       this.user = user
       this.month = new Date().getMonth()+1;
       this.year = new Date().getFullYear();
-      this.colisService.getColisByUser(this.user.id, this.year, this.month, this.day).subscribe(res => {
+      this.colisService.getColisByUser(this.user._id, this.year, this.month, this.day).subscribe(res => {
         this.colis = res
       })
     })
@@ -47,7 +47,7 @@ export class MesColisComponent implements OnInit {
     this.colisService.putColis(coli).subscribe( resuslt => {
       this.profilService.getMe().subscribe(user => {
         this.user = user
-        this.colisService.getColisByUser(this.user.id, this.year, this.month, this.day).subscribe(res => {
+        this.colisService.getColisByUser(this.user._id, this.year, this.month, this.day).subscribe(res => {
           this.colis = res
         })
       })
@@ -60,7 +60,7 @@ export class MesColisComponent implements OnInit {
     this.colis = []
     this.profilService.getMe().subscribe(user => {
       this.user = user
-      this.colisService.getColisByUser(this.user.id, this.year, this.month, this.day).subscribe(res => {
+      this.colisService.getColisByUser(this.user._id, this.year, this.month, this.day).subscribe(res => {
         this.colis = res
       })
     })

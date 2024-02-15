@@ -30,7 +30,8 @@ import { PaysDetailsComponent } from '../../pages/pays-details/pays-details.comp
     FormsModule,
     ChartsModule,
     NgbModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    ReactiveFormsModule
   ],
   declarations: [
     UserProfileComponent,

@@ -1,11 +1,8 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
-import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import {Location} from '@angular/common';
 import { Router } from '@angular/router';
-import Chart from 'chart.js';
-import {User} from "../../shared/models/user";
 import {LocalService} from "../../shared/services/local-storage/local.service";
-import {SessionLoginService} from "../../shared/services/session-login/session-login.service";
 
 @Component({
   selector: 'app-navbar',
@@ -28,10 +25,9 @@ export class NavbarComponent implements OnInit {
       private element: ElementRef,
       private router: Router,
       private localService: LocalService,
-      private sessionService: SessionLoginService,
     ) {
       this.location = location;
-          this.sidebarVisible = false;
+      this.sidebarVisible = false;
     }
 
     ngOnInit(){
@@ -46,7 +42,7 @@ export class NavbarComponent implements OnInit {
            this.mobile_menu_visible = 0;
          }
      });
-      this.prenom = this.localService.getData('userFisrtName')
+      // this.prenom = this.localService.getData('userFisrtName')
     }
 
     collapse(){
@@ -161,12 +157,12 @@ export class NavbarComponent implements OnInit {
               return this.listTitles[item].title;
           }
       }
+      //TODO: get actual title
       return 'KEAS EXPRESS';
     }
 
   logout() {
-    this.sessionService.logout()
+    this.localService.clearData()
     this.router.navigate(['/login'])
-
   }
 }

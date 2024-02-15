@@ -26,9 +26,9 @@ export class UsersListComponent implements OnInit {
   }
 
   lockUser(id: number, b: boolean, $event: MouseEvent) {
-    let user: User = new User()
+    let user: User
     user.isLocked = b
-    user.id = id
+    user._id = id
     this.userService.putUser(user).subscribe( resuslt => {
       this.getUsers()
     },error => {

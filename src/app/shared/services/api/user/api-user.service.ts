@@ -15,40 +15,28 @@ export class ApiUserService  {
     private localStore: LocalService
   ) { }
 
-  private URL_API:string = environment.api
-
-  setoption(){
-    const token = this.localStore.getData('token')
-    const headerDict = {
-      'Authorization': `Bearer ${token}`,
-      'Accept' : 'application/json'
-    }
-    return {
-      headers: new HttpHeaders(headerDict),
-    }
-  }
-
+  private URL_API:string = `${environment.api}/users`
 
 
   postUser(user: User){
-    return this.http.post(`${this.URL_API}api/users`,user, this.setoption())
+    return this.http.post(this.URL_API,user)
   }
 
   getUsers():Observable<User[]>{
-    return this.http.get<User[]>(`${this.URL_API}api/users`, this.setoption());
+    return this.http.get<User[]>(this.URL_API)
   }
   getUser(id):Observable<User>{
-    return this.http.get<User>(`${this.URL_API}api/users/${id}`, this.setoption());
+    return this.http.get<User>(`${this.URL_API}/${id}`)
   }
   findByEmail(email):Observable<User>{
-    return this.http.get<User>(`${this.URL_API}api/users?email=${email}`, this.setoption());
+    return this.http.get<User>(`${this.URL_API}/email/${email}`)
   }
 
   putUser(user: User) {
-    return this.http.put(`${this.URL_API}api/users/${user.id}`,user, this.setoption())
+    return this.http.put(`${this.URL_API}/${user._id}`,user)
   }
 
   deleteUser(user: User) {
-    return this.http.delete(`${this.URL_API}api/users/${user.id}`, this.setoption())
+    return this.http.delete(`${this.URL_API}/${user._id}`)
   }
 }

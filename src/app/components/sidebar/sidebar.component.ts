@@ -34,9 +34,10 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
-    this.profilService.getProfile().subscribe(profile => {
-      this.isAdmin = profile['roles'][0] === "ROLE_ADMIN";
-    })
+    // this.profilService.getProfile().subscribe(profile => {
+    //   this.isAdmin = profile['roles'][0] === "ROLE_ADMIN";
+    // })
+    //TODO: get user role
   }
   isMobileMenu() {
       if ( window.innerWidth > 991) {

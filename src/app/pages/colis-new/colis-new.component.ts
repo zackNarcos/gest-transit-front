@@ -32,7 +32,7 @@ export class ColisNewComponent implements OnInit {
     private userService:ApiUserService,
   ) { }
 
-  user= new User
+  user
 
   ngOnInit(): void {
     this.colis.status = 'ATTENTE_EXPEDITION'
@@ -54,7 +54,7 @@ export class ColisNewComponent implements OnInit {
   newColi(form: NgForm) {
     this.profilService.getMe().subscribe(user => {
       this.user = user
-      this.colis.employe = '/api/users/'+this.user.id
+      this.colis.employe = '/api/users/'+this.user._id
     })
 
     this.wrongCredential = false

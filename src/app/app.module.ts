@@ -13,10 +13,11 @@ import { AppComponent } from './app.component';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import {MatCardModule} from "@angular/material/card";
-import { LoginComponent } from './pages/login/login.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
+import {AuthInterceptor} from "./core/interceptors/auth.interceptor";
+import {ModuleStoreModule} from "./core/store/module-store.module";
 
 @NgModule({
   imports: [
@@ -31,16 +32,29 @@ import {MatButtonModule} from "@angular/material/button";
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    ModuleStoreModule,
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: false, // Restrict extension to log-only mode
+      features: {
+        pause: false,
+        lock: true,
+        persist: true,
+      },
+    }),
+    EffectsModule.forRoot([])
   ],
   declarations: [
-    LoginComponent,
     AppComponent,
     AdminLayoutComponent,
-
   ],
   providers: [
-
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent]
 })

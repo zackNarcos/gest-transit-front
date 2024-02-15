@@ -1,4 +1,4 @@
-export class Pays{
+export interface Pays{
   id: number
   nom: string
   colis: [

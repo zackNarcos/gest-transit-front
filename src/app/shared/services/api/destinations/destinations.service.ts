@@ -17,7 +17,7 @@ export class DestinationsService {
   ) { }
 
   private URL_API:string = environment.api
-  private URL_API2:string = environment.api2
+  private URL_API2:string = environment.api
 
   setoption(){
     const token = this.localStore.getData('token')

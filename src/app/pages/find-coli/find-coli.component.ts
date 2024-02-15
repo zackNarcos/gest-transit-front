@@ -26,7 +26,7 @@ export class FindColiComponent implements OnInit {
 
 
   colis:Colis[]
-  user:User = new User()
+  user:User
 
   ngOnInit(): void {
     this.colis = []

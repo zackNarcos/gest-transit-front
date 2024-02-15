@@ -1,10 +1,9 @@
-
-export class User{
-  id?:number
+export interface User{
+  _id?:number
   email:string
   roles:[string]
   password:string
-  pays: string
+  pays: Object
   nom:string
   prenom:string
   adresse: string
@@ -13,4 +12,6 @@ export class User{
   description: string
   salaire: number
   isLocked: boolean
+  createdAt?: Date
+  updatedAt?: Date
 }
