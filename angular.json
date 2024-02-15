@@ -137,7 +137,6 @@
       }
     }
   },
-  "defaultProject": "now-ui-dashboard-angular",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

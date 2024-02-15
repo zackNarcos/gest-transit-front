@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../../shared/models/user";
-import {FormControl, FormGroup} from "@angular/forms";
+import {UntypedFormControl, UntypedFormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
 import {Pays} from "../../shared/models/pays";
 
@@ -17,14 +17,14 @@ export class SignUpComponent implements OnInit {
   wrongCredential = false;
   notUniqMail = false;
 
-  userForm = new FormGroup({
-    email : new FormControl(''),
-    password : new FormControl('keasexpress'),
-    nom: new FormControl(''),
-    prenom: new FormControl(''),
-    telephone: new FormControl(''),
-    adresse: new FormControl(''),
-    pays: new FormControl(''),
+  userForm = new UntypedFormGroup({
+    email : new UntypedFormControl(''),
+    password : new UntypedFormControl('keasexpress'),
+    nom: new UntypedFormControl(''),
+    prenom: new UntypedFormControl(''),
+    telephone: new UntypedFormControl(''),
+    adresse: new UntypedFormControl(''),
+    pays: new UntypedFormControl(''),
   });
 
 
