@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ProfileService} from "../../shared/services/profile/profile.service";
+// import {ProfileService} from "../../shared/services/profile/profile.service";
 
 declare interface RouteInfo {
     path: string;
@@ -29,7 +29,7 @@ export class SidebarComponent implements OnInit {
   isAdmin: boolean
 
   constructor(
-    private profilService: ProfileService
+    // private profilService: ProfileService
   ) { }
 
   ngOnInit() {

@@ -1,10 +1,9 @@
+import {Destinations} from "./destinations";
+import {Colis} from "./colis";
+
 export interface Pays{
-  id: number
+  _id?: string
   nom: string
-  colis: [
-    string
-  ]
-  destinations: [
-    string
-  ]
+  colis?: Colis[]
+  destinations?: Destinations[]
 }

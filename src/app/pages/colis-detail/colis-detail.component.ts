@@ -1,19 +1,16 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Destinations} from "../../shared/models/destinations";
 import {Colis} from "../../shared/models/colis";
-import {DestinationsService} from "../../shared/services/api/destinations/destinations.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ColisService} from "../../shared/services/api/colis/colis.service";
+import {ActivatedRoute} from "@angular/router";
 import domtoimage from 'dom-to-image';
 
 import jsPDF from 'jspdf';
-import {ToastrService} from "ngx-toastr";
 import {NgForm} from "@angular/forms";
 import {Reliquat} from "../../shared/models/reliquat";
-import {ReliquatService} from "../../shared/services/api/reliquat/reliquat.service";
-import {ProfileService} from "../../shared/services/profile/profile.service";
-import {ApiUserService} from "../../shared/services/api/user/api-user.service";
 import {User} from "../../shared/models/user";
+import {DestinationsService} from "../../core/services/destinations.service";
+import {ReliquatService} from "../../core/services/reliquat.service";
+import {ColisService} from "../../core/services/colis.service";
 
 @Component({
   selector: 'app-colis-detail',
@@ -37,39 +34,36 @@ export class ColisDetailComponent implements OnInit {
     private reliquatService: ReliquatService,
     private colisService: ColisService,
     private route: ActivatedRoute,
-    private toastrS: ToastrService,
-    private profilService:ProfileService,
-    private userService:ApiUserService,
+    // private toastrS: ToastrService,
   ) { }
 
   user:User
 
-  toastr = this.toastrS
+  // toastr = this.toastrS
   private id = this.route.snapshot.params['id']
-  private date
 
   ngOnInit(): void {
     this.destinationsService.getDestinations().subscribe( result => {
       this.destinations = result
     })
-    this.colisService.getColi(this.id).subscribe(coli => {
-      this.colis = coli
-      this.destinationsService.getDestinationByURI(this.colis.destination).subscribe(dest => {
-        this.destination.libelle = dest.libelle
-      })
-    })
-    this.profilService.getMe().subscribe(user => this.user = user)
+    // this.colisService.getColi(this.id).subscribe(coli => {
+    //   this.colis = coli
+    //   this.destinationsService.getDestinationByURI(this.colis.destination).subscribe(dest => {
+    //     this.destination.libelle = dest.libelle
+    //   })
+    // })
+    // this.profilService.getMe().subscribe(user => this.user = user)
   }
 
   @ViewChild('recuColi')
   recuColi!: ElementRef;
 
-  public downloadAsPDF(numero: string, toastr: ToastrService) {
+  public downloadAsPDF(numero: string) {
     let div = this.recuColi.nativeElement;
 
-    var img:any;
-    var filename;
-    var newImage:any;
+    let img:any;
+    let filename = numero + '.pdf';
+    let newImage:any;
 
 
     domtoimage.toPng(div, { bgcolor: '#fff' })
@@ -82,48 +76,42 @@ export class ColisDetailComponent implements OnInit {
 
         img.onload = function(){
 
-          var pdfWidth = img.width;
-          var pdfHeight = img.height;
+          let pdfWidth = img.width;
+          let pdfHeight = img.height;
 
           // FileSaver.saveAs(dataUrl, 'my-pdfimage.png'); // Save as Image
 
-          var doc;
+          let doc: any;
 
-          if(pdfWidth > pdfHeight)
-          {
+          if(pdfWidth > pdfHeight) {
             doc = new jsPDF('l', 'mm', [pdfWidth , pdfHeight]);
-          }
-          else
-          {
+          } else {
             doc = new jsPDF('p', 'mm', [pdfWidth , pdfHeight]);
           }
 
 
-          var width = doc.internal.pageSize.getWidth();
-          var height = doc.internal.pageSize.getHeight();
+          let width = doc.internal.pageSize.getWidth();
+          let height = doc.internal.pageSize.getHeight();
 
 
           doc.addImage(newImage, 'PNG',  10, 10, width, height);
           filename = numero + '.pdf';
           doc.save(filename);
 
-          toastr.show('<span class="now-ui-icons ui-1_bell-53"></span> <b>Reçu</b> téléchargé avec succès.', '', {
-            timeOut: 8000,
-            closeButton: true,
-            enableHtml: true,
-            toastClass: "alert alert-info alert-with-icon",
-            positionClass: 'toast-top-right'
-          });
+          // toastr.show('<span class="now-ui-icons ui-1_bell-53"></span> <b>Reçu</b> téléchargé avec succès.', '', {
+          //   timeOut: 8000,
+          //   closeButton: true,
+          //   enableHtml: true,
+          //   toastClass: "alert alert-info alert-with-icon",
+          //   positionClass: 'toast-top-right'
+          // });
         };
 
 
       })
       .catch(function(error) {
-
-        // Error Handling
-
+        console.log(error);
       });
-
   }
 
   getReliquat(form: NgForm) {
@@ -131,52 +119,52 @@ export class ColisDetailComponent implements OnInit {
 
     this.reliquat = new Reliquat()
     this.reliquat.montant = this.colis.reste
-    this.reliquat.date = new Date()
-    this.reliquat.coli = '/api/colis/'+this.colis.id
-    this.reliquat.employe = '/api/users/'+this.user._id
-
-    this.reliquatService.postReliquat(this.reliquat).subscribe( reliq => {
-      this.colis.isSolde = true
-      this.colis.reste = 0
-
-      this.colisService.putColis(this.colis).subscribe(coli => {
-        this.colisService.getColi(this.id).subscribe(coli => {
-          this.colis = coli
-          this.destinationsService.getDestinationByURI(this.colis.destination).subscribe(dest => {
-            this.destination.libelle = dest.libelle
-          })
-        })
-      })
-    })
+    // this.reliquat.date = new Date()
+    // this.reliquat.coli = '/colis/'+this.colis.id
+    // this.reliquat.employe = '/users/'+this.user._id
+    //
+    // this.reliquatService.postReliquat(this.reliquat).subscribe( reliq => {
+    //   this.colis.isSolde = true
+    //   this.colis.reste = 0
+    //
+    //   this.colisService.putColis(this.colis).subscribe(coli => {
+    //     this.colisService.getColi(this.id).subscribe(coli => {
+    //       this.colis = coli
+    //       this.destinationsService.getDestinationByURI(this.colis.destination).subscribe(dest => {
+    //         this.destination.libelle = dest.libelle
+    //       })
+    //     })
+    //   })
+    // })
   }
 
   undoReliquat() {
     this.wrongCredential = false
 
-    this.reliquatService.findReliquatByIdColi(this.colis.id).subscribe(reliqF => {
-      let reliquatFind = reliqF[0]
-      if (reliquatFind){
-        this.reliquat = reliquatFind
-        this.reliquatService.deleteReliquat(this.reliquat).subscribe( reliq => {
-          if (this.colis.prixTotal - this.colis.avance == 0){
-            this.colis.isSolde = true
-            this.colis.reste = 0
-          }else {
-            this.colis.isSolde = false
-            this.colis.reste = this.colis.prixTotal - this.colis.avance
-          }
-
-          this.colisService.putColis(this.colis).subscribe(coli => {
-            this.colisService.getColi(this.id).subscribe(coli => {
-              this.colis = coli
-              this.destinationsService.getDestinationByURI(this.colis.destination).subscribe(dest => {
-                this.destination.libelle = dest.libelle
-              })
-            })
-          })
-
-        })
-      }
-    })
+    // this.reliquatService.findReliquatByIdColi(this.colis.id).subscribe(reliqF => {
+    //   let reliquatFind = reliqF[0]
+    //   if (reliquatFind){
+    //     this.reliquat = reliquatFind
+    //     this.reliquatService.deleteReliquat(this.reliquat).subscribe( reliq => {
+    //       if (this.colis.prixTotal - this.colis.avance == 0){
+    //         this.colis.isSolde = true
+    //         this.colis.reste = 0
+    //       }else {
+    //         this.colis.isSolde = false
+    //         this.colis.reste = this.colis.prixTotal - this.colis.avance
+    //       }
+    //
+    //       this.colisService.putColis(this.colis).subscribe(coli => {
+    //         this.colisService.getColi(this.id).subscribe(coli => {
+    //           this.colis = coli
+    //           this.destinationsService.getDestinationByURI(this.colis.destination).subscribe(dest => {
+    //             this.destination.libelle = dest.libelle
+    //           })
+    //         })
+    //       })
+    //
+    //     })
+    //   }
+    // })
   }
 }

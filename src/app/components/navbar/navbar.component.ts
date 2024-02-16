@@ -2,7 +2,8 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import {Location} from '@angular/common';
 import { Router } from '@angular/router';
-import {LocalService} from "../../shared/services/local-storage/local.service";
+import {LocalStorageService} from "../../core/services/local-storage.service";
+// import {LocalService} from "../../shared/services/local-storage/local.service";
 
 @Component({
   selector: 'app-navbar',
@@ -24,7 +25,7 @@ export class NavbarComponent implements OnInit {
       location: Location,
       private element: ElementRef,
       private router: Router,
-      private localService: LocalService,
+      private localService: LocalStorageService,
     ) {
       this.location = location;
       this.sidebarVisible = false;
@@ -162,7 +163,7 @@ export class NavbarComponent implements OnInit {
     }
 
   logout() {
-    this.localService.clearData()
+    this.localService.clear()
     this.router.navigate(['/login'])
   }
 }

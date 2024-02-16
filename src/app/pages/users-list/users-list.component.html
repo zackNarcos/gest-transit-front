@@ -28,61 +28,30 @@
 
               </thead>
               <tbody>
-              <ng-container *ngIf="users">
-                <ng-container *ngFor="let user of users">
-                    <ng-container *ngIf="user.isLocked;then isLocked else notLocked"></ng-container>
-                    <ng-template #isLocked>
-                      <tr class="bg-danger text-light">
-                        <td>
-                          {{ user.nom }}
-                        </td>
-                        <td>
-                          {{ user.prenom }}
-                        </td>
-                        <td>
-                          {{ user.telephone }}
-                        </td>
-                        <td>
-                          {{ user.ville }}
-                        </td>
-                        <td class="text-right">
-                          {{ user.email }}
-                        </td>
-                        <td class="text-right">
-                          <a routerLink="/utilisateurs/{{ user.id }}" class="btn btn-round bg-light text-primary mr-1"><i class="fa fa-eye"></i></a>
-                          <ng-container *ngIf="user.roles[0] == 'ROLE_EMPLOYE'">
-                            <button (click)="lockUser(user.id,false,$event)" class="btn btn-round bg-light text-danger mr-1"><i class="fa fa-archive"></i></button>
-                          </ng-container>
-                        </td>
-                      </tr>
-                    </ng-template>
-                    <ng-template #notLocked>
-                      <tr class="">
-                        <td>
-                          {{ user.nom }}
-                        </td>
-                        <td>
-                          {{ user.prenom }}
-                        </td>
-                        <td>
-                          {{ user.telephone }}
-                        </td>
-                        <td>
-                          {{ user.ville }}
-                        </td>
-                        <td class="text-right">
-                          {{ user.email }}
-                        </td>
-                        <td class="text-right">
-                          <a routerLink="/utilisateurs/{{ user.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
-                          <ng-container *ngIf="user.roles[0] == 'ROLE_EMPLOYE'">
-                            <button (click)="lockUser(user.id,true,$event)" class="btn btn-round btn-danger mr-1"><i class="fa fa-archive"></i></button>
-                          </ng-container>
-                        </td>
-                      </tr>
-                    </ng-template>
-                  </ng-container>
-                </ng-container>
+                <tr *ngFor="let user of $users | async"
+                  class="{{user.isLocked ? 'bg-danger text-light' : ''}}">
+                  <td>
+                    {{ user.nom }}
+                  </td>
+                  <td>
+                    {{ user.prenom }}
+                  </td>
+                  <td>
+                    {{ user.telephone }}
+                  </td>
+                  <td>
+                    {{ user.ville }}
+                  </td>
+                  <td class="text-right">
+                    {{ user.email }}
+                  </td>
+                  <td class="text-right">
+                    <a routerLink="/utilisateurs/{{ user._id }}" class="btn btn-round bg-light text-primary mr-1"><i class="fa fa-eye"></i></a>
+                    <ng-container *ngIf="user.roles[0] == 'ROLE_EMPLOYE'">
+                      <button (click)="lockUser(user,!user.isLocked)" class="btn btn-round bg-light text-danger mr-1">{{user.isLocked}}<i class="fa fa-archive"></i></button>
+                    </ng-container>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>

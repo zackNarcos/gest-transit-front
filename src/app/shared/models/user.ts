@@ -1,7 +1,7 @@
 export interface User{
   _id?:number
   email:string
-  roles:[string]
+  roles?:string[]
   password:string
   pays: Object
   nom:string
@@ -11,7 +11,7 @@ export interface User{
   telephone: string
   description: string
   salaire: number
-  isLocked: boolean
+  isLocked?: boolean
   createdAt?: Date
   updatedAt?: Date
 }

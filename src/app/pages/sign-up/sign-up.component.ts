@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../../shared/models/user";
-import {UntypedFormControl, UntypedFormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {Pays} from "../../shared/models/pays";
+import {ModuleStoreService} from "../../core/store/module-store.service";
 
 @Component({
   selector: 'app-sign-up',
@@ -11,43 +12,60 @@ import {Pays} from "../../shared/models/pays";
 })
 export class SignUpComponent implements OnInit {
 
-  user : User
-  pays : Pays[]
+  user : User = {email: '', password: '', nom: '', prenom: '', telephone: '', adresse: '', pays: 0, ville: '', description: '', salaire: 0, isLocked: false, roles: []}
+  pays$ = this.moduleStoreService.selectPays()
 
   wrongCredential = false;
   notUniqMail = false;
 
-  userForm = new UntypedFormGroup({
-    email : new UntypedFormControl(''),
-    password : new UntypedFormControl('keasexpress'),
-    nom: new UntypedFormControl(''),
-    prenom: new UntypedFormControl(''),
-    telephone: new UntypedFormControl(''),
-    adresse: new UntypedFormControl(''),
-    pays: new UntypedFormControl(''),
+  userForm = new FormGroup({
+    email : new FormControl('', Validators.required),
+    password : new FormControl('keasexpress', Validators.required),
+    nom: new FormControl('', Validators.required),
+    prenom: new FormControl(''),
+    telephone: new FormControl(''),
+    adresse: new FormControl(''),
+    pays: new FormControl(0, Validators.required),
+    ville: new FormControl(''),
+    description: new FormControl(''),
+    salaire: new FormControl(0),
   });
 
 
   constructor(
-    private router: Router
+    private router: Router,
+    private moduleStoreService: ModuleStoreService,
   ) { }
 
   ngOnInit(): void {
   }
 
   signUp() {
-    this.user = this.userForm.value
+    this.user.email = this.userForm.get('email').value
+    this.user.password = this.userForm.get('password').value
+    this.user.nom = this.userForm.get('nom').value
+    this.user.prenom = this.userForm.get('prenom').value
+    this.user.telephone = this.userForm.get('telephone').value
+    this.user.adresse = this.userForm.get('adresse').value
+    this.user.pays = this.userForm.get('pays').value
+    this.user.ville = this.userForm.get('ville').value
+    this.user.description = this.userForm.get('description').value
+    this.user.salaire = this.userForm.get('salaire').value
     this.user.isLocked = false
-    this.user.roles = ["ROLE_USER"]
-    console.log(this.user)
+    this.user.roles = ["ROLE_EMPLOYE"]
+
+    this.moduleStoreService.addEmployee(this.user)
+    this.router.navigate(['/utilisateurs'])
   }
 
   checkEmail() {
     this.notUniqMail = false
-    // this.userService.findByEmail(this.user.email).subscribe(user => {
-    //   if (user){
-    //     this.notUniqMail = true
-    //   }
-    // })
+    this.moduleStoreService.selectEmployees().subscribe(users => {
+      users.forEach(user => {
+        if (user.email == this.userForm.get('email').value) {
+          this.notUniqMail = true
+        }
+      })
+    })
   }
 }

@@ -46,8 +46,8 @@
                   <div class="form-group">
                     <label>Pays</label>
                     <select name="destination" class="form-control" formControlName="pays">
-                      <option value="" selected>Selectionner un pays</option>
-<!--                      <option *ngFor="let destinationItem of pays" [value]="destinationItem">{{destinationItem.nom}}</option>-->
+                      <option [value]=0 selected>Selectionner un pays</option>
+                      <option *ngFor="let destinationItem of pays$ | async as pays" [value]="destinationItem">{{destinationItem.nom}}</option>
                     </select>
                   </div>
                 </div>
@@ -77,7 +77,7 @@
                   <div class="form-group">
                     <label for="email">Adresse mail</label>
                     <input name="email" id="email" type="email" class="form-control" placeholder="Email" formControlName="email" (change)="checkEmail()">
-                    <div *ngIf="notUniqMail" id="" class="text-danger text-center">
+                    <div *ngIf="notUniqMail" class="text-danger text-center">
                       Adresse mail deja utilisé
                     </div>
                   </div>
@@ -94,7 +94,7 @@
               <div class="offset-4 col-4">
                 <button type="submit"
                         class="btn btn-round btn-primary col-12"
-                        [disabled]="!userForm.valid || !notUniqMail"
+                        [disabled]="!userForm.valid || notUniqMail"
                         (click)="signUp()"
                 >
                   Enregistrer

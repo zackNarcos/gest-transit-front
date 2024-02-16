@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ProfileService} from "../../shared/services/profile/profile.service";
-import {ApiUserService} from "../../shared/services/api/user/api-user.service";
-import {ColisService} from "../../shared/services/api/colis/colis.service";
+// import {ProfileService} from "../../shared/services/profile/profile.service";
+// import {ApiUserService} from "../../shared/services/api/user/api-user.service";
+// import {ColisService} from "../../shared/services/api/colis/colis.service";
 import {Router} from "@angular/router";
 import {Colis} from "../../shared/models/colis";
 import {User} from "../../shared/models/user";
@@ -18,10 +18,10 @@ export class FindColiComponent implements OnInit {
   numberToFinnd: string = ''
 
   constructor(
-    private profilService:ProfileService,
-    private userService:ApiUserService,
-    private colisService:ColisService,
-    private router: Router
+    // private profilService:ProfileService,
+    // private userService:ApiUserService,
+    // private colisService:ColisService,
+    // private router: Router
   ) { }
 
 
@@ -35,21 +35,21 @@ export class FindColiComponent implements OnInit {
   upColis(id: number, status: string, form: NgForm) {
     let coli: Colis = new Colis()
     coli.status = status
-    coli.id = id
-    this.colisService.putColis(coli).subscribe( resuslt => {
-      this.colisService.findColisByExpediteurName(form.value.nameToFinnd, form.value.numberToFinnd).subscribe(res => {
-        this.colis = res
-      })
-    },error => {
-
-    })
+    coli._id = id
+    // this.colisService.putColis(coli).subscribe( resuslt => {
+    //   this.colisService.findColisByExpediteurName(form.value.nameToFinnd, form.value.numberToFinnd).subscribe(res => {
+    //     this.colis = res
+    //   })
+    // },error => {
+    //
+    // })
   }
 
   reloadData(form: NgForm) {
     this.colis = []
-    this.colisService.findColisByExpediteurName(form.value.nameToFinnd, form.value.numberToFinnd).subscribe(res => {
-      this.colis = res
-    })
+    // this.colisService.findColisByExpediteurName(form.value.nameToFinnd, form.value.numberToFinnd).subscribe(res => {
+    //   this.colis = res
+    // })
   }
 
 }

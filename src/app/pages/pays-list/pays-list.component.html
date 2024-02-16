@@ -13,24 +13,24 @@
             <table class="table">
               <thead class=" text-primary">
               <th>
-                Id
+                #
               </th><th>
                 Nom
               </th>
 
               </thead>
               <tbody>
-              <ng-container *ngIf="pays">
-                <ng-container *ngFor="let destination of pays">
+              <ng-container *ngIf="pays$ | async as pays">
+                <ng-container *ngFor="let destination of pays; let i = index">
                   <tr class="">
                     <td>
-                      {{ destination.id }}
+                      {{ i + 1 }}
                     </td>
                     <td>
                       {{ destination.nom }}
                     </td>
                     <td class="text-right">
-                      <a routerLink="/pays/{{ destination.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
+                      <a routerLink="/pays/{{ destination._id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
                     </td>
                   </tr>
                 </ng-container>

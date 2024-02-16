@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
-import { NotificationsComponent } from '../../pages/notifications/notifications.component';
+// import { NotificationsComponent } from '../../pages/notifications/notifications.component';
 import {SignUpComponent} from "../../pages/sign-up/sign-up.component";
 import {UsersListComponent} from "../../pages/users-list/users-list.component";
 import {DestinationsComponent} from "../../pages/destinations/destinations.component";
@@ -33,6 +33,6 @@ export const AdminLayoutRoutes: Routes = [
   { path: 'nouveau-pays',      component: PaysNewComponent },
   { path: 'me',      component: MeComponent },
   { path: 'me/colis',      component: MesColisComponent },
-  { path: 'notifications',  component: NotificationsComponent },
+  // { path: 'notifications',  component: NotificationsComponent },
   { path: 'rechercher/coli',  component: FindColiComponent },
 ];

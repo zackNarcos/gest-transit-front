@@ -70,5 +70,4 @@ export class UserService {
 
     return this.http.delete(url);
   }
-
 }

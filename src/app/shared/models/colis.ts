@@ -1,7 +1,7 @@
 import {User} from "./user";
 
 export class Colis{
-  id: number
+  _id?: number
   nomExpediteur: string
   prenomExpediteur: string
   telephoneExpediteur: string

@@ -6,7 +6,8 @@
       <div class="card">
         <div class="card-header d-flex justify-content-between">
           <h5 class="card-title"> Detail du recu</h5>
-          <button class="btn btn-round btn-primary mt-4 mr-5" (click)="downloadAsPDF(colis.numero,toastr );">Imprimer le recu</button>
+<!--          <button class="btn btn-round btn-primary mt-4 mr-5" (click)="downloadAsPDF(colis.numero,toastr );">Imprimer le recu</button>-->
+          <button class="btn btn-round btn-primary mt-4 mr-5" (click)="downloadAsPDF(colis.numero);">Imprimer le recu</button>
         </div>
         <div class="card-body" #recuColi style="height: 902px; width: 596px">
           <form #form="ngForm">

@@ -1,31 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {DestinationsService} from "../../shared/services/api/destinations/destinations.service";
 import {Router} from "@angular/router";
-import {Destinations} from "../../shared/models/destinations";
-import {PaysService} from "../../shared/services/api/pays/pays.service";
-import {Pays} from "../../shared/models/pays";
+import {ModuleStoreService} from "../../core/store/module-store.service";
 
 @Component({
   selector: 'app-pays-list',
   templateUrl: './pays-list.component.html',
   styleUrls: ['./pays-list.component.scss']
 })
-export class PaysListComponent implements OnInit {
+export class PaysListComponent{
 
   constructor(
-    private paysService:PaysService,
+    private moduleStoreService: ModuleStoreService,
     private router: Router
   ) { }
 
-  pays:Pays[]=[]
-  getDestinations(){
-    this.paysService.getPayss().subscribe(res => {
-      this.pays = res
-    })
-  }
-
-  ngOnInit(): void {
-    this.getDestinations()
-  }
-
+  pays$ = this.moduleStoreService.selectPays()
 }

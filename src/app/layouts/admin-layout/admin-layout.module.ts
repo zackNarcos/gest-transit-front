@@ -4,10 +4,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
-import { NotificationsComponent } from '../../pages/notifications/notifications.component';
-import { ChartsModule } from 'ng2-charts';
+// import { NotificationsComponent } from '../../pages/notifications/notifications.component';
+// import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrModule } from 'ngx-toastr';
+// import { ToastrModule } from 'ngx-toastr';
 import {SignUpComponent} from "../../pages/sign-up/sign-up.component";
 import {UsersListComponent} from "../../pages/users-list/users-list.component";
 import { DestinationsComponent } from '../../pages/destinations/destinations.component';
@@ -28,14 +28,14 @@ import { PaysDetailsComponent } from '../../pages/pays-details/pays-details.comp
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
-    ChartsModule,
+    // ChartsModule,
     NgbModule,
-    ToastrModule.forRoot(),
+    // ToastrModule.forRoot(),
     ReactiveFormsModule
   ],
   declarations: [
     UserProfileComponent,
-    NotificationsComponent,
+    // NotificationsComponent,
     SignUpComponent,
     UsersListComponent,
     DestinationsComponent,

@@ -6,6 +6,7 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Subscription ,  Observable } from 'rxjs';
 import PerfectScrollbar from 'perfect-scrollbar';
+import {ModuleStoreService} from "../../core/store/module-store.service";
 
 @Component({
   selector: 'app-admin-layout',
@@ -17,7 +18,14 @@ export class AdminLayoutComponent implements OnInit {
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
 
-  constructor( public location: Location, private router: Router) {}
+  constructor(
+    public location: Location,
+    private router: Router,
+    private moduleStoreService: ModuleStoreService,
+  ) {
+    this.moduleStoreService.loadEmployees()
+    this.moduleStoreService.loadPays()
+  }
 
   ngOnInit() {
       const isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;

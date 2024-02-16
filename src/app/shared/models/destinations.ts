@@ -1,5 +1,5 @@
 export class Destinations{
-  id: number
+  _id?: number
   libelle: string
   pays: string
   jourDeDepart: string

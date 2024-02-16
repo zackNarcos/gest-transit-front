@@ -138,10 +138,10 @@
                         </td>
                         <td class="row">
                           <div class="col-6">
-                            <a routerLink="/colis/{{ coli.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
+                            <a routerLink="/colis/{{ coli._id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
                           </div>
                           <div class="col-6">
-                            <button (click)="upColis(coli.id,'RECUPERÉ')" class="btn btn-round btn-success mr-1"><i class="fa fa-unlock">RECUPERÉ</i></button>
+                            <button (click)="upColis(coli._id,'RECUPERÉ')" class="btn btn-round btn-success mr-1"><i class="fa fa-unlock">RECUPERÉ</i></button>
                           </div>
                         </td>
                       </ng-container>
@@ -152,10 +152,10 @@
 
                         <td class="row">
                           <div class="col-6">
-                            <a routerLink="/colis/{{ coli.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
+                            <a routerLink="/colis/{{ coli._id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
                           </div>
                           <div class="col-6">
-                            <button (click)="upColis(coli.id,'ATTENTE_EXPEDITION')" class="btn btn-round btn-danger mr-1"><i class="fa fa-unlock">ATT_EXPED</i></button>
+                            <button (click)="upColis(coli._id,'ATTENTE_EXPEDITION')" class="btn btn-round btn-danger mr-1"><i class="fa fa-unlock">ATT_EXPED</i></button>
                           </div>
                         </td>
                       </ng-container>
