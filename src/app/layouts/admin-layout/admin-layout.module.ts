@@ -22,6 +22,7 @@ import { FindColiComponent } from '../../pages/find-coli/find-coli.component';
 import { PaysNewComponent } from '../../pages/pays-new/pays-new.component';
 import { PaysListComponent } from '../../pages/pays-list/pays-list.component';
 import { PaysDetailsComponent } from '../../pages/pays-details/pays-details.component';
+import {AllColisListComponent} from "../../pages/all-colis-list/all-colis-list.component";
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import { PaysDetailsComponent } from '../../pages/pays-details/pays-details.comp
     DestinationsComponent,
     DestinationsNewComponent,
     DestinationsDetailComponent,
+    AllColisListComponent,
     ColisListComponent,
     ColisNewComponent,
     ColisDetailComponent,

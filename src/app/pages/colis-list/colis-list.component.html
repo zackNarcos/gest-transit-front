@@ -5,41 +5,39 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title"> Liste des colis entrant</h4>
+          <h4 class="card-title"> Liste des colis Entrant</h4>
           <div class="col-md-12 mb-xl-0">
             <div class="card">
               <div class="card-header p-1 px-4">
                 <div class="row">
                   <div class="col-12 d-flex justify-content-end">
-                    <form #form="ngForm">
-                      <div class="row">
-                        <select class="form-control col-7 text-primary" (change)="reloadData()" name="month" [(ngModel)]="month">
-                          <option value="1">Janvier</option>
-                          <option value="2">Fevrier</option>
-                          <option value="3">Mars</option>
-                          <option value="4">Avril</option>
-                          <option value="5">Mai</option>
-                          <option value="6">Juin</option>
-                          <option value="7">Juillet</option>
-                          <option value="8">Aout</option>
-                          <option value="9">Septembre</option>
-                          <option value="10">Octobre</option>
-                          <option value="11">Novembre</option>
-                          <option value="12">Decembre</option>
-                        </select>
-                        <select class="form-control col-5 text-primary" (change)="reloadData()" name="year" [(ngModel)]="year">
-                          <option value="2022">2022</option>
-                          <option value="2023">2023</option>
-                          <option value="2024">2024</option>
-                          <option value="2025">2025</option>
-                          <option value="2026">2026</option>
-                          <option value="2027">2027</option>
-                          <option value="2028">2028</option>
-                          <option value="2029">2029</option>
-                          <option value="2030">2030</option>
-                          <option value="2031">2031</option>
-                          <option value="2032">2032</option>
-                        </select>
+                    <form class="w-100">
+                      <div class="hstack gap-1  flex w-100" [formGroup]="searchForm">
+                        <div class="ms-auto">
+                          <select class="form-control text-primary" formControlName="month">
+                            <option value="1">Janvier</option>
+                            <option value="2">Fevrier</option>
+                            <option value="3">Mars</option>
+                            <option value="4">Avril</option>
+                            <option value="5">Mai</option>
+                            <option value="6">Juin</option>
+                            <option value="7">Juillet</option>
+                            <option value="8">Aout</option>
+                            <option value="9">Septembre</option>
+                            <option value="10">Octobre</option>
+                            <option value="11">Novembre</option>
+                            <option value="12">Decembre</option>
+                          </select>
+                        </div>
+                        <div class="">
+                          <select class="form-control text-primary" formControlName="year">
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                          </select>
+                        </div>
                       </div>
                     </form>
                   </div>
@@ -49,14 +47,14 @@
           </div>
         </div>
         <div class="card-body">
-          <div class="table-responsive">
+          <div class="table-responsive-md">
             <table class="table">
               <thead class=" text-primary">
               <th>
-                Numero
+                #
               </th>
               <th>
-                Noms expediteurs
+                Destinations
               </th>
               <th>
                 Téléphones expediteurs
@@ -67,11 +65,8 @@
               <th>
                 Téléphones bénéficiaires
               </th>
-              <th>
-                Poids
-              </th>
               <th class="text-center pb-0">
-                Montants<p class="category mb-0">(douane+amballage+kilos)</p>
+                Montants
               </th>
               <th>
                 Status
@@ -79,88 +74,79 @@
 
               </thead>
               <tbody>
-              <ng-container *ngIf="colis">
-                <ng-container *ngFor="let coli of colis">
-                    <tr class="">
-                      <td class="text-center">
-                        {{ coli.numero }}
-                      </td>
-                      <td class="text-center">
-                        {{ coli['nom_expediteur'] }}
-                      </td>
-                      <td class="text-center">
-                        {{ coli['telephone_expediteur'] }}
-                      </td>
-                      <td class="text-center">
-                        {{ coli['nom_beneficiaire'] }}
-                      </td>
-                      <td class="text-center">
-                        {{ coli['telephone_beneficiaire'] }}
-                      </td>
-                      <td class="text-center">
-                        {{ coli.poids }}
-                      </td>
-                      <td class="text-center">
-                        {{ coli['prix_total'] }}
-                        <p class="category text-danger text_bold mb-0">
-                          (-{{ coli.reste }})
-                        </p>
-                      </td>
-                      <ng-container *ngIf="coli.status=='ATTENTE_EXPEDITION'">
-                        <td class="text-center bg-danger text-light">
-                          {{ coli.status }}
-                        </td>
-                        <td class="row">
-                          <div class="col-6">
-                            <a routerLink="/colis/{{ coli.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
-                          </div>
-                          <div class="col-6">
-                            <button (click)="upColis(coli.id,'TRANSIT')" class="btn btn-round btn-warning mr-1"><i class="fa fa-unlock">TRANSIT</i></button>
-                          </div>
-                        </td>
-                      </ng-container>
-                      <ng-container *ngIf="coli.status=='TRANSIT'">
-                        <td class="text-center bg-warning text-light">
-                          {{ coli.status }}
-                        </td>
-                        <td class="row">
-                          <div class="col-6">
-                            <a routerLink="/colis/{{ coli.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
-                          </div>
-                          <div class="col-6">
-                            <button (click)="upColis(coli.id,'EXPEDIÉ')" class="btn btn-round btn-secondary mr-1"><i class="fa fa-unlock">EXPEDIÉ</i></button>
-                          </div>
-                        </td>
-                      </ng-container>
-                      <ng-container *ngIf="coli.status=='EXPEDIÉ'">
-                        <td class="text-center bg-secondary text-light">
-                          {{ coli.status }}
-                        </td>
-                        <td class="row">
-                          <div class="col-6">
-                            <a routerLink="/colis/{{ coli._id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
-                          </div>
-                          <div class="col-6">
-                            <button (click)="upColis(coli._id,'RECUPERÉ')" class="btn btn-round btn-success mr-1"><i class="fa fa-unlock">RECUPERÉ</i></button>
-                          </div>
-                        </td>
-                      </ng-container>
-                      <ng-container *ngIf="coli.status=='RECUPERÉ'">
-                        <td class="text-center bg-success text-light">
-                          {{ coli.status }}
-                        </td>
+              <ng-container *ngIf="colis$ | async as colis">
+                <tr  *ngFor="let coli of colis; let i = index">
+                  <td class="text-center">
+                    {{ i+1 }}
+                  </td>
+                  <td class="text-center">
+                    {{ coli.destination.libelle }}
+                  </td>
+                  <td class="text-center">
+                    {{ coli.telephoneExpediteur }}
+                  </td>
+                  <td class="text-center">
+                    {{ coli.nomBeneficiaire }}
+                  </td>
+                  <td class="text-center">
+                    {{ coli.telephoneBeneficiaire }}
+                  </td>
+                  <td class="text-center">
+                    {{ coli['prix_total'] }}
+                    <p class="category text-danger text_bold mb-0">
+                      (-{{ coli.reste }})
+                    </p>
+                  </td>
+                  <td class="text-center"
+                      [ngClass]="{
+                            'bg-secondary-subtle': coli.status=='ATTENTE_EXPEDITION' || coli.status=='RECUPERÉ',
+                            'text-secondary': coli.status=='ATTENTE_EXPEDITION' || coli.status=='RECUPERÉ',
 
-                        <td class="row">
-                          <div class="col-6">
-                            <a routerLink="/colis/{{ coli._id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
-                          </div>
-                          <div class="col-6">
-                            <button (click)="upColis(coli._id,'ATTENTE_EXPEDITION')" class="btn btn-round btn-danger mr-1"><i class="fa fa-unlock">ATT_EXPED</i></button>
-                          </div>
-                        </td>
-                      </ng-container>
-                    </tr>
-                </ng-container>
+                            'bg-warning-subtle': coli.status=='TRANSIT',
+                            'text-warning': coli.status=='TRANSIT',
+
+                            'bg-success-subtle': coli.status=='EXPEDIÉ',
+                            'text-success': coli.status=='EXPEDIÉ',
+                          }"
+                  >
+                    <i class="fa" [ngClass]="{
+                              'fa-solid fa-hourglass-start': coli.status=='ATTENTE_EXPEDITION',
+                              'fa-solid fa-ship': coli.status=='TRANSIT',
+                              'fa-solid fa-plane-circle-check': coli.status=='EXPEDIÉ',
+                              'fa-solid fa-house-circle-check': coli.status=='RECUPERÉ',
+                            }"
+                    ></i>
+                  </td>
+                  <td class="hstack gap-3 flex">
+                    <div>
+                      <a routerLink="/colis/{{ coli._id }}" class="btn btn-round btn-primary mr-1"
+                      ><i class="fa fa-eye"></i></a>
+                    </div>
+                    <div>
+                      <button (click)="upColis(
+                          coli, coli.status == 'ATTENTE_EXPEDITION' ? 'TRANSIT'
+                                    : coli.status == 'TRANSIT' ? 'EXPEDIÉ'
+                                    : coli.status == 'EXPEDIÉ' ? 'RECUPERÉ'
+                                    : 'ATTENTE_EXPEDITION'
+                          )" class="btn btn-round mr-1"
+                              [ngClass]="{
+                              'btn-warning': coli.status=='ATTENTE_EXPEDITION',
+                              'btn-secondary': coli.status=='RECUPERÉ' || coli.status=='EXPEDIÉ',
+                              'btn-success': coli.status=='TRANSIT'
+                             }"
+                      >
+                        <i class="fa"
+                           [ngClass]="{
+                              'fa-solid fa-hourglass-start': coli.status=='RECUPERÉ',
+                              'fa-solid fa-house-circle-check': coli.status=='EXPEDIÉ',
+                              'fa-solid fa-plane-circle-check': coli.status=='TRANSIT',
+                              'fa-solid fa-ship': coli.status=='ATTENTE_EXPEDITION',
+                            }"></i>
+                      </button>
+                    </div>
+                  </td>
+
+                </tr>
               </ng-container>
               </tbody>
             </table>

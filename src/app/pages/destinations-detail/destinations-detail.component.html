@@ -17,9 +17,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label>Pays de destination</label>
-                    <select name="destination" class="form-control" [(ngModel)]="destination.pays">
-                      <option *ngFor="let destinationItem of pays" value="/api/pays/{{destinationItem.id}}">{{destinationItem.nom}}</option>
-                    </select>
+                    <input name="pays" type="text" class="form-control" placeholder="Pays de destination" [(ngModel)]="destination.pays.nom" disabled="">
                   </div>
                 </div>
               </div>
@@ -27,7 +25,7 @@
                 <div class="col-md-12 pr-1">
                   <div class="form-group">
                     <label>Libelle</label>
-                    <input name="libelle" id="libelle" type="text" class="form-control" placeholder="Dakar/Libreville" [(ngModel)]="destination.libelle" disabled="">
+                    <input name="libelle" id="libelle" type="text" class="form-control" placeholder="Dakar/Libreville" [(ngModel)]="destination.libelle">
                     <div *ngIf="uniqDest" class=" text-danger">
                       Destination existante!
                     </div>
@@ -61,7 +59,7 @@
             </div>
             <div class="row">
               <div class="offset-4 col-4">
-                <button type="submit" class="btn btn-round btn-primary col-12">Enregistrer</button>
+                <button type="submit" class="btn btn-round btn-primary col-12">Mise a jour</button>
               </div>
             </div>
           </form>

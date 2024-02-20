@@ -18,8 +18,9 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label>Pays de destination</label>
-                    <select name="destination" class="form-control" [(ngModel)]="destination.pays">
-                      <option *ngFor="let destinationItem of pays" value="/api/pays/{{destinationItem.id}}">{{destinationItem.nom}}</option>
+                    <select name="destination" class="form-control" [(ngModel)]="pays">
+                      <option value="0" selected>Selectionner un pays</option>
+                      <option *ngFor="let destinationItem of pays$ | async as pays" [value]="destinationItem._id">{{destinationItem.nom}}</option>
                     </select>
                   </div>
                 </div>

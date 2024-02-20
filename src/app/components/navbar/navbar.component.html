@@ -22,10 +22,10 @@
             Rechercher un coli<i class="now-ui-icons ui-1_zoom-bold ml-1"></i>
           </a>
           <ul class="navbar-nav">
-            <li class="nav-item" ngbDropdown>
+            <li *ngIf="($user | async)" class="nav-item" ngbDropdown>
               <a class="nav-link" id="dropdownBasic1" ngbDropdownToggle>
-                {{ prenom }}
-                <i class="now-ui-icons users_single-02"></i>
+                {{ ($user | async).nom }}
+                <i class="me-1 now-ui-icons users_single-02"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <a routerLink="/me" class="dropdown-item nav-link text-dark">
@@ -34,6 +34,10 @@
                 <button class="dropdown-item" (click)="logout()">Deconnection</button>
               </div>
             </li>
+            <li *ngIf="!($user | async)" class="nav-item">
+              <a routerLink="/auth/login" class="nav-link">
+                Connexion
+              </a>
           </ul>
         </div>
     </div>

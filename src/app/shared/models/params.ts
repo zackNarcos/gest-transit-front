@@ -1,8 +1,8 @@
 export class Params{
   id?: string;
-  month?: string;
-  year?: string;
+  month?: number;
+  year?: number;
   userId?: string;
   destinationId?: string;
-  direction: string;
+  direction?: string;
 }

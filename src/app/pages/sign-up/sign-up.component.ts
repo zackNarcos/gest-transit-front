@@ -12,7 +12,7 @@ import {ModuleStoreService} from "../../core/store/module-store.service";
 })
 export class SignUpComponent implements OnInit {
 
-  user : User = {email: '', password: '', nom: '', prenom: '', telephone: '', adresse: '', pays: 0, ville: '', description: '', salaire: 0, isLocked: false, roles: []}
+  user : User = {email: '', password: '', nom: '', prenom: '', telephone: '', adresse: '', pays: null, ville: '', description: '', salaire: 0, isLocked: false, roles: []}
   pays$ = this.moduleStoreService.selectPays()
 
   wrongCredential = false;
@@ -25,7 +25,7 @@ export class SignUpComponent implements OnInit {
     prenom: new FormControl(''),
     telephone: new FormControl(''),
     adresse: new FormControl(''),
-    pays: new FormControl(0, Validators.required),
+    pays: new FormControl(null, Validators.required),
     ville: new FormControl(''),
     description: new FormControl(''),
     salaire: new FormControl(0),

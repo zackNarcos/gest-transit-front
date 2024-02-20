@@ -21,7 +21,15 @@ export class ColisService {
   }
 
   getColis(param: Params):Observable<Colis[]>{
-    return this.http.post<Colis[]>(`${this.URL_API}/getcolis`,param);
+    return this.http.post<Colis[]>(`${this.URL_API}/colis/all`,param);
+  }
+
+  getColisIn(param: Params):Observable<Colis[]>{
+    return this.http.post<Colis[]>(`${this.URL_API}/colis/in`,param);
+  }
+
+  getColisOut(param: Params):Observable<Colis[]>{
+    return this.http.post<Colis[]>(`${this.URL_API}/colis/out`,param);
   }
 
   putColis(coli: Colis) {
@@ -31,5 +39,4 @@ export class ColisService {
   deleteColis(coli: Colis) {
     return this.http.delete(`${this.URL_API}/colis/${coli._id}`)
   }
-
 }

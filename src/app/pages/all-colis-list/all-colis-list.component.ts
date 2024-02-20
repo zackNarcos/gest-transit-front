@@ -1,21 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-// import {ProfileService} from "../../shared/services/profile/profile.service";
-// import {ApiUserService} from "../../shared/services/api/user/api-user.service";
-// import {ColisService} from "../../shared/services/api/colis/colis.service";
 import {Router} from "@angular/router";
-import {Colis} from "../../shared/models/colis";
 import {User} from "../../shared/models/user";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Colis} from "../../shared/models/colis";
+import {ColisService} from "../../core/services/colis.service";
 import {ModuleStoreService} from "../../core/store/module-store.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Params} from "../../shared/models/params";
 
 @Component({
-  selector: 'app-mes-colis',
-  templateUrl: './mes-colis.component.html',
-  styleUrls: ['./mes-colis.component.scss']
+  selector: 'app-colis-list',
+  templateUrl: './all-colis-list.component.html',
+  styleUrls: ['./all-colis-list.component.scss']
 })
-export class MesColisComponent{
-
+export class AllColisListComponent{
   month = new Date().getMonth()+1;
   year = new Date().getFullYear();
 
@@ -31,7 +28,7 @@ export class MesColisComponent{
       month: new Date().getMonth()+1,
       year: new Date().getFullYear()
     }
-    this.moduleStoreService.loadInColis(param)
+    this.moduleStoreService.loadAllColis(param)
 
     this.searchForm.valueChanges.subscribe({
       next: () => {
@@ -39,14 +36,17 @@ export class MesColisComponent{
           year: this.searchForm.get('year').value,
           month: this.searchForm.get('month').value,
         }
-        this.moduleStoreService.loadInColis(params)
+        this.moduleStoreService.loadAllColis(params)
       }
     })
   }
 
-  colis$ = this.moduleStoreService.selectInColis()
+  colis$ = this.moduleStoreService.selectAllColis()
+
   upColis(coli: Colis, status: string) {
     coli.status = status
     this.moduleStoreService.updateColis(coli)
   }
+
+
 }

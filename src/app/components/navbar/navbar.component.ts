@@ -3,6 +3,7 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import {Location} from '@angular/common';
 import { Router } from '@angular/router';
 import {LocalStorageService} from "../../core/services/local-storage.service";
+import {ModuleStoreService} from "../../core/store/module-store.service";
 // import {LocalService} from "../../shared/services/local-storage/local.service";
 
 @Component({
@@ -19,13 +20,14 @@ export class NavbarComponent implements OnInit {
 
     public isCollapsed = true;
 
-    prenom = "Connexion"
+    $user = this.moduleStoreService.selectUser()
 
     constructor(
       location: Location,
       private element: ElementRef,
       private router: Router,
       private localService: LocalStorageService,
+      private moduleStoreService: ModuleStoreService
     ) {
       this.location = location;
       this.sidebarVisible = false;
@@ -164,6 +166,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.localService.clear()
-    this.router.navigate(['/login'])
+    this.moduleStoreService.clear()
+    this.router.navigate(['/auth/login'])
   }
 }

@@ -46,7 +46,7 @@
                   <div class="form-group">
                     <label>Pays</label>
                     <select name="destination" class="form-control" formControlName="pays">
-                      <option [value]=0 selected>Selectionner un pays</option>
+                      <option [value]=null selected>Selectionner un pays</option>
                       <option *ngFor="let destinationItem of pays$ | async as pays" [value]="destinationItem">{{destinationItem.nom}}</option>
                     </select>
                   </div>

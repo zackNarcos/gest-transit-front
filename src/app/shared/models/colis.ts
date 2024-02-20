@@ -1,4 +1,6 @@
 import {User} from "./user";
+import {Pays} from "./pays";
+import {Destinations} from "./destinations";
 
 export class Colis{
   _id?: number
@@ -19,11 +21,11 @@ export class Colis{
   reste: number
   prixKilo: number
   prixTotal: number
-  destination: string
-  paysDestination: string
+  destination: Destinations
+  paysDestination: Pays
   status: string
   numero: string
   dateDepot: Date
-  employe: string
+  employe: User
   isSolde: boolean
 }

@@ -2,38 +2,31 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {Destinations} from "../../shared/models/destinations";
 import {DestinationsService} from "../../core/services/destinations.service";
+import {ModuleStoreService} from "../../core/store/module-store.service";
 
 @Component({
   selector: 'app-destinationss',
   templateUrl: './destinations.component.html',
   styleUrls: ['./destinations.component.scss']
 })
-export class DestinationsComponent implements OnInit {
+export class DestinationsComponent {
 
+  isAdmin: boolean = false;
   constructor(
-    private destinationsService:DestinationsService,
-    private router: Router
-  ) { }
-
-  destinations:Destinations[]=[]
-  getDestinations(){
-    this.destinationsService.getDestinations().subscribe(res => {
-      this.destinations = res
-    })
+    private moduleStoreService: ModuleStoreService
+  ) {
+    this.moduleStoreService.getUser().subscribe(user => {
+      if (user) {
+        const roles = user.roles;
+        this.isAdmin = roles.includes('ROLE_ADMIN');
+      }
+    });
   }
 
-  ngOnInit(): void {
-    this.getDestinations()
-  }
+  destinations$ = this.moduleStoreService.selectDestinations();
 
-  lockUser(id: number, b: boolean, $event: MouseEvent) {
-    let destination: Destinations = new Destinations()
-    destination._id = id
+  lockUser(destination: Destinations, b: boolean) {
     destination.isArchivate = b
-    // this.destinationsService.deleteDestinationr(destination).subscribe( resuslt => {
-    //   this.getDestinations()
-    // },error => {
-    //
-    // })
+    this.moduleStoreService.updateDestination(destination)
   }
 }

@@ -7,6 +7,8 @@ import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Subscription ,  Observable } from 'rxjs';
 import PerfectScrollbar from 'perfect-scrollbar';
 import {ModuleStoreService} from "../../core/store/module-store.service";
+import {User} from "../../shared/models/user";
+import {Params} from "../../shared/models/params";
 
 @Component({
   selector: 'app-admin-layout',
@@ -14,17 +16,19 @@ import {ModuleStoreService} from "../../core/store/module-store.service";
   styleUrls: ['./admin-layout.component.scss']
 })
 export class AdminLayoutComponent implements OnInit {
-  private _router: Subscription;
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
+  private _router: Subscription;
 
   constructor(
     public location: Location,
     private router: Router,
     private moduleStoreService: ModuleStoreService,
   ) {
+    this.moduleStoreService.loadUser()
     this.moduleStoreService.loadEmployees()
     this.moduleStoreService.loadPays()
+    this.moduleStoreService.loadDestinations()
   }
 
   ngOnInit() {

@@ -6,12 +6,15 @@
       <div class="card">
         <div class="card-header d-flex justify-content-between">
           <h4 class="card-title"> Liste des Destinantions</h4>
-          <a routerLink="/nouvelle-destination" class="btn btn-round btn-primary mt-4 mr-5">Nouvelle Destination</a>
+          <a *ngIf="isAdmin" routerLink="/nouvelle-destination" class="btn btn-round btn-primary mt-4 mr-5">Nouvelle Destination</a>
         </div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table">
               <thead class=" text-primary">
+              <th>
+                #
+              </th>
               <th>
                 libelle
               </th><th>
@@ -23,31 +26,37 @@
               <th>
                 Jours de depart
               </th>
-
+              <th>
+                Pays
+              </th>
               </thead>
               <tbody>
-              <ng-container *ngIf="destinations">
-                <ng-container *ngFor="let destination of destinations">
-                    <tr class="">
-                      <td>
-                        {{ destination.libelle }}
-                      </td>
-                      <td>
-                        {{ destination.prixKilos }}
-                      </td>
-                      <td>
-                        {{ destination.prixDouane }}
-                      </td>
-                      <td>
-                        {{ destination.jourDeDepart }}
-                      </td>
-                      <td class="text-right">
-                        <a routerLink="/destinations/{{ destination.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
-                        <button (click)="lockUser(destination.id,true,$event)" class="btn btn-round btn-danger mr-1"><i class="fa fa-archive"></i></button>
-                      </td>
-                    </tr>
-                </ng-container>
-              </ng-container>
+                <tr *ngFor="let destination of destinations$ | async as destinations; index as i"
+                    class="{{destination.isArchivate ? 'bg-secondary text-white' : ''}}"
+                >
+                  <td>
+                    {{ i + 1 }}
+                  </td>
+                  <td>
+                    {{ destination.libelle }}
+                  </td>
+                  <td>
+                    {{ destination.prixKilos }}
+                  </td>
+                  <td>
+                    {{ destination.prixDouane }}
+                  </td>
+                  <td>
+                    {{ destination.jourDeDepart }}
+                  </td>
+                  <td>
+                    {{ destination.pays.nom }}
+                  </td>
+                  <td *ngIf="isAdmin" class="text-right">
+                    <a routerLink="/destinations/{{ destination._id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
+                    <button (click)="lockUser(destination, !destination.isArchivate)" class="btn btn-round btn-danger mr-1"><i class="fa fa-archive"></i></button>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>

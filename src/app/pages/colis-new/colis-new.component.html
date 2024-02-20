@@ -11,7 +11,7 @@
           <div *ngIf="wrongCredential" class="alert alert-danger text-center" role="alert">
             Données invalide!
           </div>
-          <form #form="ngForm" (submit)="newColi(form)">
+          <form [formGroup]="colisForm" #form="ngForm">
             <div>
               <fieldset>
                 <legend>EXPEDITEUR</legend>
@@ -19,13 +19,17 @@
                   <div class="col-md-6 pr-1">
                     <div class="form-group">
                       <label>Noms</label>
-                      <input name="nomExpediteur" type="text" class="form-control" placeholder="Nom" [(ngModel)]="colis.nomExpediteur" >
+                      <input name="nomExpediteur" type="text" class="form-control" placeholder="Nom"
+                             formControlName="nomExpediteur"
+                      >
                     </div>
                   </div>
                   <div class="col-md-6 pl-1">
                     <div class="form-group">
                       <label>Prénoms</label>
-                      <input name="prenomExpediteur" type="text" class="form-control" placeholder="Prénom"  [(ngModel)]="colis.prenomExpediteur">
+                      <input name="prenomExpediteur" type="text" class="form-control" placeholder="Prénom"
+                             formControlName="prenomExpediteur"
+                      >
                     </div>
                   </div>
                 </div>
@@ -33,19 +37,25 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Téléphone</label>
-                      <input name="telephoneExpediteur" type="tel" class="form-control" [(ngModel)]="colis.telephoneExpediteur">
+                      <input name="telephoneExpediteur" type="tel" class="form-control"
+                             formControlName="telephoneExpediteur"
+                      >
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Numéro de la pièce d’identité</label>
-                      <input name="npiExpediteur" type="text" class="form-control"  [(ngModel)]="colis.npiExpediteur">
+                      <input name="npiExpediteur" type="text" class="form-control"
+                             formControlName="npiExpediteur"
+                      >
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>E-mail</label>
-                      <input name="emailExpediteur" type="email" class="form-control" placeholder="exemple@exemple.com"  [(ngModel)]="colis.emailExpediteur">
+                      <input name="emailExpediteur" type="email" class="form-control" placeholder="exemple@exemple.com"
+                             formControlName="emailExpediteur"
+                      >
                     </div>
                   </div>
                 </div>
@@ -56,13 +66,17 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Nom</label>
-                      <input name="nomBeneficiaire" type="text" class="form-control" placeholder="Nom" [(ngModel)]="colis.nomBeneficiaire" >
+                      <input name="nomBeneficiaire" type="text" class="form-control" placeholder="Nom"
+                             formControlName="nomBeneficiaire"
+                      >
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Prénom</label>
-                      <input name="prenomBeneficiaire" type="text" class="form-control" placeholder="Prénom"  [(ngModel)]="colis.prenomBeneficiaire">
+                      <input name="prenomBeneficiaire" type="text" class="form-control" placeholder="Prénom"
+                             formControlName="prenomBeneficiaire"
+                      >
                     </div>
                   </div>
                 </div>
@@ -70,7 +84,9 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Téléphone</label>
-                      <input name="tel" type="text" class="form-control" [(ngModel)]="colis.telephoneBeneficiaire">
+                      <input name="telephoneBeneficiaire" type="text" class="form-control"
+                             formControlName="telephoneBeneficiaire"
+                      >
                     </div>
                   </div>
                 </div>
@@ -81,16 +97,22 @@
                   <div class="col-md-7 ">
                     <div class="form-group">
                       <label>Destination</label>
-                      <select name="destination" class="form-control" [(ngModel)]="colis.destination" (change)="changeDestination()">
-                        <option value="value"> –– Choisissez une destination ––</option>
-                        <option *ngFor="let destinationItem of destinations" value="/api/destinations/{{destinationItem.id}}">{{destinationItem.libelle}}</option>
+                      <select name="destination" class="form-control"
+                              formControlName="destination"
+                      >
+                        <option [value]=null> –– Choisissez une destination ––</option>
+                        <option *ngFor="let destinationItem of destinations$ | async as destinations"
+                                [ngValue]="destinationItem"
+                        >{{destinationItem.libelle}}</option>
                       </select>
                     </div>
                   </div>
                   <div class="col-md-5 ">
                     <div class="form-group">
                       <label for="valeur">Valeur de la marchandise</label>
-                      <input name="valeur" id="valeur" type="number" class="form-control" [(ngModel)]="colis.valeur">
+                      <input name="valeur" id="valeur" type="number" class="form-control"
+                             formControlName="valeur"
+                      >
                     </div>
                   </div>
                 </div>
@@ -98,25 +120,33 @@
                   <div class="col-md-3 ">
                     <div class="form-group">
                       <label>Poids (Kg)</label>
-                      <input name="poids" type="number" class="form-control" [(ngModel)]="colis.poids">
+                      <input name="poids" type="number" class="form-control"
+                             formControlName="poids"
+                      >
                     </div>
                   </div>
                   <div class="col-md-3 ">
                     <div class="form-group">
                       <label>Prix du Kg</label>
-                      <input name="prixKilo" type="number" class="form-control" [(ngModel)]="colis.prixKilo">
+                      <input name="prixKilo" type="number" class="form-control"
+                              formControlName="prixKilo"
+                      >
                     </div>
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
                       <label for="emballage">Emballage</label>
-                      <input name="emballage" id="emballage" type="number" class="form-control" [(ngModel)]="colis.emballage">
+                      <input name="emballage" id="emballage" type="number" class="form-control"
+                             formControlName="emballage"
+                      >
                     </div>
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
                       <label>Douane</label>
-                      <input name="douane" type="number" class="form-control" [(ngModel)]="colis.douane">
+                      <input name="douane" type="number" class="form-control"
+                             formControlName="douane"
+                      >
                     </div>
                   </div>
                 </div>
@@ -124,7 +154,9 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Contenue</label>
-                      <textarea name="contenue" rows="4" cols="80" class="form-control"  [(ngModel)]="colis.contenue"></textarea>
+                      <textarea name="contenue" rows="4" cols="80" class="form-control"
+                                formControlName="contenue"
+                      ></textarea>
                     </div>
                   </div>
                 </div>
@@ -132,7 +164,9 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Avance</label>
-                      <input name="avance" type="number" class="form-control" [(ngModel)]="colis.avance">
+                      <input name="avance" type="number" class="form-control"
+                             formControlName="avance"
+                      >
                     </div>
                   </div>
                 </div>
@@ -156,7 +190,10 @@
             </div>
             <div class="row">
               <div class="offset-4 col-4">
-                <button type="submit" class="btn btn-round btn-primary col-12">Enregistrer</button>
+                <button type="submit" class="btn btn-round btn-primary col-12"
+                        (click)="newColi()"
+                        [disabled]="!colisForm.valid"
+                >Enregistrer</button>
               </div>
             </div>
           </form>

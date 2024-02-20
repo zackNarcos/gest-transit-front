@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
-// import { NotificationsComponent } from '../../pages/notifications/notifications.component';
 import {SignUpComponent} from "../../pages/sign-up/sign-up.component";
 import {UsersListComponent} from "../../pages/users-list/users-list.component";
 import {DestinationsComponent} from "../../pages/destinations/destinations.component";
@@ -16,23 +15,25 @@ import {FindColiComponent} from "../../pages/find-coli/find-coli.component";
 import {PaysListComponent} from "../../pages/pays-list/pays-list.component";
 import {PaysDetailsComponent} from "../../pages/pays-details/pays-details.component";
 import {PaysNewComponent} from "../../pages/pays-new/pays-new.component";
+import {AllColisListComponent} from "../../pages/all-colis-list/all-colis-list.component";
+import {AdminGuard} from "../../core/guards/admin.guard";
 
 export const AdminLayoutRoutes: Routes = [
-  {path : '', redirectTo: 'nouveau-coli', pathMatch: 'full'},
-  { path: 'inscription',      component: SignUpComponent },
-  { path: 'utilisateurs',      component: UsersListComponent},
+  { path: '', redirectTo: 'nouveau-coli', pathMatch: 'full' },
+  { path: 'inscription',      component: SignUpComponent, canActivate: [AdminGuard] },
+  { path: 'utilisateurs',      component: UsersListComponent, canActivate: [AdminGuard] },
   { path: 'colis',      component: ColisListComponent },
+  { path: 'colis-all',      component: AllColisListComponent, canActivate: [AdminGuard] },
   { path: 'colis/:id',      component: ColisDetailComponent },
   { path: 'nouveau-coli',      component: ColisNewComponent },
-  { path: 'utilisateurs/:id',   component: UserProfileComponent },
+  { path: 'utilisateurs/:id',   component: UserProfileComponent, canActivate: [AdminGuard] },
   { path: 'destinations',      component: DestinationsComponent },
-  { path: 'destinations/:id',   component: DestinationsDetailComponent },
+  { path: 'destinations/:id',   component: DestinationsDetailComponent, canActivate: [AdminGuard] },
   { path: 'nouvelle-destination',      component: DestinationsNewComponent },
   { path: 'pays',      component: PaysListComponent },
-  { path: 'pays/:id',   component: PaysDetailsComponent },
-  { path: 'nouveau-pays',      component: PaysNewComponent },
+  { path: 'pays/:id',   component: PaysDetailsComponent, canActivate: [AdminGuard] },
+  { path: 'nouveau-pays',      component: PaysNewComponent, canActivate: [AdminGuard] },
   { path: 'me',      component: MeComponent },
   { path: 'me/colis',      component: MesColisComponent },
-  // { path: 'notifications',  component: NotificationsComponent },
   { path: 'rechercher/coli',  component: FindColiComponent },
 ];

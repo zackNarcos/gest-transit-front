@@ -1,9 +1,11 @@
+import {Pays} from "./pays";
+
 export interface User{
   _id?:number
   email:string
   roles?:string[]
   password:string
-  pays: Object
+  pays: Pays
   nom:string
   prenom:string
   adresse: string

@@ -3,61 +3,48 @@ import {Router} from "@angular/router";
 import {User} from "../../shared/models/user";
 import {Colis} from "../../shared/models/colis";
 import {ColisService} from "../../core/services/colis.service";
+import {ModuleStoreService} from "../../core/store/module-store.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Params} from "../../shared/models/params";
 
 @Component({
   selector: 'app-colis-list',
   templateUrl: './colis-list.component.html',
   styleUrls: ['./colis-list.component.scss']
 })
-export class ColisListComponent implements OnInit {
+export class ColisListComponent {
   month = new Date().getMonth()+1;
   year = new Date().getFullYear();
 
+  searchForm = new FormGroup({
+    year: new FormControl(this.year, Validators.required),
+    month: new FormControl(this.month, Validators.required),
+  });
+
   constructor(
-    private colisService:ColisService,
-  ) { }
+    private moduleStoreService: ModuleStoreService,
+  ) {
+    const param: Params = {
+      month: new Date().getMonth()+1,
+      year: new Date().getFullYear()
+    }
+    this.moduleStoreService.loadOutColis(param)
 
-
-  colis:Colis[]=[]
-  user:User
-
-  ngOnInit(): void {
-    // this.profilService.getMe().subscribe(user => {
-    //   this.user = user
-    //   this.month = new Date().getMonth()+1;
-    //   this.year = new Date().getFullYear();
-    //   this.colisService.getColisIn(this.user._id, this.year, this.month).subscribe(res => {
-    //     this.colis = res
-    //   })
-    // })
-
+    this.searchForm.valueChanges.subscribe({
+      next: () => {
+        const params: Params = {
+          year: this.searchForm.get('year').value,
+          month: this.searchForm.get('month').value,
+        }
+        this.moduleStoreService.loadOutColis(params)
+      }
+    })
   }
 
-  upColis(id: number, status: string) {
-    let coli: Colis = new Colis()
+  colis$ = this.moduleStoreService.selectOutColis()
+
+  upColis(coli: Colis, status: string) {
     coli.status = status
-    coli._id = id
-    // this.colisService.putColis(coli).subscribe( resuslt => {
-    //   this.profilService.getMe().subscribe(user => {
-    //     this.user = user
-    //     this.colisService.getColisIn(this.user._id, this.year, this.month).subscribe(res => {
-    //       this.colis = res
-    //     })
-    //   })
-    // },error => {
-    //
-    // })
+    this.moduleStoreService.updateColis(coli)
   }
-
-  reloadData() {
-    this.colis = []
-    // this.profilService.getMe().subscribe(user => {
-    //   this.user = user
-    //   this.colisService.getColisIn(this.user._id, this.year, this.month).subscribe(res => {
-    //     this.colis = res
-    //   })
-    // })
-  }
-
-
 }

@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-// import {Destinations} from "../../shared/models/destinations";
-// import {DestinationsService} from "../../shared/services/api/destinations/destinations.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {Pays} from "../../shared/models/pays";
 import {ModuleStoreService} from "../../core/store/module-store.service";
-// import {PaysService} from "../../shared/services/api/pays/pays.service";
 
 @Component({
   selector: 'app-pays-details',

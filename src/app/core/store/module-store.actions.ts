@@ -1,4 +1,7 @@
 import {createAction, props} from "@ngrx/store";
+import {User} from "../../shared/models/user";
+import {Colis} from "../../shared/models/colis";
+import {Params} from "@angular/router";
 // import {Matiere, MatiereParams} from "@mp/fe/ui";
 export enum ModuleStoreActionsTypes {
   LoadDestinations = '[Module] Load Destinations',
@@ -82,6 +85,10 @@ export enum ModuleStoreActionsTypes {
 
   setSelectedPays = '[Module] Set Selected Pays',
 
+  getUser = '[Module] Get User',
+  getUserSuccess = '[Module] Get User Success',
+  getUserFailure = '[Module] Get User Failure',
+
 }
 
 
@@ -115,11 +122,12 @@ const loadEmployeesFailure = createAction(
 
 const loadOutColis = createAction(
   ModuleStoreActionsTypes.LoadOutColis,
+  props<{ param: Params }>()
 );
 
 const loadOutColisSuccess = createAction(
   ModuleStoreActionsTypes.LoadOutColisSuccess,
-  props<{ outColis: [] }>()
+  props<{ outColis: Colis[] }>()
 );
 
 const loadOutColisFailure = createAction(
@@ -129,11 +137,12 @@ const loadOutColisFailure = createAction(
 
 const loadInColis = createAction(
   ModuleStoreActionsTypes.LoadInColis,
+  props<{ param: Params }>()
 );
 
 const loadInColisSuccess = createAction(
   ModuleStoreActionsTypes.LoadInColisSuccess,
-  props<{ inColis: [] }>()
+  props<{ inColis: Colis[] }>()
 );
 
 const loadInColisFailure = createAction(
@@ -143,11 +152,12 @@ const loadInColisFailure = createAction(
 
 const loadAllColis = createAction(
   ModuleStoreActionsTypes.LoadAllColis,
+  props<{ param: Params }>()
 );
 
 const loadAllColisSuccess = createAction(
   ModuleStoreActionsTypes.LoadAllColisSuccess,
-  props<{ allColis: [] }>()
+  props<{ allColis: Colis[] }>()
 );
 
 const loadAllColisFailure = createAction(
@@ -162,7 +172,7 @@ const setSelectedDestination = createAction(
 
 const setSelectedEmployee = createAction(
   ModuleStoreActionsTypes.SetSelectedEmployee,
-  props<{ employee: any }>()
+  props<{ employee: User }>()
 );
 
 const setSelectedColis = createAction(
@@ -373,6 +383,20 @@ const setSelectedPays = createAction(
   props<{ pays: any }>()
 );
 
+const getUser = createAction(
+  ModuleStoreActionsTypes.getUser,
+);
+
+const getUserSuccess = createAction(
+  ModuleStoreActionsTypes.getUserSuccess,
+  props<{ user: User }>()
+);
+
+const getUserFailure = createAction(
+  ModuleStoreActionsTypes.getUserFailure,
+  props<{ error: any }>()
+);
+
 export const ModuleActions = {
   loadDestinations,
   loadDestinationsSuccess,
@@ -434,4 +458,7 @@ export const ModuleActions = {
   deletePaysSuccess,
   deletePaysFailure,
   setSelectedPays,
+  getUser,
+  getUserSuccess,
+  getUserFailure,
 }

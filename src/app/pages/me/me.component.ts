@@ -11,6 +11,8 @@ import {Destinations} from "../../shared/models/destinations";
 // import {PaysService} from "../../shared/services/api/pays/pays.service";
 import {Pays} from "../../shared/models/pays";
 import {MonthStatistique} from "../../shared/models/monthStatistique";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ModuleStoreService} from "../../core/store/module-store.service";
 
 @Component({
   selector: 'app-me',
@@ -25,13 +27,12 @@ export class MeComponent implements OnInit {
   destination : Destinations = new Destinations()
 
   constructor(
-    // private destinationsService: PaysService,
-    // private profilService:ProfileService,
-    // private userService:ApiUserService,
-    // private monthStatistiquesService: MonthStatsService,
+    private moduleStoreService: ModuleStoreService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
-  user:User
+  user : User;
 
   ngOnInit(): void {
     // this.destinationsService.getPayss().subscribe( result => {
@@ -47,17 +48,21 @@ export class MeComponent implements OnInit {
     //   this.monthStatistiquesService.getSumReliquats(this.user._id, this.monthStatistique.year, this.monthStatistique.month).subscribe(sum => this.monthStatistique.reliquats = sum)
     // })
 
+    this.moduleStoreService.selectUser().subscribe(user => {
+      this.user = user
+    })
+
   }
 
-  upgrade(form: NgForm) {
-    this.wrongCredential = false
-
-    // this.userService.putUser(this.user).subscribe( resuslt => {
-    //   this.profilService.getMe().subscribe(user => this.user = user)
-    // },error => {
-    //   this.wrongCredential = true
-    // })
-  }
+  // upgrade(form: NgForm) {
+  //   this.wrongCredential = false
+  //
+  //   // this.userService.putUser(this.user).subscribe( resuslt => {
+  //   //   this.profilService.getMe().subscribe(user => this.user = user)
+  //   // },error => {
+  //   //   this.wrongCredential = true
+  //   // })
+  // }
 
   reloadData() {
     // this.profilService.getMe().subscribe(user => {

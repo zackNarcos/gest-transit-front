@@ -1,8 +1,8 @@
 <div class="panel-header panel-header-sm">
 </div>
-<div class="main-content">
+<div class="main-content"  *ngIf="user">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <div class="row">
         <div class="col-md-12 mb-xl-0">
           <div class="card">
@@ -105,48 +105,15 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card card-user">
-        <div class="image">
-          <img src="../assets/img/bg5.jpg" alt="...">
-        </div>
-        <div class="card-body">
-          <div class="author">
-            <a href="#">
-              <img class="avatar border-gray" src="../assets/img/mike.jpg" alt="...">
-              <h5 class="title">{{ user.nom }}</h5>
-            </a>
-            <p class="description">
-              {{ user.email }}
-            </p>
-          </div>
-          <p class="description text-center">
-            {{ user.description }}
-          </p>
-        </div>
-        <hr>
-        <div class="button-container">
-          <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-            <i class="fab fa-facebook-f"></i>
-          </button>
-          <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-            <i class="fab fa-twitter"></i>
-          </button>
-          <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-            <i class="fab fa-google-plus-g"></i>
-          </button>
-        </div>
-      </div>
-    </div>
   </div>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-header">
           <h5 class="title">Profil</h5>
         </div>
         <div class="card-body">
-          <form #form="ngForm" (submit)="upgrade(form)">
+          <form #form="ngForm">
             <div>
               <div class="row">
                 <div class="col-md-6 pr-1">
@@ -166,7 +133,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label>Adresse</label>
-                    <input name="adresse" type="text" class="form-control" placeholder="Adresse"  [(ngModel)]="user.adresse">
+                    <input name="adresse" type="text" class="form-control" placeholder="Adresse"  [(ngModel)]="user.adresse" disabled="">
                   </div>
                 </div>
               </div>
@@ -174,23 +141,19 @@
                 <div class="col-md-4 pr-1">
                   <div class="form-group">
                     <label>Ville</label>
-                    <input name="ville" type="text" class="form-control" placeholder="Ville"  [(ngModel)]="user.ville"disabled="">
+                    <input name="ville" type="text" class="form-control" placeholder="Ville"  [(ngModel)]="user.ville" disabled="">
                   </div>
                 </div>
                 <div class="col-md-4 px-1">
                   <div class="form-group">
                     <label>Pays</label>
-                    <div *ngFor="let destinationItem of destinations">
-                      <div *ngIf="'/api/pays/'+destinationItem.id == user.pays" class="text-warning pl-4">
-                        {{destinationItem.nom}}
-                      </div>
-                    </div>
+                    <input name="ville" type="text" class="form-control" placeholder="Ville"  [(ngModel)]="user.pays.nom" disabled="">
                   </div>
                 </div>
                 <div class="col-md-4 pl-1">
                   <div class="form-group">
                     <label>Téléphone</label>
-                    <input name="telephone" type="tel" class="form-control"  [(ngModel)]="user.telephone">
+                    <input name="salaire" type="text" class="form-control" [(ngModel)]="user.salaire" disabled="">
                   </div>
                 </div>
               </div>
@@ -198,7 +161,7 @@
                 <div class="col-md-6 pr-1">
                   <div class="form-group">
                     <label>Salaire</label>
-                    <input name="salaire" type="number" class="form-control" [(ngModel)]="user.salaire"disabled="">
+                    <input name="salaire" type="number" class="form-control" [(ngModel)]="user.salaire" disabled="">
                   </div>
                 </div>
                 <div class="col-md-6 pl-1">

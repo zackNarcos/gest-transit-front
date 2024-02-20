@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {Store} from "@ngrx/store";
 import {moduleStoreSelectors, selectModuleState} from "./module-store.selectors";
 import {ModuleActions} from "./module-store.actions";
+import {Params} from "../../shared/models/params";
 // import {MatiereParams} from "@mp/fe/ui";
 
 
@@ -18,9 +19,9 @@ export class ModuleStoreService {
 
   loadDestinations() { this.store.dispatch(ModuleActions.loadDestinations()); }
   loadEmployees() { this.store.dispatch(ModuleActions.loadEmployees()); }
-  loadOutColis() { this.store.dispatch(ModuleActions.loadOutColis()); }
-  loadInColis() { this.store.dispatch(ModuleActions.loadInColis()); }
-  loadAllColis() { this.store.dispatch(ModuleActions.loadAllColis()); }
+  loadOutColis(param: Params) { this.store.dispatch(ModuleActions.loadOutColis({param})); }
+  loadInColis(param: Params) { this.store.dispatch(ModuleActions.loadInColis({param})); }
+  loadAllColis(param: Params) { this.store.dispatch(ModuleActions.loadAllColis({param})); }
   setSelectedDestination(destination: any) { this.store.dispatch(ModuleActions.setSelectedDestination({destination})); }
   setSelectedEmployee(employee: any) { this.store.dispatch(ModuleActions.setSelectedEmployee({employee})); }
   setSelectedColis(colis: any) { this.store.dispatch(ModuleActions.setSelectedColis({colis})); }
@@ -56,7 +57,11 @@ export class ModuleStoreService {
   deletePays(pays: any) { this.store.dispatch(ModuleActions.deletePays({pays})); }
   updatePays(pays: any) { this.store.dispatch(ModuleActions.updatePays({pays})); }
   clear() { this.store.dispatch(ModuleActions.clear()); }
+  getUser() { return this.store.select(moduleStoreSelectors.selectUser); }
+  getIsLoadUser() { return this.store.select(moduleStoreSelectors.selectIsLoadUser); }
+  loadUser() { this.store.dispatch(ModuleActions.getUser()); }
 
-
-
+  selectUser() {
+    return this.store.select(moduleStoreSelectors.selectUser);
+  }
 }
