@@ -1,18 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-// import {ApiUserService} from "../../shared/services/api/user/api-user.service";
-// import {ActivatedRoute, Router} from "@angular/router";
 import {User} from "../../shared/models/user";
-import {NgForm} from "@angular/forms";
-// import {ProfileService} from "../../shared/services/profile/profile.service";
-// import {MonthStatsService} from "../../shared/services/api/stats/monthStats/month-stats.service";
-// import {MonthStatistique} from "../../shared/models/monthStatistique";
-// import {DestinationsService} from "../../shared/services/api/destinations/destinations.service";
 import {Destinations} from "../../shared/models/destinations";
-// import {PaysService} from "../../shared/services/api/pays/pays.service";
 import {Pays} from "../../shared/models/pays";
 import {MonthStatistique} from "../../shared/models/monthStatistique";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ModuleStoreService} from "../../core/store/module-store.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Params} from "../../shared/models/params";
 
 @Component({
   selector: 'app-me',
@@ -22,56 +16,36 @@ import {ModuleStoreService} from "../../core/store/module-store.service";
 export class MeComponent implements OnInit {
 
   private wrongCredential: boolean;
-  monthStatistique = new MonthStatistique()
   destinations : Pays[]
   destination : Destinations = new Destinations()
 
+  stats$ = this.moduleStoreService.selectColisStat()
+  month = new Date().getMonth()+1;
+  year = new Date().getFullYear();
+
+  searchForm = new FormGroup({
+    year: new FormControl(this.year, Validators.required),
+    month: new FormControl(this.month, Validators.required),
+  });
   constructor(
     private moduleStoreService: ModuleStoreService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) { }
+  ) {
+    this.searchForm.valueChanges.subscribe({
+      next: () => {
+        const params: Params = {
+          year: this.searchForm.get('year').value,
+          month: this.searchForm.get('month').value,
+        }
+        this.moduleStoreService.loadColisStat(params)
+      }
+    })
+  }
 
   user : User;
 
   ngOnInit(): void {
-    // this.destinationsService.getPayss().subscribe( result => {
-    //   this.destinations = result
-    // })
-    // this.profilService.getMe().subscribe(user => {
-    //   this.user = user
-    //   this.monthStatistique.month = new Date().getMonth()+1;
-    //   this.monthStatistique.year = new Date().getFullYear();
-    //   this.monthStatistiquesService.getSumgains(this.user._id, this.monthStatistique.year, this.monthStatistique.month).subscribe(sum => this.monthStatistique.gains = sum)
-    //   this.monthStatistiquesService.getSumAvances(this.user._id, this.monthStatistique.year, this.monthStatistique.month).subscribe(sum => this.monthStatistique.avances = sum)
-    //   this.monthStatistiquesService.getQtes(this.user._id, this.monthStatistique.year, this.monthStatistique.month).subscribe(qte => this.monthStatistique.qte = qte)
-    //   this.monthStatistiquesService.getSumReliquats(this.user._id, this.monthStatistique.year, this.monthStatistique.month).subscribe(sum => this.monthStatistique.reliquats = sum)
-    // })
-
     this.moduleStoreService.selectUser().subscribe(user => {
       this.user = user
     })
-
   }
-
-  // upgrade(form: NgForm) {
-  //   this.wrongCredential = false
-  //
-  //   // this.userService.putUser(this.user).subscribe( resuslt => {
-  //   //   this.profilService.getMe().subscribe(user => this.user = user)
-  //   // },error => {
-  //   //   this.wrongCredential = true
-  //   // })
-  // }
-
-  reloadData() {
-    // this.profilService.getMe().subscribe(user => {
-    //   this.user = user
-    //   this.monthStatistiquesService.getSumgains(this.user._id, this.monthStatistique.year, this.monthStatistique.month).subscribe(sum => this.monthStatistique.gains = sum)
-    //   this.monthStatistiquesService.getSumAvances(this.user._id, this.monthStatistique.year, this.monthStatistique.month).subscribe(sum => this.monthStatistique.avances = sum)
-    //   this.monthStatistiquesService.getQtes(this.user._id, this.monthStatistique.year, this.monthStatistique.month).subscribe(qte => this.monthStatistique.qte = qte)
-    //   this.monthStatistiquesService.getSumReliquats(this.user._id, this.monthStatistique.year, this.monthStatistique.month).subscribe(sum => this.monthStatistique.reliquats = sum)
-    // })
-  }
-
 }

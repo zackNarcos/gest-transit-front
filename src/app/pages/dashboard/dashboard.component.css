@@ -1,0 +1,35 @@
+.bg-danger {
+    color : white !important;
+    background-color: #ea6e7a !important;
+}
+
+.show-player {
+    color : #ff0000;
+    background-color: #f0f0f0;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.show-player:hover {
+    background-color: #e0e0e0;
+    cursor: pointer;
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+td {
+    text-align: right;
+}
+
+th {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center !important;
+}

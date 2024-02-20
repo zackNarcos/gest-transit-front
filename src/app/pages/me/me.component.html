@@ -3,43 +3,39 @@
 <div class="main-content"  *ngIf="user">
   <div class="row">
     <div class="col-md-12">
-      <div class="row">
+      <div class="row" *ngIf="stats$ | async as stats">
         <div class="col-md-12 mb-xl-0">
           <div class="card">
             <div class="card-header p-1 px-4">
               <div class="row">
-                <div class="col-4">
-                </div>
-                <div class="col-8 d-flex justify-content-end">
-                  <form #form="ngForm">
-                    <div class="row">
-                      <select class="form-control col-7 text-primary" (change)="reloadData()" name="month" [(ngModel)]="monthStatistique.month">
-                        <option value="1">Janvier</option>
-                        <option value="2">Fevrier</option>
-                        <option value="3">Mars</option>
-                        <option value="4">Avril</option>
-                        <option value="5">Mai</option>
-                        <option value="6">Juin</option>
-                        <option value="7">Juillet</option>
-                        <option value="8">Aout</option>
-                        <option value="9">Septembre</option>
-                        <option value="10">Octobre</option>
-                        <option value="11">Novembre</option>
-                        <option value="12">Decembre</option>
-                      </select>
-                      <select class="form-control col-5 text-primary" (change)="reloadData()" name="year" [(ngModel)]="monthStatistique.year">
-                        <option value="2022">2022</option>
-                        <option value="2023">2023</option>
-                        <option value="2024">2024</option>
-                        <option value="2025">2025</option>
-                        <option value="2026">2026</option>
-                        <option value="2027">2027</option>
-                        <option value="2028">2028</option>
-                        <option value="2029">2029</option>
-                        <option value="2030">2030</option>
-                        <option value="2031">2031</option>
-                        <option value="2032">2032</option>
-                      </select>
+                <div class="col-12 d-flex justify-content-end">
+                  <form class="w-100">
+                    <div class="hstack gap-1  flex w-100" [formGroup]="searchForm">
+                      <div class="ms-auto">
+                        <select class="form-control text-primary" formControlName="month">
+                          <option value="1">Janvier</option>
+                          <option value="2">Fevrier</option>
+                          <option value="3">Mars</option>
+                          <option value="4">Avril</option>
+                          <option value="5">Mai</option>
+                          <option value="6">Juin</option>
+                          <option value="7">Juillet</option>
+                          <option value="8">Aout</option>
+                          <option value="9">Septembre</option>
+                          <option value="10">Octobre</option>
+                          <option value="11">Novembre</option>
+                          <option value="12">Decembre</option>
+                        </select>
+                      </div>
+                      <div class="">
+                        <select class="form-control text-primary" formControlName="year">
+                          <option value="2024">2024</option>
+                          <option value="2025">2025</option>
+                          <option value="2026">2026</option>
+                          <option value="2027">2027</option>
+                          <option value="2028">2028</option>
+                        </select>
+                      </div>
                     </div>
                   </form>
                 </div>
@@ -47,12 +43,12 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-sm-6 mb-xl-0 mb-1">
+        <div class="col-md-3 col-sm-6 mb-xl-0 mb-1">
           <div class="card">
             <div class="card-header p-3 pt-2">
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Gains</p>
-                <h4 class="mb-0 text-info">{{ monthStatistique.gains }}Fcfa</h4>
+                <h4 class="mb-0 text-info">{{stats[0].total}} Fcfa</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -61,12 +57,12 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-sm-6 mb-xl-0 mb-1">
+        <div class="col-md-3 col-sm-6 mb-xl-0 mb-1">
           <div class="card">
             <div class="card-header p-3 pt-2">
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Avances</p>
-                <h4 class="mb-0 text-success">{{ monthStatistique.avances }}Fcfa</h4>
+                <h4 class="mb-0 text-success">{{stats[0].countAvance}} Fcfa</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -75,12 +71,12 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-sm-6 mb-xl-0 mb-1">
+        <div class="col-md-3 col-sm-6 mb-xl-0 mb-1">
           <div class="card">
             <div class="card-header p-3 pt-2">
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Reliquat</p>
-                <h4 class="mb-0 text-warning">{{ monthStatistique.reliquats }}Fcfa</h4>
+                <h4 class="mb-0 text-warning">jj Fcfa</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -89,12 +85,12 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-sm-6 mb-xl-0 mb-1">
+        <div class="col-md-3 col-sm-6 mb-xl-0 mb-1">
           <div class="card">
             <div class="card-header p-3 pt-2">
               <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Quantité de depôts</p>
-                <h4 class="mb-0">{{ monthStatistique.qte }}</h4>
+                <p class="text-sm mb-0 text-capitalize">Attente expedition</p>
+                <h4 class="mb-0">{{stats[0].countAttente}} Colis</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -103,6 +99,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>

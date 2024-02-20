@@ -17,9 +17,10 @@ import {PaysDetailsComponent} from "../../pages/pays-details/pays-details.compon
 import {PaysNewComponent} from "../../pages/pays-new/pays-new.component";
 import {AllColisListComponent} from "../../pages/all-colis-list/all-colis-list.component";
 import {AdminGuard} from "../../core/guards/admin.guard";
+import {DashboardComponent} from "../../pages/dashboard/dashboard.component";
 
 export const AdminLayoutRoutes: Routes = [
-  { path: '', redirectTo: 'nouveau-coli', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'inscription',      component: SignUpComponent, canActivate: [AdminGuard] },
   { path: 'utilisateurs',      component: UsersListComponent, canActivate: [AdminGuard] },
   { path: 'colis',      component: ColisListComponent },
@@ -36,4 +37,5 @@ export const AdminLayoutRoutes: Routes = [
   { path: 'me',      component: MeComponent },
   { path: 'me/colis',      component: MesColisComponent },
   { path: 'rechercher/coli',  component: FindColiComponent },
+  { path: 'dashboard', component: DashboardComponent }
 ];

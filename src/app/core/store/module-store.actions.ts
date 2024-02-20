@@ -89,6 +89,10 @@ export enum ModuleStoreActionsTypes {
   getUserSuccess = '[Module] Get User Success',
   getUserFailure = '[Module] Get User Failure',
 
+  loadColisStat = '[Module] Load Colis Stat',
+  loadColisStatSuccess = '[Module] Load Colis Stat Success',
+  loadColisStatFailure = '[Module] Load Colis Stat Failure',
+
 }
 
 
@@ -397,6 +401,21 @@ const getUserFailure = createAction(
   props<{ error: any }>()
 );
 
+const loadColisStat = createAction(
+  ModuleStoreActionsTypes.loadColisStat,
+  props<{ param: Params }>()
+);
+
+const loadColisStatSuccess = createAction(
+  ModuleStoreActionsTypes.loadColisStatSuccess,
+  props<{ colisStat: any }>()
+);
+
+const loadColisStatFailure = createAction(
+  ModuleStoreActionsTypes.loadColisStatFailure,
+  props<{ error: any }>()
+);
+
 export const ModuleActions = {
   loadDestinations,
   loadDestinationsSuccess,
@@ -461,4 +480,8 @@ export const ModuleActions = {
   getUser,
   getUserSuccess,
   getUserFailure,
+
+  loadColisStat,
+  loadColisStatSuccess,
+  loadColisStatFailure,
 }

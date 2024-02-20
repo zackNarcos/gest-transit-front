@@ -95,6 +95,11 @@ const selectIsLoadUser = createSelector(
   (state: ModuleState) => state.isLoadUser
 );
 
+const selectColisStat = createSelector(
+  selectModuleState,
+  (state: ModuleState) => state.colisStat
+);
+
 export const moduleStoreSelectors = {
   selectDestinations,
   selectEmployees,
@@ -113,5 +118,6 @@ export const moduleStoreSelectors = {
   selectPays,
   selectIsLoadMorePays,
   selectUser,
-  selectIsLoadUser
+  selectIsLoadUser,
+  selectColisStat
 }

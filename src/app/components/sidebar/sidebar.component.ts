@@ -9,6 +9,7 @@ declare interface RouteInfo {
     isAdmin: boolean;
 }
 export const ROUTES: RouteInfo[] = [
+    { path: '/dashboard', title: 'Dashboard',  icon:'fa-gauge', class: '',isAdmin: false },
     { path: '/me/colis', title: 'Colis Sortant',  icon:'fa-arrow-right-from-bracket', class: '',isAdmin: false },
     { path: '/colis-all', title: 'Tous les Colis',  icon:'fa-boxes-stacked', class: '',isAdmin: true },
     { path: '/colis', title: 'Colis entrant',  icon:'fa-arrow-right-to-bracket', class: '',isAdmin: false },

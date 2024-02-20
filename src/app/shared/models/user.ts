@@ -1,7 +1,7 @@
 import {Pays} from "./pays";
 
 export interface User{
-  _id?:number
+  _id?:string
   email:string
   roles?:string[]
   password:string

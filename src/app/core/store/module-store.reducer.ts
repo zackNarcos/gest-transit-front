@@ -27,6 +27,8 @@ export interface ModuleState {
   selectedPays: Pays,
   error?: any;
   isLoadUser: boolean;
+  colisStat: any[];
+  isLoadColisStat: boolean;
 }
 
 export const ModuleInitialState: ModuleState = {
@@ -48,7 +50,9 @@ export const ModuleInitialState: ModuleState = {
   selectedColis: null,
   selectedPays: null,
   error: null,
-  isLoadUser: true
+  isLoadUser: true,
+  colisStat: [],
+  isLoadColisStat: true
 }
 
 const reducer = createReducer(
@@ -119,6 +123,9 @@ const reducer = createReducer(
     on(ModuleActions.getUser, state => ({...state, isLoadUser: true})),
     on(ModuleActions.getUserSuccess, (state, {user}) => ({...state, user, isLoadUser: false})),
     on(ModuleActions.getUserFailure, (state, {error}) => ({...state, error, isLoadUser: false})),
+    on(ModuleActions.loadColisStat, state => ({...state, isLoadColisStat: true})),
+    on(ModuleActions.loadColisStatSuccess, (state, {colisStat}) => ({...state, colisStat, isLoadColisStat: false})),
+    on(ModuleActions.loadColisStatFailure, (state, {error}) => ({...state, error, isLoadColisStat: false})),
 );
 
 export function moduleReducer(state: ModuleState | undefined, action: Action) {

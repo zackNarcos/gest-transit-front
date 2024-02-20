@@ -1,0 +1,164 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="col-md-12">
+    <div class="row" *ngIf="stats$ | async as stats">
+      <div class="col-md-12 mb-xl-0">
+        <div class="card">
+          <div class="card-header p-1 px-4">
+            <div class="col-12 d-flex justify-content-end">
+              <a routerLink="/colis/new" class="btn btn-primary btn-round">
+                <i class="fa fa-plus"></i> Nouveau colis
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-xl-0 mb-1">
+        <div class="card">
+          <div class="card-header p-3 pt-2">
+            <div class="text-end pt-1">
+              <p class="text-sm mb-0 text-capitalize">Gains</p>
+              <h4 class="mb-0 text-info">{{stats[0].total}} Fcfa</h4>
+            </div>
+          </div>
+          <hr class="dark horizontal my-0">
+          <div class="card-footer p-3 bg-info">
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-xl-0 mb-1">
+        <div class="card">
+          <div class="card-header p-3 pt-2">
+            <div class="text-end pt-1">
+              <p class="text-sm mb-0 text-capitalize">Avances</p>
+              <h4 class="mb-0 text-success">{{stats[0].countAvance}} Fcfa</h4>
+            </div>
+          </div>
+          <hr class="dark horizontal my-0">
+          <div class="card-footer p-3 bg-success">
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-xl-0 mb-1">
+        <div class="card">
+          <div class="card-header p-3 pt-2">
+            <div class="text-end pt-1">
+              <p class="text-sm mb-0 text-capitalize">Reliquat</p>
+              <h4 class="mb-0 text-warning">jj Fcfa</h4>
+            </div>
+          </div>
+          <hr class="dark horizontal my-0">
+          <div class="card-footer p-3 bg-warning">
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-xl-0 mb-1">
+        <div class="card">
+          <div class="card-header p-3 pt-2">
+            <div class="text-end pt-1">
+              <p class="text-sm mb-0 text-capitalize">Attente expedition</p>
+              <h4 class="mb-0">{{stats[0].countAttente}} Colis</h4>
+            </div>
+          </div>
+          <hr class="dark horizontal my-0">
+          <div class="card-footer p-3 bg-dark">
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 mb-xl-0 h-auto">
+        <div class="card">
+          <div class="card-body">
+            <div class="table-responsive-md">
+              <table class="table">
+                <thead class=" text-primary">
+                <th>
+                  #
+                </th>
+                <th>
+                  Destinations
+                </th>
+                <th>
+                  Téléphones expediteurs
+                </th>
+                <th>
+                  Noms bénéficiaires
+                </th>
+                <th>
+                  Téléphones bénéficiaires
+                </th>
+                <th class="text-center pb-0">
+                  Montants
+                </th>
+                <th>
+                  Status
+                </th>
+
+                </thead>
+                <tbody>
+                <ng-container *ngIf="colis$ | async as colis">
+                  <tr  *ngFor="let coli of colis; let i = index">
+                    <td class="text-center">
+                      {{ i+1 }}
+                    </td>
+                    <td class="text-center">
+                      {{ coli.destination.libelle }}
+                    </td>
+                    <td class="text-center">
+                      {{ coli.telephoneExpediteur }}
+                    </td>
+                    <td class="text-center">
+                      {{ coli.nomBeneficiaire }}
+                    </td>
+                    <td class="text-center">
+                      {{ coli.telephoneBeneficiaire }}
+                    </td>
+                    <td class="text-center">
+                      {{ coli['prix_total'] }}
+                      <p class="category text-danger text_bold mb-0">
+                        (-{{ coli.reste }})
+                      </p>
+                    </td>
+                    <td class="text-center"
+                        [ngClass]="{
+                            'bg-secondary-subtle': coli.status=='ATTENTE_EXPEDITION' || coli.status=='RECUPERÉ',
+                            'text-secondary': coli.status=='ATTENTE_EXPEDITION' || coli.status=='RECUPERÉ',
+
+                            'bg-warning-subtle': coli.status=='TRANSIT',
+                            'text-warning': coli.status=='TRANSIT',
+
+                            'bg-success-subtle': coli.status=='EXPEDIÉ',
+                            'text-success': coli.status=='EXPEDIÉ',
+                          }"
+                    >
+                      <i class="fa" [ngClass]="{
+                              'fa-solid fa-hourglass-start': coli.status=='ATTENTE_EXPEDITION',
+                              'fa-solid fa-ship': coli.status=='TRANSIT',
+                              'fa-solid fa-plane-circle-check': coli.status=='EXPEDIÉ',
+                              'fa-solid fa-house-circle-check': coli.status=='RECUPERÉ',
+                            }"
+                      ></i>
+                    </td>
+                    <td class="hstack gap-3 flex">
+                      <div>
+                        <a routerLink="/colis/{{ coli._id }}" class="btn btn-round btn-primary mr-1"
+                        ><i class="fa fa-eye"></i></a>
+                      </div>
+                    </td>
+
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

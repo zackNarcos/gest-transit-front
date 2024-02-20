@@ -1,15 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../../shared/models/user";
 import {ActivatedRoute, Router} from "@angular/router";
-// import {ApiUserService} from "../../shared/services/api/user/api-user.service";
-import {NgForm} from "@angular/forms";
-// import {DestinationsService} from "../../shared/services/api/destinations/destinations.service";
-// import {Destinations} from "../../shared/models/destinations";
-import {MonthStatistique} from "../../shared/models/monthStatistique";
-// import {MonthStatsService} from "../../shared/services/api/stats/monthStats/month-stats.service";
-// import {PaysService} from "../../shared/services/api/pays/pays.service";
+import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 import {Pays} from "../../shared/models/pays";
 import {ModuleStoreService} from "../../core/store/module-store.service";
+import {Params} from "../../shared/models/params";
 
 @Component({
   selector: 'app-user-profile',
@@ -17,10 +12,17 @@ import {ModuleStoreService} from "../../core/store/module-store.service";
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-  private wrongCredential: boolean;
-  monthStatistique = new MonthStatistique()
   destinations : Pays[]
   user: User
+  stats$ = this.moduleStoreService.selectColisStat()
+  month = new Date().getMonth()+1;
+  year = new Date().getFullYear();
+
+  searchForm = new FormGroup({
+    year: new FormControl(this.year, Validators.required),
+    month: new FormControl(this.month, Validators.required),
+  });
+  wrongCredential: boolean = false
 
   constructor(
     private moduleStoreService: ModuleStoreService,
@@ -28,6 +30,18 @@ export class UserProfileComponent implements OnInit {
     private router: Router,
   ) {
     const id = this.route.snapshot.params['id']
+    this.moduleStoreService.loadColisStat({month: this.month, year: this.year, userId: id})
+    this.searchForm.valueChanges.subscribe({
+      next: () => {
+        const params: Params = {
+          year: this.searchForm.get('year').value,
+          month: this.searchForm.get('month').value,
+          userId: id
+        }
+        this.moduleStoreService.loadColisStat(params)
+      }
+    })
+
     if (id != null) {
       let trouve = false
       this.moduleStoreService.selectEmployees().subscribe(users => {
@@ -48,17 +62,7 @@ export class UserProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.destinationsService.getPayss().subscribe( result => {
-    //   this.destinations = result
-    // })
-    // this.userService.getUser(this.id).subscribe(user => this.user = user)
 
-    this.monthStatistique.month = new Date().getMonth()+1;
-    this.monthStatistique.year = new Date().getFullYear();
-    // this.monthStatistiquesService.getSumgains(this.id, this.monthStatistique.year, this.monthStatistique.month).subscribe(sum => this.monthStatistique.gains = sum)
-    // this.monthStatistiquesService.getSumAvances(this.id, this.monthStatistique.year, this.monthStatistique.month).subscribe(sum => this.monthStatistique.avances = sum)
-    // this.monthStatistiquesService.getQtes(this.id, this.monthStatistique.year, this.monthStatistique.month).subscribe(qte => this.monthStatistique.qte = qte)
-    // this.monthStatistiquesService.getSumReliquats(this.id, this.monthStatistique.year, this.monthStatistique.month).subscribe(sum => this.monthStatistique.reliquats = sum)
   }
 
   upgrade(form: NgForm) {
@@ -67,10 +71,4 @@ export class UserProfileComponent implements OnInit {
     this.router.navigate(['/utilisateurs'])
   }
 
-  reloadData() {
-    // this.monthStatistiquesService.getSumgains(this.id, this.monthStatistique.year, this.monthStatistique.month).subscribe(sum => this.monthStatistique.gains = sum)
-    // this.monthStatistiquesService.getSumAvances(this.id, this.monthStatistique.year, this.monthStatistique.month).subscribe(sum => this.monthStatistique.avances = sum)
-    // this.monthStatistiquesService.getQtes(this.id, this.monthStatistique.year, this.monthStatistique.month).subscribe(qte => this.monthStatistique.qte = qte)
-    // this.monthStatistiquesService.getSumReliquats(this.id, this.monthStatistique.year, this.monthStatistique.month).subscribe(sum => this.monthStatistique.reliquats = sum)
-  }
 }

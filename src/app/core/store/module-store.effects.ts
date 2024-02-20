@@ -280,4 +280,18 @@ export class ModuleStoreEffects {
       )
     )
   ));
+
+  $loadColisStat = createEffect(() => this.actions$.pipe(
+    ofType(ModuleActions.loadColisStat),
+    switchMap((action) => this.coliService.getColisStat(action.param)
+      .pipe(
+        map((colisStat: any) => {
+          return ModuleActions.loadColisStatSuccess({colisStat: colisStat})
+        }),
+        catchError((err) => {
+          return of(ModuleActions.loadColisStatFailure({error: err}))
+        })
+      )
+    )
+  ));
 }

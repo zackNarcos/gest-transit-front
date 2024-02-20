@@ -61,6 +61,9 @@ export class ModuleStoreService {
   getIsLoadUser() { return this.store.select(moduleStoreSelectors.selectIsLoadUser); }
   loadUser() { this.store.dispatch(ModuleActions.getUser()); }
 
+  loadColisStat(param: Params) { this.store.dispatch(ModuleActions.loadColisStat({param})); }
+  selectColisStat() { return this.store.select(moduleStoreSelectors.selectColisStat); }
+
   selectUser() {
     return this.store.select(moduleStoreSelectors.selectUser);
   }

@@ -23,6 +23,10 @@ import { PaysNewComponent } from '../../pages/pays-new/pays-new.component';
 import { PaysListComponent } from '../../pages/pays-list/pays-list.component';
 import { PaysDetailsComponent } from '../../pages/pays-details/pays-details.component';
 import {AllColisListComponent} from "../../pages/all-colis-list/all-colis-list.component";
+import {DashboardComponent} from "../../pages/dashboard/dashboard.component";
+import {MatInputModule} from "@angular/material/input";
+import {MatOptionModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   imports: [
@@ -32,7 +36,10 @@ import {AllColisListComponent} from "../../pages/all-colis-list/all-colis-list.c
     // ChartsModule,
     NgbModule,
     // ToastrModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   declarations: [
     UserProfileComponent,
@@ -52,7 +59,7 @@ import {AllColisListComponent} from "../../pages/all-colis-list/all-colis-list.c
     PaysNewComponent,
     PaysListComponent,
     PaysDetailsComponent,
-
+    DashboardComponent
   ]
 })
 

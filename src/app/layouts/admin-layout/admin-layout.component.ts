@@ -29,6 +29,10 @@ export class AdminLayoutComponent implements OnInit {
     this.moduleStoreService.loadEmployees()
     this.moduleStoreService.loadPays()
     this.moduleStoreService.loadDestinations()
+    const params = new Params()
+    params.year = new Date().getFullYear()
+    params.month = new Date().getMonth() + 1
+    this.moduleStoreService.loadColisStat(params)
   }
 
   ngOnInit() {

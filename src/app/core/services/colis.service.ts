@@ -39,4 +39,8 @@ export class ColisService {
   deleteColis(coli: Colis) {
     return this.http.delete(`${this.URL_API}/colis/${coli._id}`)
   }
+
+  getColisStat(param: Params):Observable<any>{
+    return this.http.post<any>(`${this.URL_API}/colis/stat`,param);
+  }
 }
