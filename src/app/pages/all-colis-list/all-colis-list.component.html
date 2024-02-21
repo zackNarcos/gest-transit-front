@@ -102,7 +102,7 @@
                         (-{{ coli.reste }})
                       </p>
                     </td>
-                      <td class="text-center"
+                    <td class="text-center"
                           [ngClass]="{
                             'bg-secondary-subtle': coli.status=='ATTENTE_EXPEDITION' || coli.status=='RECUPERÉ',
                             'text-secondary': coli.status=='ATTENTE_EXPEDITION' || coli.status=='RECUPERÉ',
@@ -122,7 +122,7 @@
                             }"
                         ></i>
                       </td>
-                      <td class="hstack gap-3 flex">
+                    <td class="hstack gap-1 flex">
                         <div>
                           <a routerLink="/colis/{{ coli._id }}" class="btn btn-round btn-primary mr-1"
                           ><i class="fa fa-eye"></i></a>
@@ -147,6 +147,13 @@
                               'fa-solid fa-plane-circle-check': coli.status=='TRANSIT',
                               'fa-solid fa-ship': coli.status=='ATTENTE_EXPEDITION',
                             }"></i>
+                          </button>
+                        </div>
+                        <div *ngIf="!coli.isSolde" class="text-center">
+                          <button (click)="getReliquat(coli)"
+                                  class="btn btn-round btn-info"
+                          >
+                            <i class="fa fa-money-check"></i>
                           </button>
                         </div>
                       </td>

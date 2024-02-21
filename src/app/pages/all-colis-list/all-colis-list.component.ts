@@ -49,4 +49,14 @@ export class AllColisListComponent{
   }
 
 
+  getReliquat(coli: Colis) {
+    const reliquat = {
+      montant: coli.reste,
+      date: new Date(),
+      colisId: coli._id
+    }
+    this.moduleStoreService.addColisReliquat(reliquat)
+    coli.isSolde = true
+    this.moduleStoreService.updateColis(coli)
+  }
 }

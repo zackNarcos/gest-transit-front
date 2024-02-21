@@ -2,6 +2,7 @@ import {createAction, props} from "@ngrx/store";
 import {User} from "../../shared/models/user";
 import {Colis} from "../../shared/models/colis";
 import {Params} from "@angular/router";
+import {Reliquat} from "../../shared/models/reliquat";
 // import {Matiere, MatiereParams} from "@mp/fe/ui";
 export enum ModuleStoreActionsTypes {
   LoadDestinations = '[Module] Load Destinations',
@@ -92,6 +93,18 @@ export enum ModuleStoreActionsTypes {
   loadColisStat = '[Module] Load Colis Stat',
   loadColisStatSuccess = '[Module] Load Colis Stat Success',
   loadColisStatFailure = '[Module] Load Colis Stat Failure',
+
+  addColisReliquat = '[Module] Add Colis Reliquat',
+  addColisReliquatSuccess = '[Module] Add Colis Reliquat Success',
+  addColisReliquatFailure = '[Module] Add Colis Reliquat Failure',
+
+  getColisReliquat = '[Module] Get Colis Reliquat',
+  getColisReliquatSuccess = '[Module] Get Colis Reliquat Success',
+  getColisReliquatFailure = '[Module] Get Colis Reliquat Failure',
+
+  getColisReliquatByMonth = '[Module] Get Colis Reliquat By Month',
+  getColisReliquatByMonthSuccess = '[Module] Get Colis Reliquat By Month Success',
+  getColisReliquatByMonthFailure = '[Module] Get Colis Reliquat By Month Failure',
 
 }
 
@@ -416,6 +429,51 @@ const loadColisStatFailure = createAction(
   props<{ error: any }>()
 );
 
+const addColisReliquat = createAction(
+  ModuleStoreActionsTypes.addColisReliquat,
+  props<{ reliquat: Reliquat }>()
+);
+
+const addColisReliquatSuccess = createAction(
+  ModuleStoreActionsTypes.addColisReliquatSuccess,
+  props<{ reliquat: any }>()
+);
+
+const addColisReliquatFailure = createAction(
+  ModuleStoreActionsTypes.addColisReliquatFailure,
+  props<{ error: any }>()
+);
+
+const getColisReliquat = createAction(
+  ModuleStoreActionsTypes.getColisReliquat,
+  props<{ coli: string }>()
+);
+
+const getColisReliquatSuccess = createAction(
+  ModuleStoreActionsTypes.getColisReliquatSuccess,
+  props<{ reliquat: Reliquat }>()
+);
+
+const getColisReliquatFailure = createAction(
+  ModuleStoreActionsTypes.getColisReliquatFailure,
+  props<{ error: any }>()
+);
+
+const getColisReliquatByMonth = createAction(
+  ModuleStoreActionsTypes.getColisReliquatByMonth,
+  props<{ param: Params }>()
+);
+
+const getColisReliquatByMonthSuccess = createAction(
+  ModuleStoreActionsTypes.getColisReliquatByMonthSuccess,
+  props<{ reliquat: any }>()
+);
+
+const getColisReliquatByMonthFailure = createAction(
+  ModuleStoreActionsTypes.getColisReliquatByMonthFailure,
+  props<{ error: any }>()
+);
+
 export const ModuleActions = {
   loadDestinations,
   loadDestinationsSuccess,
@@ -484,4 +542,16 @@ export const ModuleActions = {
   loadColisStat,
   loadColisStatSuccess,
   loadColisStatFailure,
-}
+
+  addColisReliquat,
+  addColisReliquatSuccess,
+  addColisReliquatFailure,
+
+  getColisReliquat,
+  getColisReliquatSuccess,
+  getColisReliquatFailure,
+
+  getColisReliquatByMonth,
+  getColisReliquatByMonthSuccess,
+  getColisReliquatByMonthFailure,
+};

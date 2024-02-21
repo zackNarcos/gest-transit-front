@@ -24,6 +24,10 @@ export class ColisService {
     return this.http.post<Colis[]>(`${this.URL_API}/colis/all`,param);
   }
 
+  getColisById(id: string):Observable<Colis>{
+    return this.http.get<Colis>(`${this.URL_API}/colis/${id}`);
+  }
+
   getColisIn(param: Params):Observable<Colis[]>{
     return this.http.post<Colis[]>(`${this.URL_API}/colis/in`,param);
   }

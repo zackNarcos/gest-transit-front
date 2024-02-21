@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {User} from "../../shared/models/user";
 import {Destinations} from "../../shared/models/destinations";
 import {Pays} from "../../shared/models/pays";
-import {MonthStatistique} from "../../shared/models/monthStatistique";
-import {ActivatedRoute, Router} from "@angular/router";
 import {ModuleStoreService} from "../../core/store/module-store.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Params} from "../../shared/models/params";
@@ -30,6 +28,7 @@ export class MeComponent implements OnInit {
   constructor(
     private moduleStoreService: ModuleStoreService,
   ) {
+    this.moduleStoreService.loadColisStat({month: this.month, year: this.year})
     this.searchForm.valueChanges.subscribe({
       next: () => {
         const params: Params = {

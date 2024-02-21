@@ -11,6 +11,7 @@ import {User} from "../../shared/models/user";
 import {DestinationsService} from "../../core/services/destinations.service";
 import {ReliquatService} from "../../core/services/reliquat.service";
 import {ColisService} from "../../core/services/colis.service";
+import {ModuleStoreService} from "../../core/store/module-store.service";
 
 @Component({
   selector: 'app-colis-detail',
@@ -19,40 +20,36 @@ import {ColisService} from "../../core/services/colis.service";
 })
 export class ColisDetailComponent implements OnInit {
 
-  destinations : Destinations[]
-  destination : Destinations = new Destinations()
   colis : Colis = new Colis()
   reliquat: Reliquat
 
 
   wrongCredential: boolean;
-  uniqDest: boolean;
 
 
   constructor(
-    private destinationsService: DestinationsService,
-    private reliquatService: ReliquatService,
-    private colisService: ColisService,
+    private moduleStoreService: ModuleStoreService,
     private route: ActivatedRoute,
-    // private toastrS: ToastrService,
-  ) { }
+    private colisService: ColisService,
+  ) {
+
+    const id = this.route.snapshot.params['id']
+
+    this.colisService.getColisById(id).subscribe(coli => {
+      this.colis = coli
+      this.moduleStoreService.setSelectedColis(coli)
+    })
+  }
 
   user:User
 
   // toastr = this.toastrS
-  private id = this.route.snapshot.params['id']
 
   ngOnInit(): void {
-    this.destinationsService.getDestinations().subscribe( result => {
-      this.destinations = result
+
+    this.moduleStoreService.selectSelectedColis().subscribe(coli => {
+      this.colis = coli
     })
-    // this.colisService.getColi(this.id).subscribe(coli => {
-    //   this.colis = coli
-    //   this.destinationsService.getDestinationByURI(this.colis.destination).subscribe(dest => {
-    //     this.destination.libelle = dest.libelle
-    //   })
-    // })
-    // this.profilService.getMe().subscribe(user => this.user = user)
   }
 
   @ViewChild('recuColi')

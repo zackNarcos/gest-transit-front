@@ -1,8 +1,8 @@
 <div class="panel-header panel-header-sm">
 </div>
 <div class="main-content">
-  <div class="col-md-12">
-    <div class="row" *ngIf="stats$ | async as stats">
+  <div class="col-md-12"*ngIf="stats$ | async as stats">
+    <div class="row">
       <div class="col-md-12 mb-xl-0">
         <div class="card">
           <div class="card-header p-1 px-4">
@@ -14,7 +14,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3 col-sm-6 mb-xl-0 mb-1">
+      <div *ngIf="stats.length > 0" class="col-md-3 col-sm-6 mb-xl-0 mb-1">
         <div class="card">
           <div class="card-header p-3 pt-2">
             <div class="text-end pt-1">
@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3 col-sm-6 mb-xl-0 mb-1">
+      <div *ngIf="stats.length > 0" class="col-md-3 col-sm-6 mb-xl-0 mb-1">
         <div class="card">
           <div class="card-header p-3 pt-2">
             <div class="text-end pt-1">
@@ -42,7 +42,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3 col-sm-6 mb-xl-0 mb-1">
+      <div *ngIf="stats.length > 0" class="col-md-3 col-sm-6 mb-xl-0 mb-1">
         <div class="card">
           <div class="card-header p-3 pt-2">
             <div class="text-end pt-1">
@@ -56,7 +56,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3 col-sm-6 mb-xl-0 mb-1">
+      <div *ngIf="stats.length > 0" class="col-md-3 col-sm-6 mb-xl-0 mb-1">
         <div class="card">
           <div class="card-header p-3 pt-2">
             <div class="text-end pt-1">

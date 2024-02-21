@@ -23,6 +23,7 @@ export class ColisListComponent {
 
   constructor(
     private moduleStoreService: ModuleStoreService,
+    private router: Router,
   ) {
     const param: Params = {
       month: new Date().getMonth()+1,
@@ -46,5 +47,21 @@ export class ColisListComponent {
   upColis(coli: Colis, status: string) {
     coli.status = status
     this.moduleStoreService.updateColis(coli)
+  }
+
+  getReliquat(coli: Colis) {
+    const reliquat = {
+      montant: coli.reste,
+      date: new Date(),
+      colisId: coli._id
+    }
+    this.moduleStoreService.addColisReliquat(reliquat)
+    coli.isSolde = true
+    this.moduleStoreService.updateColis(coli)
+  }
+
+  async goTo(coli: Colis) {
+    this.moduleStoreService.setSelectedColis(coli)
+    await this.router.navigate(['colis', coli._id])
   }
 }

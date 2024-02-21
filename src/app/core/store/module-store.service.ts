@@ -64,6 +64,10 @@ export class ModuleStoreService {
   loadColisStat(param: Params) { this.store.dispatch(ModuleActions.loadColisStat({param})); }
   selectColisStat() { return this.store.select(moduleStoreSelectors.selectColisStat); }
 
+  getColisReliquatByMonth(param: Params) { this.store.dispatch(ModuleActions.getColisReliquatByMonth({param})); }
+  selectColisReliquat() { return this.store.select(moduleStoreSelectors.selectColisReliquat); }
+  addColisReliquat(colisReliquat: any) { this.store.dispatch(ModuleActions.addColisReliquat({reliquat: colisReliquat})); }
+
   selectUser() {
     return this.store.select(moduleStoreSelectors.selectUser);
   }
