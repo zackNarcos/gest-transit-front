@@ -1,5 +1,5 @@
 export class Params{
-  id?: string;
+  id?: number;
   month?: number;
   year?: number;
   userId?: string;

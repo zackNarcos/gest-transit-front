@@ -24,10 +24,10 @@ export class DestinationsService {
   }
 
   putDestination(destination: Destinations) {
-    return this.http.put(`${this.URL_API}/destinations/${destination._id}`,destination)
+    return this.http.put(`${this.URL_API}/destinations/${destination.id}`,destination)
   }
 
   deleteDestination(destination: Destinations) {
-    return this.http.delete(`${this.URL_API}/destinations/${destination._id}`)
+    return this.http.delete(`${this.URL_API}/destinations/${destination.id}`)
   }
 }

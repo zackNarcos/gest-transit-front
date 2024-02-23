@@ -24,11 +24,11 @@ export class PaysService {
   }
 
   putPays(pays: Pays) {
-    return this.http.put(`${this.URL_API}/pays/${pays._id}`,pays)
+    return this.http.put(`${this.URL_API}/pays/${pays.id}`,pays)
   }
 
   deletePays(pays: Pays) {
-    return this.http.delete(`${this.URL_API}/pays/${pays._id}`)
+    return this.http.delete(`${this.URL_API}/pays/${pays.id}`)
   }
 
 

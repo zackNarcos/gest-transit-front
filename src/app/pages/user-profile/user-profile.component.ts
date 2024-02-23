@@ -46,7 +46,7 @@ export class UserProfileComponent implements OnInit {
       let trouve = false
       this.moduleStoreService.selectEmployees().subscribe(users => {
         users.forEach(user => {
-          if (user._id == id) {
+          if (user.id == id) {
             this.user = user
             trouve = true
           }

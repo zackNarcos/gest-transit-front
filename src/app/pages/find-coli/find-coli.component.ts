@@ -35,7 +35,7 @@ export class FindColiComponent implements OnInit {
   upColis(id: number, status: string, form: NgForm) {
     let coli: Colis = new Colis()
     coli.status = status
-    coli._id = id
+    coli.id = id
     // this.colisService.putColis(coli).subscribe( resuslt => {
     //   this.colisService.findColisByExpediteurName(form.value.nameToFinnd, form.value.numberToFinnd).subscribe(res => {
     //     this.colis = res

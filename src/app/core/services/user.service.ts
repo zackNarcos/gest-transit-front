@@ -44,10 +44,10 @@ export class UserService {
   }
 
   public update(user: User) {
-    const url = `${this.baseUrl}/users/${user._id}`;
+    const url = `${this.baseUrl}/users/${user.id}`;
 
     const body = {
-      _id: user._id,
+      id: user.id,
       email: user.email.trim(),
       password: user.password,
       nom: user.nom,

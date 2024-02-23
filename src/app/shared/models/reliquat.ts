@@ -5,4 +5,5 @@ export class Reliquat{
   date: Date
   coli: string
   employe: string
+  employeId: number
 }

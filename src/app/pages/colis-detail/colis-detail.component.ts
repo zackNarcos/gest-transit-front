@@ -118,7 +118,7 @@ export class ColisDetailComponent implements OnInit {
     this.reliquat.montant = this.colis.reste
     // this.reliquat.date = new Date()
     // this.reliquat.coli = '/colis/'+this.colis.id
-    // this.reliquat.employe = '/users/'+this.user._id
+    // this.reliquat.employe = '/users/'+this.user.id
     //
     // this.reliquatService.postReliquat(this.reliquat).subscribe( reliq => {
     //   this.colis.isSolde = true

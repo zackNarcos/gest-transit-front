@@ -12,7 +12,7 @@
             Données invalide!
           </div>
 
-          <form #form="ngForm" (submit)="newDest(form)">
+          <form #form="ngForm">
             <div class="px-5">
               <div class="row">
                 <div class="col-md-12">
@@ -20,7 +20,7 @@
                     <label>Pays de destination</label>
                     <select name="destination" class="form-control" [(ngModel)]="pays">
                       <option value="0" selected>Selectionner un pays</option>
-                      <option *ngFor="let destinationItem of pays$ | async as pays" [value]="destinationItem._id">{{destinationItem.nom}}</option>
+                      <option *ngFor="let destinationItem of pays$ | async as pays" [value]="destinationItem.id">{{destinationItem.nom}}</option>
                     </select>
                   </div>
                 </div>
@@ -63,7 +63,7 @@
             </div>
             <div class="row">
               <div class="offset-4 col-4">
-                <button type="submit" class="btn btn-round btn-primary col-12">Enregistrer</button>
+                <button  (click)="newDest(form)" class="btn btn-round btn-primary col-12">Enregistrer</button>
               </div>
             </div>
           </form>

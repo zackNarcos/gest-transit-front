@@ -53,7 +53,7 @@
                     {{ destination.pays.nom }}
                   </td>
                   <td *ngIf="isAdmin" class="text-right">
-                    <a routerLink="/destinations/{{ destination._id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
+                    <a routerLink="/destinations/{{ destination.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
                     <button (click)="lockUser(destination, !destination.isArchivate)" class="btn btn-round btn-danger mr-1"><i class="fa fa-archive"></i></button>
                   </td>
                 </tr>

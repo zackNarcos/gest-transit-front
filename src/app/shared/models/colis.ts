@@ -3,7 +3,7 @@ import {Pays} from "./pays";
 import {Destinations} from "./destinations";
 
 export class Colis{
-  _id?: number
+  id?: number
   nomExpediteur: string
   prenomExpediteur: string
   telephoneExpediteur: string
@@ -22,10 +22,13 @@ export class Colis{
   prixKilo: number
   prixTotal: number
   destination: Destinations
+  destinationId: number
   paysDestination: Pays
+  paysDestinationId: number
   status: string
   numero: string
   dateDepot: Date
   employe: User
+  employeId: number
   isSolde: boolean
 }

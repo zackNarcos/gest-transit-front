@@ -37,11 +37,11 @@ export class ColisService {
   }
 
   putColis(coli: Colis) {
-    return this.http.put(`${this.URL_API}/colis/${coli._id}`,coli)
+    return this.http.put(`${this.URL_API}/colis/${coli.id}`,coli)
   }
 
   deleteColis(coli: Colis) {
-    return this.http.delete(`${this.URL_API}/colis/${coli._id}`)
+    return this.http.delete(`${this.URL_API}/colis/${coli.id}`)
   }
 
   getColisStat(param: Params):Observable<any>{

@@ -27,7 +27,7 @@ export class DestinationsDetailComponent {
     let trouve= false
     this.moduleStoreService.selectDestinations().subscribe(dests => {
       dests.forEach(dest => {
-        if (dest._id == this.id) {
+        if (dest.id == this.id) {
           this.destination = dest
           trouve = true
         }
@@ -44,7 +44,7 @@ export class DestinationsDetailComponent {
 
     this.moduleStoreService.selectDestinations().subscribe(dests => {
       dests.forEach(dest => {
-        if (dest.libelle == this.destination.libelle && dest._id != this.destination._id) {
+        if (dest.libelle == this.destination.libelle && dest.id != this.destination.id) {
           this.uniqDest = true
         }
       })

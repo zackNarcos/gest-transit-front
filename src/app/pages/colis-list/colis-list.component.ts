@@ -53,7 +53,7 @@ export class ColisListComponent {
     const reliquat = {
       montant: coli.reste,
       date: new Date(),
-      colisId: coli._id
+      colisId: coli.id
     }
     this.moduleStoreService.addColisReliquat(reliquat)
     coli.isSolde = true
@@ -62,6 +62,6 @@ export class ColisListComponent {
 
   async goTo(coli: Colis) {
     this.moduleStoreService.setSelectedColis(coli)
-    await this.router.navigate(['colis', coli._id])
+    await this.router.navigate(['colis', coli.id])
   }
 }

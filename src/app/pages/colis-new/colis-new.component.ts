@@ -63,10 +63,10 @@ export class ColisNewComponent implements OnInit {
     this.colisForm.get('destination').valueChanges.subscribe( value => {
       if (value == null) return
       console.log("value", value)
-      this.colis.destination = value
+      this.colis.destinationId = value.id
       this.colis.douane = value.prixDouane
       this.colis.prixKilo = value.prixKilos
-      this.colis.paysDestination = value.pays
+      this.colis.paysDestinationId = value.pays.id
       //set the price per kilo to the form*
       this.colisForm.get('prixKilo').setValue(value.prixKilos)
       this.colisForm.get('douane').setValue(value.prixDouane)
@@ -110,12 +110,13 @@ export class ColisNewComponent implements OnInit {
     this.colis.valeur = this.colisForm.get('valeur').value
     this.colis.avance = this.colisForm.get('avance').value
     this.colis.prixKilo = this.colisForm.get('prixKilo').value
-    this.colis.destination = this.colisForm.get('destination').value
-    this.colis.employe = this.user
+    this.colis.destinationId = this.colisForm.get('destination').value.id
+    this.colis.paysDestinationId = this.colisForm.get('destination').value.paysId
+    this.colis.employeId = this.user.id
     this.colis.prixTotal = (this.colis.prixKilo*this.colis.poids)+this.colis.douane+this.colis.emballage
-    this.colis.dateDepot = new Date()
+    // this.colis.dateDepot = new Date()
     let date = new Date()
-    this.colis.numero = "KE"+ this.colis.paysDestination.nom.slice(0,2) + date.getFullYear() + (date.getMonth()+1) + date.getDate() + date.getMinutes() + date.getSeconds() + date.getMilliseconds()
+    this.colis.numero = "KE" + date.getFullYear() + (date.getMonth()+1) + date.getDate() + date.getMinutes() + date.getSeconds() + date.getMilliseconds()
 
     this.wrongCredential = false
 

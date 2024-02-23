@@ -30,6 +30,22 @@ export class ModuleStoreEffects {
     switchMap(() => this.userService.getUsers()
       .pipe(
         map((employees: any) => {
+          const employeesWithPays = this.moduleStoreService.selectPays().pipe(
+            take(1),
+            map(pays => {
+              employees.forEach(emp => {
+                const pay = pays.find(p => p.id === emp.paysId)
+                emp.pays = pay
+              })
+
+              return employees
+            })
+          )
+          employeesWithPays.subscribe({
+            next: (value) => {
+              return ModuleActions.loadEmployeesSuccess({employees: value})
+            }
+          })
           return ModuleActions.loadEmployeesSuccess({employees: employees})
         }),
         catchError((err) => {
@@ -45,7 +61,7 @@ export class ModuleStoreEffects {
       .pipe(
         map((employee: any) => {
           this.moduleStoreService.selectEmployees().pipe(take(1)).subscribe((employees) => {
-            const index = employees.findIndex((emp) => emp._id === employee._id)
+            const index = employees.findIndex((emp) => emp.id === employee.id)
             employees[index] = employee
           })
           return ModuleActions.updateEmployeeSuccess({employee: employee})
@@ -111,7 +127,7 @@ export class ModuleStoreEffects {
       .pipe(
         map((pays: any) => {
           this.moduleStoreService.selectPays().pipe(take(1)).subscribe((payss) => {
-            const index = payss.findIndex((pay) => pay._id === pays._id)
+            const index = payss.findIndex((pay) => pay.id === pays.id)
             payss[index] = pays
           })
           return ModuleActions.updatePaysSuccess({pays: pays})
@@ -128,6 +144,22 @@ export class ModuleStoreEffects {
     switchMap(() => this.destinationService.getDestinations()
       .pipe(
         map((destinations: any) => {
+          const destWithPays = this.moduleStoreService.selectPays().pipe(
+            take(1),
+            map(pays => {
+              destinations.forEach(dest => {
+                const pay = pays.find(p => p.id === dest.paysId)
+                dest.pays = pay
+              })
+
+              return destinations
+            })
+          )
+          destWithPays.subscribe({
+            next: (value) => {
+              return ModuleActions.loadDestinationsSuccess({destinations: value})
+            }
+          })
           return ModuleActions.loadDestinationsSuccess({destinations: destinations})
         }),
         catchError((err) => {
@@ -160,7 +192,7 @@ export class ModuleStoreEffects {
       .pipe(
         map((destination: any) => {
           this.moduleStoreService.selectDestinations().pipe(take(1)).subscribe((destinations) => {
-            const index = destinations.findIndex((dest) => dest._id === destination._id)
+            const index = destinations.findIndex((dest) => dest.id === destination.id)
             destinations[index] = destination
           })
           return ModuleActions.updateDestinationSuccess({destination: destination})
@@ -177,6 +209,22 @@ export class ModuleStoreEffects {
     switchMap((action) => this.coliService.getColis(action.param)
       .pipe(
         map((colis: Colis[]) => {
+          const colisWithDest = this.moduleStoreService.selectDestinations().pipe(
+            take(1),
+            map(dests => {
+              colis.forEach(coli => {
+                const dest = dests.find(d => d.id === coli.destinationId)
+                coli.destination = dest
+              })
+
+              return colis
+            })
+          )
+          colisWithDest.subscribe({
+            next: (value) => {
+              return ModuleActions.loadAllColisSuccess({allColis: value})
+            }
+          })
           return ModuleActions.loadAllColisSuccess({allColis: colis})
         }),
         catchError((err) => {
@@ -191,6 +239,22 @@ export class ModuleStoreEffects {
     switchMap((action) => this.coliService.getColisIn(action.param)
       .pipe(
         map((colis: Colis[]) => {
+          const colisWithDest = this.moduleStoreService.selectDestinations().pipe(
+            take(1),
+            map(dests => {
+              colis.forEach(coli => {
+                const dest = dests.find(d => d.id === coli.destinationId)
+                coli.destination = dest
+              })
+
+              return colis
+            })
+          )
+          colisWithDest.subscribe({
+            next: (value) => {
+              return ModuleActions.loadInColisSuccess({inColis: value})
+            }
+          })
           return ModuleActions.loadInColisSuccess({inColis: colis})
         }),
         catchError((err) => {
@@ -205,6 +269,22 @@ export class ModuleStoreEffects {
     switchMap((action) => this.coliService.getColisOut(action.param)
       .pipe(
         map((colis: Colis[]) => {
+          const colisWithDest = this.moduleStoreService.selectDestinations().pipe(
+            take(1),
+            map(dests => {
+              colis.forEach(coli => {
+                const dest = dests.find(d => d.id === coli.destinationId)
+                coli.destination = dest
+              })
+
+              return colis
+            })
+          )
+          colisWithDest.subscribe({
+            next: (value) => {
+              return ModuleActions.loadOutColisSuccess({outColis: value})
+            }
+          })
           return ModuleActions.loadOutColisSuccess({outColis: colis})
         }),
         catchError((err) => {
@@ -220,7 +300,7 @@ export class ModuleStoreEffects {
       .pipe(
         map((colis: any) => {
           this.moduleStoreService.selectAllColis().pipe(take(1)).subscribe((coliss) => {
-            const index = coliss.findIndex((coli) => coli._id === colis._id)
+            const index = coliss.findIndex((coli) => coli.id === colis.id)
             coliss[index] = colis
           })
           return ModuleActions.updateColisSuccess({colis: colis})
@@ -255,7 +335,7 @@ export class ModuleStoreEffects {
       .pipe(
         map((colis: any) => {
           this.moduleStoreService.selectAllColis().pipe(take(1)).subscribe((coliss) => {
-            const index = coliss.findIndex((coli) => coli._id === colis._id)
+            const index = coliss.findIndex((coli) => coli.id === colis.id)
             coliss.splice(index, 1)
           })
           return ModuleActions.deleteColisSuccess({colis: colis})
@@ -272,6 +352,23 @@ export class ModuleStoreEffects {
     switchMap((action) => this.userService.getMe()
       .pipe(
         map((user: any) => {
+          const userWithPays = this.moduleStoreService.selectPays().pipe(
+            // take(1),
+            map(pays => {
+              console.log("pays", pays)
+              const pay = pays.find(p => p.id === user.paysId)
+              console.log("pay", pay)
+              user.pays = pay
+              console.log("user", user)
+
+              return user
+            })
+          )
+          userWithPays.subscribe({
+            next: (value) => {
+              return ModuleActions.getUserSuccess({user: value})
+            }
+          })
           return ModuleActions.getUserSuccess({user: user})
         }),
         catchError((err) => {

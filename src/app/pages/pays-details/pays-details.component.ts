@@ -11,7 +11,7 @@ import {ModuleStoreService} from "../../core/store/module-store.service";
 })
 export class PaysDetailsComponent{
 
-  pays : Pays = { nom: '', _id: ''}
+  pays : Pays = { nom: '', id: 0}
 
 
   wrongCredential: boolean;
@@ -26,7 +26,7 @@ export class PaysDetailsComponent{
     let trouve= false
     this.moduleStoreService.selectPays().subscribe(pays => {
       pays.forEach(pay => {
-        if (pay._id == this.id) {
+        if (pay.id == this.id) {
           this.pays = pay
           trouve = true
         }
@@ -44,7 +44,7 @@ export class PaysDetailsComponent{
 
     this.moduleStoreService.selectPays().subscribe(pays => {
       pays.forEach(pay => {
-        if (pay.nom == this.pays.nom && pay._id != this.pays._id) {
+        if (pay.nom == this.pays.nom && pay.id != this.pays.id) {
           this.uniqDest = true
         }
       })

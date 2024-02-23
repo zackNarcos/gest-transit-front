@@ -1,9 +1,10 @@
 import {Pays} from "./pays";
 
 export class Destinations{
-  _id?: number
+  id?: number
   libelle: string
   pays: Pays
+  paysId: number
   jourDeDepart: string
   prixKilos: number
   prixDouane: number

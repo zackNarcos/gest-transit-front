@@ -19,7 +19,7 @@ export class DestinationsNewComponent {
   uniqDest: boolean;
 
   pays$ = this.moduleStoreService.selectPays()
-  pays = "0"
+  pays = 0
   listePays = []
 
   constructor(
@@ -34,13 +34,15 @@ export class DestinationsNewComponent {
     ).subscribe(pays => {
       cpt += 1
       if (pays.length > 0){
-        this.pays = pays[0]._id
+        this.pays = pays[0].id
       }
       this.listePays = pays
     })
   }
 
   newDest(form: NgForm) {
+    console.log("form", form.invalid, form.value)
+    console.log('this.destination', this.destination)
     this.wrongCredential = false
 
     if (form.invalid) {
@@ -58,17 +60,10 @@ export class DestinationsNewComponent {
         this.uniqDest = true
         document.getElementById('libelle').classList.add('is-invalid')
       } else {
-          this.listePays.forEach(pay => {
-            console.log("pay eee", this.pays)
-            console.log("pay ", pay._id, this.pays)
-            if (pay._id === this.pays){
-              console.log("pay", pay)
-              this.destination.pays = pay
-              this.moduleStoreService.addDestination(this.destination)
-              this.moduleStoreService.loadDestinations()
-              this.router.navigate(['/destinations'])
-            }
-          })
+        this.destination.paysId = this.pays
+        this.moduleStoreService.addDestination(this.destination)
+        this.moduleStoreService.loadDestinations()
+        this.router.navigate(['/destinations'])
       }
     })
   }

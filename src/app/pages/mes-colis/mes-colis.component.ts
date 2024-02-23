@@ -54,7 +54,7 @@ export class MesColisComponent{
     const reliquat = {
       montant: coli.reste,
       date: new Date(),
-      colisId: coli._id
+      colisId: coli.id
     }
     this.moduleStoreService.addColisReliquat(reliquat)
     coli.isSolde = true
