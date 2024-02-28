@@ -5,4 +5,6 @@ export class Params{
   userId?: string;
   destinationId?: string;
   direction?: string;
+  code?: string;
+  telephone?: string;
 }

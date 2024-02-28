@@ -1,0 +1,139 @@
+<div class="wrapper">
+  <div class="main">
+      <div class="section">
+          <div class="container text-center">
+              <div class="row justify-content-md-center mt-5">
+                  <div class="col-md-12 col-lg-8 mt-5 pt-5">
+                      <h2 class="title">Suivre votre colis en ligne</h2>
+                      <h5 class="description">
+                          Avec notre service de suivi de colis, vous pouvez suivre votre colis à tout moment et en tout lieu. Entrez simplement votre numéro de colis et le numéro du destinataire pour obtenir les dernières informations sur l'état de votre colis.
+                      </h5>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="section section-signup" style="background-image: url('assets/img/bg11.jpg'); background-size: cover; background-position: top center;">
+          <div class="container login-page">
+            <div class="row">
+              <div class="col-md-4 content-center ml-auto mr-auto">
+                  <div class="card card-login card-plain">
+                      <form class="form">
+
+                          <div class="content" [formGroup]="formSearch">
+<!--                            <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">-->
+<!--                              <div class="input-group-prepend">-->
+<!--                                  <span class="input-group-text">  <i class="now-ui-icons users_circle-08 text-dark"></i></span>-->
+<!--                              </div>-->
+<!--                              <input type="text"-->
+<!--                                     formControlName="tel"-->
+<!--                                     class="form-control text-dark"-->
+<!--                                     placeholder="Tel destinataire..."-->
+<!--                                     (focus)="focus=true"-->
+<!--                                     (blur)="focus=false"-->
+<!--                              />-->
+<!--                            </div>-->
+                            <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus1===true}">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text"><i class="now-ui-icons text_caps-small text-dark"></i></span>
+                              </div>
+                              <input type="text"
+                                     formControlName="code"
+                                     placeholder="Code colis..."
+                                     class="form-control text-dark"
+                                     (focus)="focus1=true"
+                                     (blur)="focus1=false"
+                              />
+                            </div>
+                          </div>
+                          <div class="footer text-center">
+                              <button class="btn bg-black text-light btn-round btn-lg"
+                                      (click)="search()"
+                              >Rechercher</button>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div
+        *ngIf="colis"
+        class="section section-download text-dark mt-5"
+        id="#download-section"
+        data-background-color="black"
+      >
+          <div class="container col-md-6 offset-md-3 p-3">
+              <div class="border-start border-4 p-3 position-relative mb-5 pb-3"
+                   [ngClass]="{'border-success-subtle': istepInit, 'border-secondary-subtle': !istepInit}"
+                   style="min-height: 90px"
+              >
+                  <div class="text-success-subtle rounded-circle position-absolute top-0 translate-middle border border-4"
+                       [ngClass]="{'border-success-subtle bg-success': istepInit, 'border-secondary-subtle bg-secondary': !istepInit}"
+                       style="height: 30px; width: 30px; left:-2px"
+                  ></div>
+                <div>
+                  <h4 class="p-1 m-0 h5">Initié</h4>
+                  <span>Le colis est enregistré dans notre système et est en attente de traitement.</span>
+                </div>
+              </div>
+              <div class="border-start border-4 p-3 position-relative mb-5 pb-3"
+                    [ngClass]="{'border-success-subtle': isStepTransit, 'border-secondary-subtle': !isStepTransit}"
+                   style="min-height: 90px">
+                  <div class="text-secondary-subtle rounded-circle position-absolute top-0 translate-middle border border-4"
+                       [ngClass]="{'border-success-subtle bg-success': isStepTransit, 'border-secondary-subtle bg-success': isStepTransit}"
+                       style="height: 30px; width: 30px; left:-2px"
+                  ></div>
+                <div>
+                  <h4 class="p-1 m-0 h5">En Transit</h4>
+                  <span>Les colis est en transit vers sa destination.</span>
+                </div>
+              </div>
+              <div class="border-start border-4 p-3 position-relative mb-5 pb-3"
+                   [ngClass]="{'border-success-subtle': isStepArrive, 'border-secondary-subtle': !isStepArrive}"
+                   style="min-height: 90px">
+                  <div class="text-secondary-subtle rounded-circle position-absolute top-0 translate-middle border border-4"
+                       [ngClass]="{'border-success-subtle bg-success': isStepArrive, 'border-secondary-subtle bg-secondary': !isStepArrive}"
+                       style="height: 30px; width: 30px; left:-2px"
+                  ></div>
+                <div>
+                  <h4 class="p-1 m-0 h5">Arrivé</h4>
+                  <span>Le colis est arrivé à destination.</span>
+                </div>
+              </div>
+              <div class="border-start border-4 p-3 position-relative mb-5 pb-3"
+                   [ngClass]="{'border-success-subtle': isStepWait, 'border-secondary-subtle': !isStepWait}"
+                   style="min-height: 90px">
+                  <div class="text-secondary-subtle rounded-circle position-absolute top-0 translate-middle border border-4"
+                       [ngClass]="{'border-success-subtle bg-success': isStepWait, 'border-secondary-subtle bg-secondary': !isStepWait}"
+                       style="height: 30px; width: 30px; left:-2px"
+                  ></div>
+                <div>
+                  <h4 class="p-1 m-0 h5">Attente de recupération</h4>
+                  <span>Le colis est arrivé à destination et est en attente de récupération par le destinataire.</span>
+                </div>
+              </div>
+              <div class="border-start border-4 p-3 position-relative mb-5 pb-3"
+                    [ngClass]="{'border-success-subtle': isStepDelivred, 'border-secondary-subtle': !isStepDelivred}"
+                   style="min-height: 90px">
+                  <div class="text-secondary-subtle rounded-circle position-absolute top-0 translate-middle border border-4"
+                        [ngClass]="{'border-success-subtle bg-success': isStepDelivred, 'border-secondary-subtle bg-secondary': !isStepDelivred}"
+                       style="height: 30px; width: 30px; left:-2px"
+                  ></div>
+                <div>
+                  <h4 class="p-1 m-0 h5">Recupéré</h4>
+                  <span>Le colis a été récupéré par le destinataire.</span>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <footer class="footer" data-background-color="black">
+      <div class="container">
+          <div class="copyright">
+              &copy;
+            {{data | date: 'yyyy'}}, Coded by
+              <a href="https://www.zack-abessolo.com" target="_blank">Zack Abessolo</a>
+          </div>
+      </div>
+  </footer>
+</div>

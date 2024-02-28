@@ -55,7 +55,7 @@ Now Ui Dashboard
 │   │   ├── app.module.ts
 │   │   ├── app.routing.ts
 │   │   ├── components
-│   │   │   ├── components.module.ts
+│   │   │   ├── accueil.module.ts
 │   │   │   ├── footer
 │   │   │   │   ├── footer.component.css
 │   │   │   │   ├── footer.component.html
@@ -64,8 +64,8 @@ Now Ui Dashboard
 │   │   │   ├── navbar
 │   │   │   │   ├── navbar.component.css
 │   │   │   │   ├── navbar.component.html
-│   │   │   │   ├── navbar.component.spec.ts
-│   │   │   │   └── navbar.component.ts
+│   │   │   │   ├── navbar-user.component.spec.ts
+│   │   │   │   └── navbar-user.component.ts
 │   │   │   └── sidebar
 │   │   │       ├── sidebar.component.css
 │   │   │       ├── sidebar.component.html
@@ -85,10 +85,10 @@ Now Ui Dashboard
 │   │   │   └── admin-layout
 │   │   │       ├── admin-layout.component.html
 │   │   │       ├── admin-layout.component.scss
-│   │   │       ├── admin-layout.component.spec.ts
-│   │   │       ├── admin-layout.component.ts
-│   │   │       ├── admin-layout.module.ts
-│   │   │       └── admin-layout.routing.ts
+│   │   │       ├── users-layout.component.spec.ts
+│   │   │       ├── users-layout.component.ts
+│   │   │       ├── users-layout.module.ts
+│   │   │       └── users-layout.routing.ts
 │   │   ├── maps
 │   │   │   ├── maps.component.css
 │   │   │   ├── maps.component.html

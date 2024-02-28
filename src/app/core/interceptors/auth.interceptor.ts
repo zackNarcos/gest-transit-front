@@ -20,12 +20,16 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.localStorageService.getItem('token');
+    const homePath = '/accueil';
+    if (request.url.includes(homePath)) {
+      return next.handle(request);
+    }
     if (token) {
       request = request.clone({
         setHeaders: {
           "auth-token": `${token}`,
-          "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, auth-token",
         },
+          // "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, auth-token",
       });
     } else {
       this.router.navigate(['/auth/login']).then(r => console.log(r));

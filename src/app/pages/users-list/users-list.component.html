@@ -46,7 +46,7 @@
                     {{ user.email }}
                   </td>
                   <td class="text-right">
-                    <a routerLink="/utilisateurs/{{ user.id }}" class="btn btn-round bg-light text-primary mr-1"><i class="fa fa-eye"></i></a>
+                    <a routerLink="/admin/utilisateurs/{{ user.id }}" class="btn btn-round bg-light text-primary mr-1"><i class="fa fa-eye"></i></a>
                     <ng-container *ngIf="user.roles[0] == 'ROLE_EMPLOYE'">
                       <button (click)="lockUser(user,!user.isLocked)" class="btn btn-round bg-light text-danger mr-1"><i class="fa fa-archive"></i></button>
                     </ng-container>

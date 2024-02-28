@@ -31,6 +31,8 @@ export interface ModuleState {
   isLoadColisStat: boolean;
   colisReliquat: any[];
   isLoadColisReliquat: boolean;
+  findColis: Colis[];
+  isLoadFindColis: boolean;
 }
 
 export const ModuleInitialState: ModuleState = {
@@ -57,6 +59,8 @@ export const ModuleInitialState: ModuleState = {
   isLoadColisStat: true,
   colisReliquat: [],
   isLoadColisReliquat: true,
+  findColis: null,
+  isLoadFindColis: false,
 }
 
 const reducer = createReducer(
@@ -133,6 +137,9 @@ const reducer = createReducer(
     on(ModuleActions.getColisReliquatByMonth, state => ({...state, isLoadColisReliquat: true})),
     on(ModuleActions.getColisReliquatByMonthSuccess, (state, {reliquat}) => ({...state, colisReliquat: reliquat, isLoadColisReliquat: false})),
     on(ModuleActions.getColisReliquatByMonthFailure, (state, {error}) => ({...state, error, isLoadColisReliquat: false})),
+    on(ModuleActions.findColis, state => ({...state, isLoadFindColis: true})),
+    on(ModuleActions.findColisSuccess, (state, {colis}) => ({...state, findColis: colis, isLoadFindColis: false})),
+    on(ModuleActions.findColisFailure, (state, {error}) => ({...state, error, isLoadFindColis: false})),
 );
 
 export function moduleReducer(state: ModuleState | undefined, action: Action) {

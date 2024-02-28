@@ -6,7 +6,7 @@
       <div class="card">
         <div class="card-header d-flex justify-content-between">
           <h4 class="card-title"> Liste des Destinantions</h4>
-          <a *ngIf="isAdmin" routerLink="/nouvelle-destination" class="btn btn-round btn-primary mt-4 mr-5">Nouvelle Destination</a>
+          <a *ngIf="isAdmin" routerLink="/admin/nouvelle-destination" class="btn btn-round btn-primary mt-4 mr-5">Nouvelle Destination</a>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -50,10 +50,10 @@
                     {{ destination.jourDeDepart }}
                   </td>
                   <td>
-                    {{ destination.pays.nom }}
+                    {{ destination.pays.nom ?? 'Aucun' }}
                   </td>
                   <td *ngIf="isAdmin" class="text-right">
-                    <a routerLink="/destinations/{{ destination.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
+                    <a routerLink="/admin/destinations/{{ destination.id }}" class="btn btn-round btn-primary mr-1"><i class="fa fa-eye"></i></a>
                     <button (click)="lockUser(destination, !destination.isArchivate)" class="btn btn-round btn-danger mr-1"><i class="fa fa-archive"></i></button>
                   </td>
                 </tr>

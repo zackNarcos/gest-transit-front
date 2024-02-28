@@ -7,7 +7,7 @@
         <div class="card">
           <div class="card-header p-1 px-4">
             <div class="col-12 d-flex justify-content-end">
-              <a routerLink="/colis/new" class="btn btn-primary btn-round">
+              <a routerLink="/admin/colis/new" class="btn btn-primary btn-round">
                 <i class="fa fa-plus"></i> Nouveau colis
               </a>
             </div>
@@ -24,7 +24,7 @@
           </div>
           <hr class="dark horizontal my-0">
           <div class="card-footer p-3 bg-info">
-
+            <span class="text-white">Pour: {{ stats[0].count }}</span>
           </div>
         </div>
       </div>
@@ -38,21 +38,21 @@
           </div>
           <hr class="dark horizontal my-0">
           <div class="card-footer p-3 bg-success">
-
+            <span class="text-white">Pour: {{ stats[0].count }}</span>
           </div>
         </div>
       </div>
-      <div *ngIf="stats.length > 0" class="col-md-3 col-sm-6 mb-xl-0 mb-1">
+      <div *ngIf="reliquat$ | async as reliquat" class="col-md-3 col-sm-6 mb-xl-0 mb-1">
         <div class="card">
           <div class="card-header p-3 pt-2">
             <div class="text-end pt-1">
               <p class="text-sm mb-0 text-capitalize">Reliquat</p>
-              <h4 class="mb-0 text-warning">jj Fcfa</h4>
+              <h4 class="mb-0 text-warning">{{ reliquat[0].total }} Fcfa</h4>
             </div>
           </div>
           <hr class="dark horizontal my-0">
           <div class="card-footer p-3 bg-warning">
-
+            <span class="text-white">Pour: {{ reliquat[0].count ?? 0 }}</span>
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@
           </div>
           <hr class="dark horizontal my-0">
           <div class="card-footer p-3 bg-dark">
-
+            <span class="text-white">Pour: {{ stats[0].count }}</span>
           </div>
         </div>
       </div>
@@ -146,7 +146,7 @@
                     </td>
                     <td class="hstack gap-3 flex">
                       <div>
-                        <a routerLink="/colis/{{ coli.id }}" class="btn btn-round btn-primary mr-1"
+                        <a routerLink="/admin/colis/{{ coli.id }}" class="btn btn-round btn-primary mr-1"
                         ><i class="fa fa-eye"></i></a>
                       </div>
                     </td>

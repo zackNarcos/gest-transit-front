@@ -60,7 +60,8 @@ import {MatSelectModule} from "@angular/material/select";
     PaysListComponent,
     PaysDetailsComponent,
     DashboardComponent
-  ]
+  ],
+
 })
 
 export class AdminLayoutModule {}

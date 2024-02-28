@@ -47,4 +47,8 @@ export class ColisService {
   getColisStat(param: Params):Observable<any>{
     return this.http.post<any>(`${this.URL_API}/colis/stat`,param);
   }
+
+  findColis(param: Params):Observable<Colis>{
+    return this.http.post<Colis>(`${this.URL_API}/colis/find`,param);
+  }
 }

@@ -4,7 +4,6 @@ import {AppState} from "../../app-state";
 
 export const selectModuleState: MemoizedSelector<AppState, ModuleState> = createFeatureSelector<ModuleState>(moduleFeatureKey);
 
-
 const selectDestinations = createSelector(
   selectModuleState,
   (state: ModuleState) => state.destinations
@@ -105,6 +104,13 @@ const selectColisReliquat = createSelector(
   (state: ModuleState) => state.colisReliquat
 );
 
+const selectFindColis = createSelector(
+  selectModuleState,
+  (state: ModuleState) => state.findColis
+);
+
+
+
 export const moduleStoreSelectors = {
   selectDestinations,
   selectEmployees,
@@ -126,4 +132,5 @@ export const moduleStoreSelectors = {
   selectIsLoadUser,
   selectColisStat,
   selectColisReliquat,
+  selectFindColis
 }

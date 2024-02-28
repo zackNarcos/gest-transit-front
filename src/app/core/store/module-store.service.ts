@@ -67,7 +67,8 @@ export class ModuleStoreService {
   getColisReliquatByMonth(param: Params) { this.store.dispatch(ModuleActions.getColisReliquatByMonth({param})); }
   selectColisReliquat() { return this.store.select(moduleStoreSelectors.selectColisReliquat); }
   addColisReliquat(colisReliquat: any) { this.store.dispatch(ModuleActions.addColisReliquat({reliquat: colisReliquat})); }
-
+  findColis(param: Params) { this.store.dispatch(ModuleActions.findColis({param})); }
+  selectFindColis() { return this.store.select(moduleStoreSelectors.selectFindColis); }
   selectUser() {
     return this.store.select(moduleStoreSelectors.selectUser);
   }

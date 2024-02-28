@@ -62,6 +62,6 @@ export class ColisListComponent {
 
   async goTo(coli: Colis) {
     this.moduleStoreService.setSelectedColis(coli)
-    await this.router.navigate(['colis', coli.id])
+    await this.router.navigate(['admin', 'colis', coli.id])
   }
 }

@@ -5,15 +5,27 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import {LoginGuard} from "./core/guards/login.guard";
+import {UsersLayoutComponent} from "./layouts/users-layout/users-layout.component";
+import {AccueilComponent} from "./pages/accueil/accueil.component";
 
 const routes: Routes =[
   {
     path: '',
-    redirectTo: 'nouveau-coli',
+    redirectTo: 'accueil',
     pathMatch: 'full',
   },
   {
-    path: '',
+    path: 'accueil',
+    component: UsersLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: AccueilComponent
+      }
+    ]
+  },
+  {
+    path: 'admin',
     component: AdminLayoutComponent,
     canActivate: [LoginGuard],
     children: [

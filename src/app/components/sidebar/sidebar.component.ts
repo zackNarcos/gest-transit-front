@@ -9,15 +9,15 @@ declare interface RouteInfo {
     isAdmin: boolean;
 }
 export const ROUTES: RouteInfo[] = [
-    { path: '/dashboard', title: 'Dashboard',  icon:'fa-gauge', class: '',isAdmin: false },
-    { path: '/me/colis', title: 'Colis Sortant',  icon:'fa-arrow-right-from-bracket', class: '',isAdmin: false },
-    { path: '/colis-all', title: 'Tous les Colis',  icon:'fa-boxes-stacked', class: '',isAdmin: true },
-    { path: '/colis', title: 'Colis entrant',  icon:'fa-arrow-right-to-bracket', class: '',isAdmin: false },
-    { path: '/utilisateurs', title: 'Employées',  icon: 'fa-users-rectangle', class: '',isAdmin: true },
-    { path: '/destinations', title: 'Destinations',  icon:'fa-route', class: '',isAdmin: false },
-    { path: '/pays', title: 'Pays',  icon:'fa-earth-africa', class: '',isAdmin: true },
-    { path: '/inscription', title: 'Ajouter un utilisateur',  icon: 'fa-user-plus', class: '',isAdmin: true },
-    { path: '/nouveau-coli', title: 'Nouveau coli',  icon:'fa-file-circle-plus', class: 'active active-pro h5',isAdmin: false },
+    { path: '/admin/dashboard', title: 'Dashboard',  icon:'fa-gauge', class: '',isAdmin: false },
+    { path: '/admin/me/colis', title: 'Colis Sortant',  icon:'fa-arrow-right-from-bracket', class: '',isAdmin: false },
+    { path: '/admin/colis-all', title: 'Tous les Colis',  icon:'fa-boxes-stacked', class: '',isAdmin: true },
+    { path: '/admin/colis', title: 'Colis entrant',  icon:'fa-arrow-right-to-bracket', class: '',isAdmin: false },
+    { path: '/admin/utilisateurs', title: 'Employées',  icon: 'fa-users-rectangle', class: '',isAdmin: true },
+    { path: '/admin/destinations', title: 'Destinations',  icon:'fa-route', class: '',isAdmin: false },
+    { path: '/admin/pays', title: 'Pays',  icon:'fa-earth-africa', class: '',isAdmin: true },
+    { path: '/admin/inscription', title: 'Ajouter un utilisateur',  icon: 'fa-user-plus', class: '',isAdmin: true },
+    { path: '/admin/nouveau-coli', title: 'Nouveau coli',  icon:'fa-file-circle-plus', class: 'active active-pro h5',isAdmin: false },
 ];
 
 @Component({

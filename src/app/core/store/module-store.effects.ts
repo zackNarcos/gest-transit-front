@@ -10,6 +10,7 @@ import {ColisService} from "../services/colis.service";
 import {DestinationsService} from "../services/destinations.service";
 import {Params} from "../../shared/models/params";
 import {Colis} from "../../shared/models/colis";
+import {ReliquatService} from "../services/reliquat.service";
 // import {MatiereService} from "@mp/fe/ui";
 
 @Injectable()
@@ -22,6 +23,7 @@ export class ModuleStoreEffects {
     private paysService: PaysService,
     private destinationService: DestinationsService,
     private coliService: ColisService,
+    private reliquatService: ReliquatService,
   ) {
   }
 
@@ -145,13 +147,11 @@ export class ModuleStoreEffects {
       .pipe(
         map((destinations: any) => {
           const destWithPays = this.moduleStoreService.selectPays().pipe(
-            take(1),
             map(pays => {
               destinations.forEach(dest => {
                 const pay = pays.find(p => p.id === dest.paysId)
                 dest.pays = pay
               })
-
               return destinations
             })
           )
@@ -355,11 +355,14 @@ export class ModuleStoreEffects {
           const userWithPays = this.moduleStoreService.selectPays().pipe(
             // take(1),
             map(pays => {
-              console.log("pays", pays)
+              if (pays.length === 0) {
+                return user
+              }
+              if (user === null) {
+                return user
+              }
               const pay = pays.find(p => p.id === user.paysId)
-              console.log("pay", pay)
               user.pays = pay
-              console.log("user", user)
 
               return user
             })
@@ -387,6 +390,48 @@ export class ModuleStoreEffects {
         }),
         catchError((err) => {
           return of(ModuleActions.loadColisStatFailure({error: err}))
+        })
+      )
+    )
+  ));
+
+  $loadColisReliquatByMonth = createEffect(() => this.actions$.pipe(
+    ofType(ModuleActions.getColisReliquatByMonth),
+    switchMap((action) => this.reliquatService.getReliquats(action.param)
+      .pipe(
+        map((reliquat: any) => {
+          return ModuleActions.getColisReliquatByMonthSuccess({reliquat: reliquat})
+        }),
+        catchError((err) => {
+          return of(ModuleActions.getColisReliquatByMonthFailure({error: err}))
+        })
+      )
+    )
+  ));
+
+  $addColisReliquat = createEffect(() => this.actions$.pipe(
+    ofType(ModuleActions.addColisReliquat),
+    switchMap((action) => this.reliquatService.postReliquat(action.reliquat)
+      .pipe(
+        map((reliquat: any) => {
+          return ModuleActions.addColisReliquatSuccess({reliquat: reliquat})
+        }),
+        catchError((err) => {
+          return of(ModuleActions.addColisReliquatFailure({error: err}))
+        })
+      )
+    )
+  ));
+
+  $findColis = createEffect(() => this.actions$.pipe(
+    ofType(ModuleActions.findColis),
+    switchMap((action) => this.coliService.findColis(action.param)
+      .pipe(
+        map((colis: any) => {
+          return ModuleActions.findColisSuccess({colis: colis})
+        }),
+        catchError((err) => {
+          return of(ModuleActions.findColisFailure({error: err}))
         })
       )
     )

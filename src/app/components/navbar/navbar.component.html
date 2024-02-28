@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
     <div class="container-fluid">
         <div class="navbar-wrapper">
@@ -18,7 +17,7 @@
           <span class="navbar-toggler-bar navbar-kebab"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="collapseExample" [ngbCollapse]="isCollapsed">
-          <a [routerLink]="['/rechercher/coli']" class="rounded-sm btn btn-primary p-3 py-1">
+          <a [routerLink]="['/admin/rechercher/coli']" class="rounded-sm btn btn-primary p-3 py-1">
             Rechercher un coli<i class="now-ui-icons ui-1_zoom-bold ml-1"></i>
           </a>
           <ul class="navbar-nav">
@@ -28,7 +27,7 @@
                 <i class="me-1 now-ui-icons users_single-02"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <a routerLink="/me" class="dropdown-item nav-link text-dark">
+                <a routerLink="/admin/me" class="dropdown-item nav-link text-dark">
                   Profil
                 </a>
                 <button class="dropdown-item" (click)="logout()">Deconnection</button>

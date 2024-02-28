@@ -25,10 +25,10 @@ export class AdminLayoutComponent implements OnInit {
     private router: Router,
     private moduleStoreService: ModuleStoreService,
   ) {
-    this.moduleStoreService.loadUser()
-    this.moduleStoreService.loadEmployees()
     this.moduleStoreService.loadPays()
     this.moduleStoreService.loadDestinations()
+    this.moduleStoreService.loadUser()
+    this.moduleStoreService.loadEmployees()
   }
 
   ngOnInit() {

@@ -1,8 +1,8 @@
 import {createAction, props} from "@ngrx/store";
 import {User} from "../../shared/models/user";
 import {Colis} from "../../shared/models/colis";
-import {Params} from "@angular/router";
 import {Reliquat} from "../../shared/models/reliquat";
+import {Params} from "../../shared/models/params";
 // import {Matiere, MatiereParams} from "@mp/fe/ui";
 export enum ModuleStoreActionsTypes {
   LoadDestinations = '[Module] Load Destinations',
@@ -106,6 +106,9 @@ export enum ModuleStoreActionsTypes {
   getColisReliquatByMonthSuccess = '[Module] Get Colis Reliquat By Month Success',
   getColisReliquatByMonthFailure = '[Module] Get Colis Reliquat By Month Failure',
 
+  findColis = '[Module] Find Colis',
+  findColisSuccess = '[Module] Find Colis Success',
+  findColisFailure = '[Module] Find Colis Failure',
 }
 
 
@@ -474,6 +477,21 @@ const getColisReliquatByMonthFailure = createAction(
   props<{ error: any }>()
 );
 
+const findColis = createAction(
+  ModuleStoreActionsTypes.findColis,
+  props<{ param: Params }>()
+);
+
+const findColisSuccess = createAction(
+  ModuleStoreActionsTypes.findColisSuccess,
+  props<{ colis: any }>()
+);
+
+const findColisFailure = createAction(
+  ModuleStoreActionsTypes.findColisFailure,
+  props<{ error: any }>()
+);
+
 export const ModuleActions = {
   loadDestinations,
   loadDestinationsSuccess,
@@ -554,4 +572,8 @@ export const ModuleActions = {
   getColisReliquatByMonth,
   getColisReliquatByMonthSuccess,
   getColisReliquatByMonthFailure,
+
+  findColis,
+  findColisSuccess,
+  findColisFailure,
 };

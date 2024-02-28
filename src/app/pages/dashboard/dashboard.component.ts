@@ -21,8 +21,8 @@ export class DashboardComponent{
     });
 
     colis$: Observable<Colis[]>
-
     stats$ = this.moduleStoreService.selectColisStat()
+    reliquat$ = this.moduleStoreService.selectColisReliquat()
 
     constructor(
       private moduleStoreService: ModuleStoreService,
@@ -34,7 +34,7 @@ export class DashboardComponent{
 
       this.moduleStoreService.loadColisStat(param)
       this.moduleStoreService.loadInColis(param)
-
+      this.moduleStoreService.getColisReliquatByMonth(param)
       this.moduleStoreService.selectInColis().subscribe({
         next: (colis) => {
           const last = colis.slice(-5)
@@ -43,7 +43,6 @@ export class DashboardComponent{
           })
         }
       })
-
     }
 
 }

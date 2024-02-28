@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         this.localStorageService.setItem('token', res['auth-token']);
         this.localStorageService.setItem('userId', res.userId);
         const returnUrl = this.localStorageService.getItem('returnUrl');
-        this.router.navigate([returnUrl || '/']);
+        this.router.navigate([returnUrl || '/admin']);
       },
       error: (err) => {
         this.wrongCredential = true
